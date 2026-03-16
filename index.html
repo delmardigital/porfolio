@@ -4,216 +4,246 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Leandro · Delmar Digital</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --brand:      #0ea5e9;
-      --brand-dark: #0369a1;
+      --brand:      #00aff0; 
       --bg:         #ffffff;
-      --bg2:        #f8fafc;
-      --ink:        #0f172a;
-      --ink2:       #334155;
-      --muted:      #64748b;
-      --border:     #e2e8f0;
-      --wa:         #25d366;
-      --fs:         'DM Serif Display', serif;
-      --fb:         'DM Sans', sans-serif;
+      --bg2:        #f7f9fa;
+      --ink:        #0f1419;
+      --muted:      #536471;
+      --border:     #eff3f4;
+      --up:         #00ba7c;
     }
 
-    /* ── RESET & MOBILE FIRST ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; -webkit-tap-highlight-color: transparent; }
-    body { background: var(--bg); color: var(--ink); font-family: var(--fb); line-height: 1.5; overflow-x: hidden; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--bg); color: var(--ink); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
     [data-lang="en"] .es { display: none; }
     [data-lang="es"] .en { display: none; }
 
-    /* ── NAV (Fixed & Compact) ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0.8rem 1.2rem; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px);
+    /* ── APP HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(255,255,255,0.85); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
+      padding: 0.8rem 1rem; display: flex; align-items: center; justify-content: space-between;
     }
-    .nav-logo { font-family: var(--fs); font-size: 1rem; font-weight: 800; text-decoration: none; color: var(--ink); }
-    .nav-logo span { color: var(--brand); }
+    .profile-info { display: flex; align-items: center; gap: 0.7rem; }
+    .avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--brand); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; border: 2px solid #fff; box-shadow: 0 0 0 1px var(--brand); }
+    .status-dot { width: 8px; height: 8px; background: var(--brand); border-radius: 50%; display: inline-block; animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-    /* ── HERO (Mobile First) ── */
-    #hero {
-      padding: 7rem 1.5rem 4rem;
-      min-height: 90vh;
-      display: flex; flex-direction: column; justify-content: center;
-      background: radial-gradient(circle at top right, #f0f9ff 0%, #ffffff 70%);
-    }
-    .hero-eyebrow { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; color: var(--brand); text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-    .hero-dot { width: 6px; height: 6px; background: var(--brand); border-radius: 50%; }
-    h1 { font-family: var(--fs); font-size: 3.2rem; line-height: 0.95; margin-bottom: 1.5rem; }
-    h1 em { font-style: italic; color: var(--brand); font-weight: 400; }
-    .btn-primary { 
-      background: var(--ink); color: #fff; padding: 1rem 1.5rem; text-decoration: none; 
-      font-weight: 700; border-radius: 8px; display: inline-flex; align-items: center; gap: 0.5rem;
-    }
+    /* ── HERO ── */
+    #hero { padding: 3rem 1.5rem; border-bottom: 8px solid var(--bg2); text-align: center; }
+    .cover-title { font-size: 2.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem; }
+    .cover-title span { color: var(--brand); }
 
-    /* ── SKILLS APP-STYLE SLIDER (The "Dating App" Feel) ── */
-    .skills-section { padding: 4rem 0; background: var(--bg2); overflow: hidden; }
-    .skills-header { padding: 0 1.5rem; margin-bottom: 2rem; }
-    
-    .skills-slider {
-      display: flex;
-      overflow-x: auto;
-      overflow-y: hidden;
-      scroll-snap-type: x mandatory;
-      padding: 0 1.5rem 2rem;
-      gap: 1.2rem;
-      scrollbar-width: none; /* Firefox */
-    }
-    .skills-slider::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+    /* ── STATS ── */
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 2rem -1rem 0; background: #fff; }
+    .stat-box { padding: 1.2rem 0.5rem; text-align: center; border-right: 1px solid var(--border); }
+    .stat-box:last-child { border-right: none; }
+    .stat-val { display: block; font-size: 1.3rem; font-weight: 800; color: var(--ink); }
+    .stat-lbl { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; font-weight: 700; }
+    .spark-path { fill: none; stroke: var(--up); stroke-width: 2.5; stroke-dasharray: 100; stroke-dashoffset: 100; animation: draw 2s ease-out forwards; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+
+    /* ── SKILLS & SMOKE EFFECT ── */
+    .section-label { padding: 1.5rem 1rem 0.5rem; font-size: 0.9rem; font-weight: 800; color: var(--muted); text-transform: uppercase; }
+    .skills-slider { display: flex; overflow-x: auto; gap: 1rem; padding: 0 1rem 1.5rem; scrollbar-width: none; cursor: grab; }
+    .skills-slider::-webkit-scrollbar { display: none; }
 
     .skill-card {
-      flex: 0 0 85%; /* Muestra el 85% de la siguiente tarjeta para invitar a deslizar */
-      scroll-snap-align: center;
-      background: #fff;
-      padding: 2.5rem 2rem;
-      border-radius: 24px;
-      border: 1px solid var(--border);
-      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-      display: flex; flex-direction: column;
-      transition: transform 0.3s;
+      flex: 0 0 280px; background: #fff; border: 1px solid var(--border); border-radius: 20px;
+      padding: 1.5rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;
+      position: relative; overflow: visible;
     }
-    .skill-card:active { transform: scale(0.98); }
+    .skill-card.active { border-color: var(--brand); transform: scale(1.02); z-index: 10; }
+    .sk-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .skill-card.active .sk-body { max-height: 250px; margin-top: 1rem; }
+
+    /* Humo Partículas Wow */
+    .smoke-particle {
+      position: absolute; pointer-events: none; background: var(--brand);
+      border-radius: 50%; opacity: 0; filter: blur(12px); z-index: 5;
+    }
+    @keyframes smokeFade {
+      0% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+      100% { transform: translate(var(--tx), var(--ty)) scale(4); opacity: 0; }
+    }
+
+    /* ── CONTENT ── */
+    .svc-item { border-bottom: 1px solid var(--border); padding: 1.5rem 1rem; }
+    .svc-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .btn-sub { display: block; width: 100%; padding: 1rem; background: var(--brand); color: #fff; text-decoration: none; text-align: center; border-radius: 100px; font-weight: 800; margin-top: 1rem; }
     
-    .sk-icon { font-size: 3rem; margin-bottom: 1.5rem; display: block; }
-    .sk-tag { font-size: 0.65rem; font-weight: 700; color: var(--brand); text-transform: uppercase; margin-bottom: 0.5rem; }
-    .sk-title { font-family: var(--fs); font-size: 1.8rem; line-height: 1.1; margin-bottom: 1rem; color: var(--ink); }
-    .sk-desc { font-size: 0.95rem; color: var(--ink2); margin-bottom: 1.5rem; }
-    
-    .sk-footer { margin-top: auto; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .sk-pill { font-size: 0.7rem; background: var(--bg2); padding: 0.4rem 0.8rem; border-radius: 100px; color: var(--muted); font-weight: 600; }
-
-    /* Indicador de "swipe" */
-    .swipe-hint {
-      text-align: center; font-size: 0.75rem; color: var(--muted);
-      margin-top: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-    }
-    .swipe-hint svg { width: 16px; animation: swipeMove 2s infinite; }
-    @keyframes swipeMove { 0%,100% { transform: translateX(0); } 50% { transform: translateX(10px); } }
-
-    /* ── WHATSAPP FAB ── */
-    .wa-fab {
-      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
-      width: 56px; height: 56px; background: var(--wa); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 8px 20px rgba(37,211,102,0.4);
-    }
-
-    /* ── DESKTOP ADJUSTMENTS ── */
-    @media(min-width: 900px) {
-      .skill-card { flex: 0 0 350px; }
-      #hero { padding: 10rem 10% 6rem; flex-direction: row; align-items: center; }
-      h1 { font-size: 6rem; }
-      .skills-slider { justify-content: center; padding: 0; }
-    }
+    @media(min-width: 900px) { .app-shell { max-width: 500px; margin: 0 auto; border: 1px solid var(--border); min-height: 100vh; } }
   </style>
 </head>
 <body>
 
-  <nav>
-    <a class="nav-logo" href="#">Delmar <span>Digital</span></a>
-    <button onclick="toggleLang()" style="background:none; border:none; font-weight:700; font-size:0.8rem; cursor:pointer;">
-      <span id="enLabel" class="active">EN</span> / <span id="esLabel">ES</span>
-    </button>
-  </nav>
+<div class="app-shell">
+  <header>
+    <div class="profile-info">
+      <div class="avatar">L</div>
+      <div class="profile-text">
+        <p style="font-weight:800; font-size:0.9rem;">Leandro · Delmar Digital</p>
+        <p style="font-size:0.75rem; color:var(--muted);"><span class="status-dot"></span> <span class="en">Driving foot traffic...</span><span class="es">Llevando gente al local...</span></p>
+      </div>
+    </div>
+    <button onclick="toggleLang()" style="border:1px solid var(--border); background:none; padding:0.4rem; border-radius:8px; font-weight:800; cursor:pointer;">EN/ES</button>
+  </header>
 
   <section id="hero">
-    <div>
-      <div class="hero-eyebrow"><span class="hero-dot"></span> <span>Palma de Mallorca</span></div>
-      <h1 class="en">Helping<br>businesses<br><em>grow online</em></h1>
-      <h1 class="es">Ayudo a<br>negocios a<br><em>crecer online</em></h1>
-      <a href="https://wa.me/34698971708" class="btn-primary">
-        <span class="en">Let's talk</span><span class="es">Hablemos</span>
-      </a>
+    <h1 class="cover-title en">More people<br><span>In your store.</span></h1>
+    <h1 class="cover-title es">Más gente<br><span>En tu local.</span></h1>
+    
+    <div class="stats-grid">
+      <div class="stat-box">
+        <span class="stat-lbl en">Visibility</span><span class="stat-lbl es">Visibilidad</span>
+        <span class="stat-val counter" data-target="100000">0</span>
+        <svg style="height:20px; width:40px; margin:0 auto;"><path class="spark-path" d="M0,15 Q10,15 20,5 T40,2" /></svg>
+      </div>
+      <div class="stat-box">
+        <span class="stat-lbl en">Action Rate</span><span class="stat-lbl es">Acción</span>
+        <span class="stat-val">82%</span>
+        <svg style="height:20px; width:40px; margin:0 auto;"><path class="spark-path" d="M0,10 Q10,2 20,10 T40,2" style="stroke:var(--brand)"/></svg>
+      </div>
+      <div class="stat-box">
+        <span class="stat-lbl en">New Clients</span><span class="stat-lbl es">Nuevos Clientes</span>
+        <span class="stat-val">+240%</span>
+        <svg style="height:20px; width:40px; margin:0 auto;"><path class="spark-path" d="M0,18 L10,10 L20,15 L40,2" /></svg>
+      </div>
     </div>
   </section>
 
-  <section class="skills-section">
-    <div class="skills-header">
-      <p class="sk-tag en">Expertise</p><p class="sk-tag es">Experiencia</p>
-      <h2 style="font-family: var(--fs); font-size: 2.2rem;" class="en">What I <em>do</em></h2>
-      <h2 style="font-family: var(--fs); font-size: 2.2rem;" class="es">Qué <em>hago</em></h2>
-    </div>
-
-    <div class="skills-slider">
-      <div class="skill-card">
-        <span class="sk-icon">🌐</span>
-        <p class="sk-tag">01</p>
-        <h3 class="sk-title en">Websites</h3>
-        <h3 class="sk-title es">Páginas Web</h3>
-        <p class="sk-desc en">Professional, fast websites that turn visitors into clients. Mobile-ready and clean.</p>
-        <p class="sk-desc es">Webs profesionales y rápidas que convierten visitas en clientes. Adaptadas a móvil.</p>
-        <div class="sk-footer">
-          <span class="sk-pill">Custom Design</span><span class="sk-pill">Fast</span>
-        </div>
+  <p class="section-label en">Business Boosters</p><p class="section-label es">Impulso para Negocios</p>
+  <div class="skills-slider" id="slider">
+    
+    <div class="skill-card" onclick="toggleSkill(this, event)">
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <span style="font-size:2rem;">📍</span>
+        <p style="font-weight:800;" class="en">Maps Domination</p><p style="font-weight:800;" class="es">Domina Maps</p>
       </div>
-
-      <div class="skill-card">
-        <span class="sk-icon">📍</span>
-        <p class="sk-tag">02</p>
-        <h3 class="sk-title en">Local SEO</h3>
-        <h3 class="sk-title es">SEO Local</h3>
-        <p class="sk-desc en">Optimizing your Google Business so local clients find you before the competition.</p>
-        <p class="sk-desc es">Optimizo tu Google Business para que te encuentren antes que a la competencia.</p>
-        <div class="sk-footer">
-          <span class="sk-pill">Maps</span><span class="sk-pill">Ranking</span>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <span class="sk-icon">📅</span>
-        <p class="sk-tag">03</p>
-        <h3 class="sk-title en">Booking</h3>
-        <h3 class="sk-title es">Reservas</h3>
-        <p class="sk-desc en">Automated systems so your clients can book 24/7 without back-and-forth messages.</p>
-        <p class="sk-desc es">Sistemas automáticos para que tus clientes reserven 24/7 sin mensajes interminables.</p>
-        <div class="sk-footer">
-          <span class="sk-pill">Sync</span><span class="sk-pill">Payments</span>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <span class="sk-icon">⚡</span>
-        <p class="sk-tag">04</p>
-        <h3 class="sk-title en">Automation</h3>
-        <h3 class="sk-title es">Procesos</h3>
-        <p class="sk-desc en">Connect your tools. Send auto-invoices. Save hours of manual work every week.</p>
-        <p class="sk-desc es">Conecta tus herramientas. Envía facturas auto. Ahorra horas de trabajo manual.</p>
-        <div class="sk-footer">
-          <span class="sk-pill">Stripe</span><span class="sk-pill">Zapier</span>
-        </div>
+      <div class="sk-body">
+        <p style="font-size:0.9rem; padding-top:1rem; border-top:1px solid var(--border);" class="en">I optimize your Business Profile so you are the #1 choice when people search "near me".</p>
+        <p style="font-size:0.9rem; padding-top:1rem; border-top:1px solid var(--border);" class="es">Optimizo tu perfil para ser la opción #1 cuando la gente busca "cerca de mí".</p>
       </div>
     </div>
 
-    <div class="swipe-hint en">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-      Swipe to explore
+    <div class="skill-card" onclick="toggleSkill(this, event)">
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <span style="font-size:2rem;">⭐️</span>
+        <p style="font-weight:800;" class="en">Reputation Management</p><p style="font-weight:800;" class="es">Gestión de Reseñas</p>
+      </div>
+      <div class="sk-body">
+        <p style="font-size:0.9rem; padding-top:1rem; border-top:1px solid var(--border);" class="en">Automated systems to get 5-star reviews and handle feedback before it hits the web.</p>
+        <p style="font-size:0.9rem; padding-top:1rem; border-top:1px solid var(--border);" class="es">Sistemas para conseguir reseñas de 5 estrellas y gestionar el feedback automáticamente.</p>
+      </div>
     </div>
-    <div class="swipe-hint es">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-      Desliza para explorar
+
+    <div class="skill-card" onclick="toggleSkill(this, event)">
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <span style="font-size:2rem;">🎯</span>
+        <p style="font-weight:800;" class="en">Hyper-Local Ads</p><p style="font-weight:800;" class="es">Ads Hiper-Locales</p>
+      </div>
+      <div class="sk-body">
+        <p style="font-size:0.9rem; padding-top:1rem; border-top:1px solid var(--border);" class="en">Targeted ads for people within 5km of your store. Low cost, high foot traffic.</p>
+        <p style="font-size:0.9rem; padding-top:1rem; border-top:1px solid var(--border);" class="es">Publicidad para gente a menos de 5km de tu local. Bajo coste, muchas visitas reales.</p>
+      </div>
     </div>
-  </section>
 
-  <a href="https://wa.me/34698971708" class="wa-fab">
-    <svg width="30" height="30" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </a>
+    <div class="skill-card" onclick="toggleSkill(this, event)">
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <span style="font-size:2rem;">📲</span>
+        <p style="font-weight:800;" class="en">QR Sales Funnels</p><p style="font-weight:800;" class="es">Funnels por QR</p>
+      </div>
+      <div class="sk-body">
+        <p style="font-size:0.9rem; padding-top:1rem; border-top:1px solid var(--border);" class="en">Turn physical visitors into digital leads. Digital menus, coupons, and instant contact.</p>
+        <p style="font-size:0.9rem; padding-top:1rem; border-top:1px solid var(--border);" class="es">Convierte visitas físicas en contactos digitales. Menús, cupones y contacto directo.</p>
+      </div>
+    </div>
+  </div>
 
-  <script>
-    function toggleLang(){
-      const h = document.documentElement;
-      const isEn = h.getAttribute('data-lang') === 'en';
-      h.setAttribute('data-lang', isEn ? 'es' : 'en');
-      document.getElementById('enLabel').classList.toggle('active');
-      document.getElementById('esLabel').classList.toggle('active');
+  <div class="svc-item">
+    <h3 class="svc-title en">Your store, visible.</h3><h3 class="svc-title es">Tu local, visible.</h3>
+    <p style="font-size:0.9rem; color:var(--muted);" class="en">I create the digital bridge that brings people from their phones to your physical business.</p>
+    <p style="font-size:0.9rem; color:var(--muted);" class="es">Creo el puente digital que lleva a la gente desde su móvil hasta la puerta de tu local.</p>
+    <a href="https://wa.me/34698971708" class="btn-sub en">Boost My Traffic</a>
+    <a href="https://wa.me/34698971708" class="btn-sub es">Impulsar mi Tráfico</a>
+  </div>
+
+  <footer style="padding: 2rem; text-align: center; color: var(--muted); font-size: 0.8rem; background: var(--bg2);">
+    <p>Leandro · Delmar Digital · Simple Growth</p>
+  </footer>
+</div>
+
+<script>
+  function toggleSkill(card, event) {
+    const isActive = card.classList.contains('active');
+    document.querySelectorAll('.skill-card').forEach(c => c.classList.remove('active'));
+    
+    if(!isActive) {
+      card.classList.add('active');
+      createSmoke(card);
     }
-  </script>
+  }
+
+  function createSmoke(card) {
+    for (let i = 0; i < 15; i++) { // Más partículas para efecto WOW
+      const p = document.createElement('div');
+      p.className = 'smoke-particle';
+      const size = Math.random() * 25 + 10;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.left = '50%';
+      p.style.top = '50%';
+      
+      const tx = (Math.random() - 0.5) * 250;
+      const ty = (Math.random() - 0.5) * 250;
+      p.style.setProperty('--tx', tx + 'px');
+      p.style.setProperty('--ty', ty + 'px');
+      
+      p.style.animation = `smokeFade ${Math.random() * 0.4 + 0.4}s ease-out forwards`;
+      
+      card.appendChild(p);
+      setTimeout(() => p.remove(), 800);
+    }
+  }
+
+  // CONTADORES
+  document.querySelectorAll('.counter').forEach(c => {
+    const target = +c.getAttribute('data-target');
+    let count = 0;
+    const update = () => {
+      const inc = target / 50;
+      if(count < target) {
+        count += inc;
+        c.innerText = Math.ceil(count).toLocaleString();
+        setTimeout(update, 20);
+      } else c.innerText = target.toLocaleString();
+    };
+    update();
+  });
+
+  function toggleLang(){
+    const h = document.documentElement;
+    h.setAttribute('data-lang', h.getAttribute('data-lang') === 'en' ? 'es' : 'en');
+  }
+
+  // DRAG SLIDER
+  const slider = document.getElementById('slider');
+  let isDown = false, startX, scrollLeft;
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft;
+  });
+  slider.addEventListener('mouseup', () => isDown = false);
+  slider.addEventListener('mousemove', (e) => {
+    if(!isDown) return;
+    slider.scrollLeft = scrollLeft - (e.pageX - slider.offsetLeft - startX) * 2;
+  });
+</script>
+
 </body>
 </html>
