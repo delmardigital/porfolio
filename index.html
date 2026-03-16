@@ -1,619 +1,940 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Leandro – Delmar Digital</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <title>Leandro · Delmar Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --ink: #0e0e0e;
-      --paper: #f5f0e8;
-      --cream: #ede7d9;
-      --ocean: #1a3a4a;
-      --tide: #2c5f74;
-      --coral: #c4613a;
-      --sand: #d4b896;
-      --mist: #8fa8b2;
-      --white: #ffffff;
-      --font-display: 'Cormorant Garamond', serif;
-      --font-body: 'DM Sans', sans-serif;
+      --bg:       #ffffff;
+      --bg2:      #f4f6fb;
+      --bg3:      #e8ecf5;
+      --ink:      #111827;
+      --ink2:     #374151;
+      --muted:    #6b7280;
+      --border:   #e5e7eb;
+      --blue:     #2563eb;
+      --blue-l:   #eff6ff;
+      --blue-b:   #bfdbfe;
+      --green:    #16a34a;
+      --green-l:  #f0fdf4;
+      --orange:   #ea580c;
+      --wa:       #25d366;
+      --fs:       'DM Serif Display', serif;
+      --fb:       'DM Sans', sans-serif;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--fb); font-weight: 400; overflow-x: hidden; line-height: 1.6; }
 
-    html { scroll-behavior: smooth; }
+    /* ── LANG SWITCH ── */
+    [data-lang="en"] .es { display: none; }
+    [data-lang="es"] .en { display: none; }
 
-    body {
-      background: var(--paper);
-      color: var(--ink);
-      font-family: var(--font-body);
-      font-weight: 300;
-      overflow-x: hidden;
+    /* ── WHATSAPP POPUP ── */
+    .wa-fab {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 900;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: var(--wa); color: #fff; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: waPulse 2.5s ease-in-out infinite;
     }
+    .wa-fab:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
+    @keyframes waPulse {
+      0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.45); }
+      50%      { box-shadow: 0 4px 36px rgba(37,211,102,0.75); }
+    }
+    .wa-fab svg { width: 28px; height: 28px; fill: #fff; pointer-events: none; }
+    .wa-badge {
+      position: absolute; top: -2px; right: -2px;
+      width: 16px; height: 16px; background: #ef4444; border-radius: 50%;
+      border: 2px solid #fff; animation: badgePop 2s infinite;
+    }
+    @keyframes badgePop { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }
+
+    /* popup box */
+    .wa-popup {
+      position: fixed; bottom: 5.5rem; right: 2rem; z-index: 901;
+      width: 320px; background: #fff; border-radius: 16px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+      overflow: hidden;
+      transform: scale(0.85) translateY(20px);
+      transform-origin: bottom right;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .wa-popup.open { opacity: 1; pointer-events: all; transform: scale(1) translateY(0); }
+
+    .wa-popup-header {
+      background: #075e54;
+      padding: 1rem 1.2rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .wa-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: #128c7e;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .wa-header-info {}
+    .wa-header-name { font-size: 0.92rem; font-weight: 600; color: #fff; }
+    .wa-header-status { font-size: 0.72rem; color: #9de3d5; display: flex; align-items: center; gap: 0.4rem; }
+    .wa-online-dot { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; }
+    .wa-close {
+      margin-left: auto; background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.6); font-size: 1.3rem; line-height: 1;
+      padding: 0.2rem; transition: color 0.2s;
+    }
+    .wa-close:hover { color: #fff; }
+
+    .wa-popup-body { padding: 1rem 1.2rem; background: #e5ddd5; min-height: 90px; }
+    .wa-bubble {
+      background: #fff; border-radius: 0 10px 10px 10px;
+      padding: 0.65rem 0.9rem; font-size: 0.82rem; line-height: 1.55;
+      color: #111; max-width: 90%; box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+      margin-bottom: 0.5rem;
+    }
+    .wa-bubble-time { font-size: 0.65rem; color: #999; text-align: right; margin-top: 0.3rem; }
+
+    .wa-popup-input { padding: 0.8rem 1rem; background: #f0f0f0; display: flex; flex-direction: column; gap: 0.6rem; }
+    .wa-textarea {
+      width: 100%; border: 1px solid var(--border); border-radius: 8px;
+      padding: 0.7rem 0.85rem; font-family: var(--fb); font-size: 0.85rem;
+      resize: none; outline: none; min-height: 70px; color: var(--ink);
+      background: #fff; line-height: 1.5;
+      transition: border-color 0.2s;
+    }
+    .wa-textarea:focus { border-color: var(--wa); }
+    .wa-send-btn {
+      background: var(--wa); color: #fff; border: none; border-radius: 8px;
+      padding: 0.7rem 1rem; font-family: var(--fb); font-size: 0.85rem;
+      font-weight: 600; cursor: pointer; display: flex; align-items: center;
+      justify-content: center; gap: 0.5rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .wa-send-btn:hover { background: #1ebe5d; transform: translateY(-1px); }
+    .wa-send-btn svg { width: 16px; height: 16px; fill: #fff; }
 
     /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 800;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1.4rem 4rem;
-      backdrop-filter: blur(12px);
-      background: rgba(245,240,232,0.85);
-      border-bottom: 1px solid rgba(14,14,14,0.08);
-      transition: box-shadow 0.3s;
+      padding: 1.1rem 3rem;
+      background: rgba(249,248,245,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
     }
     .nav-logo {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--ocean);
-      text-decoration: none;
+      font-family: var(--fs); font-size: 1.05rem; font-weight: 800;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--ink); text-decoration: none;
     }
-    .nav-logo span { color: var(--coral); }
-    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-logo span { color: var(--muted); font-weight: 400; }
+    .nav-right { display: flex; align-items: center; gap: 2rem; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--ink);
-      opacity: 0.65;
-      transition: opacity 0.2s, color 0.2s;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none; color: var(--muted);
+      transition: color 0.2s;
     }
-    .nav-links a:hover { opacity: 1; color: var(--coral); }
+    .nav-links a:hover { color: var(--ink); }
+    .lang-btn {
+      font-family: var(--fb); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--ink2); padding: 0.35rem 0.85rem;
+      cursor: pointer; transition: background 0.2s, color 0.2s; display: flex; gap: 0.5rem;
+    }
+    .lang-btn span { opacity: 0.4; transition: opacity 0.2s; }
+    .lang-btn span.active { opacity: 1; color: var(--ink); }
+    .nav-cta {
+      font-family: var(--fb); font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      background: var(--ink); color: var(--bg);
+      padding: 0.55rem 1.4rem; text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.82; }
 
     /* ── HERO ── */
     #hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-left {
-      background: var(--ocean);
+      min-height: 100vh; padding: 10rem 3rem 6rem;
       display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 8rem 4rem 5rem;
-      position: relative;
+      position: relative; overflow: hidden;
+      background: var(--bg);
     }
-    .hero-left::before {
+    .hero-rule { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; }
+    .hero-rule::before {
       content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 20% 80%, rgba(44,95,116,0.6) 0%, transparent 60%),
-                  radial-gradient(ellipse at 80% 20%, rgba(196,97,58,0.15) 0%, transparent 50%);
+      position: absolute; top: 6rem; left: 3rem; right: 3rem;
+      height: 1px; background: var(--border);
     }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: flex-end; }
     .hero-eyebrow {
-      font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--sand); margin-bottom: 1.5rem; position: relative;
-      display: flex; align-items: center; gap: 1rem;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--muted);
+      display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.8rem;
     }
-    .hero-eyebrow::before {
-      content: ''; display: block; width: 2.5rem; height: 1px; background: var(--coral);
+    .hero-dot { width: 5px; height: 5px; background: var(--ink); border-radius: 50%; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:0.2} }
+    h1 {
+      font-family: var(--fs);
+      font-size: clamp(3.2rem, 6.5vw, 7.5rem);
+      font-weight: 800; line-height: 0.95;
+      letter-spacing: -0.02em; color: var(--ink);
     }
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 5vw, 5rem);
-      font-weight: 300;
-      line-height: 1.05;
-      color: var(--white);
-      position: relative;
-      margin-bottom: 2rem;
+    h1 em { font-style: italic; font-weight: 400; color: var(--muted); }
+    .hero-right { padding-bottom: 0.5rem; }
+    .hero-tagline {
+      font-family: var(--fs); font-size: 1.05rem; font-weight: 700;
+      color: var(--ink2); margin-bottom: 1.2rem; line-height: 1.4;
     }
-    .hero-title em { font-style: italic; color: var(--sand); }
-    .hero-subtitle {
-      font-size: 0.78rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--mist);
-      line-height: 2.2;
-      position: relative;
+    .hero-desc { font-size: 0.97rem; line-height: 1.85; color: var(--ink2); margin-bottom: 2rem; }
+    .hero-services {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem;
     }
-    .hero-right {
-      background: var(--cream);
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 8rem 4rem 5rem;
-      position: relative;
+    .hero-pill {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; border: 1px solid var(--border);
+      color: var(--muted); padding: 0.35rem 0.85rem; background: var(--bg2);
     }
-    .hero-right::after {
-      content: 'DELMAR';
-      position: absolute; bottom: -1.5rem; right: -1rem;
-      font-family: var(--font-display);
-      font-size: 12rem; font-weight: 600;
-      color: rgba(14,14,14,0.04);
-      line-height: 1; pointer-events: none;
-      white-space: nowrap;
+    .hero-cta-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    .btn-primary {
+      font-family: var(--fb); font-size: 0.88rem; font-weight: 700;
+      background: var(--ink); color: var(--bg);
+      padding: 0.85rem 2rem; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      transition: opacity 0.2s, transform 0.2s;
     }
-    .hero-intro {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      font-style: italic;
-      color: var(--ocean);
-      margin-bottom: 1.5rem;
-      opacity: 0.7;
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+    .btn-secondary {
+      font-family: var(--fb); font-size: 0.88rem; font-weight: 600;
+      color: var(--ink2); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.1rem;
+      transition: border-color 0.2s, color 0.2s;
     }
-    .hero-body {
-      font-size: 1rem;
-      line-height: 1.85;
-      color: #3a3a3a;
-      max-width: 38ch;
+    .btn-secondary:hover { border-color: var(--ink); color: var(--ink); }
+
+    /* ── STRIP ── */
+    .strip {
+      background: var(--ink); color: var(--bg);
+      overflow: hidden; white-space: nowrap; padding: 0.75rem 0;
     }
-    .hero-body strong { color: var(--ocean); font-weight: 500; }
-    .hero-cta {
-      margin-top: 2.5rem;
-      display: inline-flex; align-items: center; gap: 0.8rem;
-      background: var(--coral);
-      color: var(--white);
-      padding: 0.85rem 2rem;
-      font-size: 0.78rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      font-family: var(--font-body);
-      transition: background 0.25s, transform 0.2s;
-      align-self: flex-start;
+    .strip-inner { display: inline-flex; animation: tk 24s linear infinite; }
+    .strip-item {
+      font-family: var(--fs); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 0 2.5rem; opacity: 0.5;
     }
-    .hero-cta:hover { background: var(--ocean); transform: translateY(-2px); }
-    .hero-cta svg { transition: transform 0.2s; }
-    .hero-cta:hover svg { transform: translateX(4px); }
+    .strip-item.hi { opacity: 1; }
+    @keyframes tk { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
     /* ── SECTION BASE ── */
-    section { padding: 6rem 4rem; }
-    .section-label {
-      font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--coral); margin-bottom: 0.8rem;
-      display: flex; align-items: center; gap: 0.8rem;
+    section { padding: 6rem 3rem; }
+    .sec-label {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--muted);
+      display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1rem;
     }
-    .section-label::after { content: ''; flex: 1; max-width: 3rem; height: 1px; background: var(--coral); }
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.2rem, 3.5vw, 3.5rem);
-      font-weight: 300; line-height: 1.1;
-      color: var(--ocean);
-    }
-    .section-title em { font-style: italic; color: var(--coral); }
-
-    /* ── ABOUT ── */
-    #about {
-      background: var(--ocean);
-      display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem;
-      align-items: center;
-    }
-    #about .section-label { color: var(--sand); }
-    #about .section-label::after { background: var(--sand); }
-    #about .section-title { color: var(--white); }
-    #about .section-title em { color: var(--sand); }
-    .about-text {
-      color: rgba(255,255,255,0.75);
-      font-size: 0.98rem; line-height: 1.9;
-    }
-    .about-text p + p { margin-top: 1rem; }
-    .about-skills {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
-    }
-    .skill-item {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 1.2rem 1.4rem;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .skill-item:hover {
-      background: rgba(196,97,58,0.15);
-      border-color: rgba(196,97,58,0.4);
-    }
-    .skill-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
-    .skill-name {
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      color: var(--white);
-    }
-    .skill-desc { font-size: 0.75rem; color: var(--mist); margin-top: 0.2rem; }
-
-    /* ── SERVICES ── */
-    #services { background: var(--paper); }
-    .services-header { max-width: 50ch; margin-bottom: 3.5rem; }
-    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5px; background: rgba(14,14,14,0.1); }
-    .service-card {
-      background: var(--paper);
-      padding: 2.5rem 2rem;
-      position: relative; overflow: hidden;
-      transition: background 0.3s;
-      cursor: default;
-    }
-    .service-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0;
-      height: 3px; background: var(--coral);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.35s ease;
-    }
-    .service-card:hover { background: var(--cream); }
-    .service-card:hover::before { transform: scaleX(1); }
-    .service-num {
-      font-family: var(--font-display);
-      font-size: 3.5rem; font-weight: 300;
-      color: rgba(14,14,14,0.07);
-      line-height: 1;
+    .sec-label::before { content: ''; width: 2rem; height: 1px; background: var(--muted); }
+    .sec-title {
+      font-family: var(--fs);
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      font-weight: 800; line-height: 0.95;
+      letter-spacing: -0.02em; color: var(--ink);
       margin-bottom: 1rem;
     }
-    .service-title {
-      font-family: var(--font-display);
-      font-size: 1.35rem; font-weight: 600;
-      color: var(--ocean);
-      margin-bottom: 0.8rem;
+    .sec-title em { font-style: italic; font-weight: 400; color: var(--muted); }
+    .sec-sub { font-size: 0.97rem; line-height: 1.85; color: var(--ink2); max-width: 52ch; margin-bottom: 3rem; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg2); border-top: 1px solid var(--border); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
+    .about-left {}
+    .about-photo {
+      width: 100%; aspect-ratio: 4/5; background: var(--bg3);
+      border: 1px solid var(--border); margin-top: 2.5rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0.6rem; color: var(--border);
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
     }
-    .service-desc { font-size: 0.85rem; line-height: 1.75; color: #555; margin-bottom: 1.2rem; }
-    .service-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .service-tag {
-      font-size: 0.65rem; letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: var(--cream);
-      color: var(--ocean);
-      padding: 0.2rem 0.6rem;
-      border: 1px solid rgba(26,58,74,0.2);
+    .about-text { font-size: 0.97rem; line-height: 1.9; color: var(--ink2); }
+    .about-text p + p { margin-top: 1.1rem; }
+    .about-text strong { color: var(--ink); font-weight: 600; }
+    .about-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border); margin-top: 2.5rem;
+    }
+    .stat-box {
+      background: var(--bg2); padding: 1.5rem 1rem; text-align: center;
+    }
+    .stat-num {
+      font-family: var(--fs); font-size: 2rem; font-weight: 800;
+      color: var(--ink); line-height: 1; display: block;
+    }
+    .stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; font-weight: 500; }
+
+    /* ── SKILLS ACCORDION ── */
+    .skills-stack { display: flex; flex-direction: column; }
+    .sk {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .sk:first-child { border-top: 1px solid var(--border); }
+    .sk-hdr {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.3rem 0; cursor: pointer; gap: 1rem;
+      transition: padding-left 0.25s;
+    }
+    .sk:hover .sk-hdr { padding-left: 0.5rem; }
+    .sk-hdr-l { display: flex; align-items: center; gap: 1rem; }
+    .sk-ico { font-size: 1.1rem; }
+    .sk-n { font-size: 0.65rem; font-weight: 700; color: var(--muted); font-family: var(--fs); }
+    .sk-title { font-family: var(--fs); font-size: 1rem; font-weight: 700; color: var(--ink); }
+    .sk-plus { font-size: 1.4rem; color: var(--muted); line-height: 1; transition: transform 0.3s, color 0.2s; }
+    .sk.open .sk-plus { transform: rotate(45deg); color: var(--ink); }
+    .sk-body { display: none; padding: 0 0 1.5rem 2.5rem; }
+    .sk.open .sk-body { display: block; }
+    .sk-desc { font-size: 0.9rem; line-height: 1.85; color: var(--ink2); margin-bottom: 1rem; }
+    .sk-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .sk-chip {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em;
+      background: var(--bg); border: 1px solid var(--border);
+      color: var(--ink2); padding: 0.25rem 0.65rem;
     }
 
-    /* ── APPROACH ── */
-    #approach {
-      background: var(--cream);
-      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    /* ── SERVICES ── */
+    #services { background: var(--bg); border-top: 1px solid var(--border); }
+    .svc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .svc-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      padding: 2.5rem; position: relative;
+      transition: border-color 0.25s, box-shadow 0.25s;
     }
-    .approach-quote {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 3vw, 3rem);
-      font-style: italic;
-      font-weight: 300;
-      line-height: 1.25;
-      color: var(--ocean);
+    .svc-card:hover { border-color: var(--ink); box-shadow: 6px 6px 0 var(--border); }
+    .svc-n { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 1.5rem; font-family: var(--fs); }
+    .svc-ico { font-size: 2rem; margin-bottom: 1rem; }
+    .svc-title { font-family: var(--fs); font-size: 1.4rem; font-weight: 800; color: var(--ink); margin-bottom: 0.6rem; line-height: 1.1; }
+    .svc-desc { font-size: 0.9rem; line-height: 1.8; color: var(--ink2); margin-bottom: 1.5rem; }
+    .svc-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 1.5rem; }
+    .svc-list li { font-size: 0.85rem; color: var(--ink2); padding-left: 1.2rem; position: relative; }
+    .svc-list li::before { content: '—'; position: absolute; left: 0; color: var(--muted); }
+    .svc-for {
+      font-size: 0.75rem; color: var(--muted); border-top: 1px solid var(--border);
+      padding-top: 1rem; margin-top: 0.5rem; font-style: italic;
     }
-    .approach-quote span { color: var(--coral); }
-    .approach-content .section-title { margin-bottom: 1.5rem; }
-    .approach-text { font-size: 0.95rem; line-height: 1.9; color: #444; }
-    .approach-text p + p { margin-top: 1rem; }
-    .who-list {
-      margin-top: 2rem;
-      display: flex; flex-wrap: wrap; gap: 0.6rem;
-    }
-    .who-pill {
-      background: var(--ocean);
-      color: var(--white);
-      font-size: 0.75rem;
-      padding: 0.35rem 0.9rem;
-      letter-spacing: 0.06em;
-    }
+    .svc-for strong { color: var(--ink2); font-style: normal; font-weight: 600; }
 
-    /* ── PROJECTS ── */
-    #projects { background: var(--paper); }
-    .projects-header { max-width: 50ch; margin-bottom: 3rem; }
-    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-    .project-card {
-      border: 1px solid rgba(14,14,14,0.12);
-      padding: 2rem 2.2rem;
+    /* ── WHY SECTION ── */
+    #why { background: var(--ink); color: var(--bg); border-top: 1px solid #333; padding: 6rem 3rem; }
+    #why .sec-label { color: rgba(255,255,255,0.35); }
+    #why .sec-label::before { background: rgba(255,255,255,0.25); }
+    #why .sec-title { color: var(--bg); }
+    #why .sec-title em { color: rgba(255,255,255,0.35); }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #333; margin-top: 3rem; }
+    .why-card { background: var(--ink); padding: 2.5rem 2rem; }
+    .why-num { font-family: var(--fs); font-size: 2.5rem; font-weight: 800; color: rgba(255,255,255,0.08); line-height: 1; margin-bottom: 1rem; }
+    .why-title { font-family: var(--fs); font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 0.7rem; }
+    .why-text { font-size: 0.88rem; line-height: 1.8; color: rgba(255,255,255,0.55); }
+
+    /* ── PROCESS ── */
+    #process { background: var(--bg2); border-top: 1px solid var(--border); }
+    .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 3rem; }
+    .step {
+      padding: 2rem 1.8rem; border-right: 1px solid var(--border);
       position: relative;
-      transition: border-color 0.25s, transform 0.2s;
-      background: var(--white);
     }
-    .project-card:hover { border-color: var(--coral); transform: translateY(-3px); }
-    .project-tag {
-      font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--coral); margin-bottom: 0.8rem;
+    .step:last-child { border-right: none; }
+    .step-n {
+      font-family: var(--fs); font-size: 3rem; font-weight: 800;
+      color: var(--bg3); line-height: 1; margin-bottom: 1rem;
     }
-    .project-name {
-      font-family: var(--font-display);
-      font-size: 1.3rem; font-weight: 600;
-      color: var(--ocean); margin-bottom: 0.6rem;
-    }
-    .project-desc { font-size: 0.85rem; line-height: 1.7; color: #555; }
-    .project-arrow {
-      position: absolute; bottom: 1.5rem; right: 1.8rem;
-      font-size: 1.2rem; color: var(--sand);
-      transition: color 0.2s, transform 0.2s;
-    }
-    .project-card:hover .project-arrow { color: var(--coral); transform: translate(3px, -3px); }
+    .step-title { font-family: var(--fs); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; }
+    .step-desc { font-size: 0.85rem; line-height: 1.75; color: var(--muted); }
 
     /* ── CONTACT ── */
-    #contact {
-      background: var(--ocean);
-      text-align: center;
-      padding: 7rem 4rem;
-      position: relative; overflow: hidden;
+    #contact { background: var(--bg); border-top: 1px solid var(--border); }
+    .contact-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: start; }
+    .contact-left {}
+    .contact-intro { font-size: 0.97rem; line-height: 1.9; color: var(--ink2); margin-bottom: 2.5rem; }
+    .contact-channels { display: flex; flex-direction: column; gap: 1rem; }
+    .ch-item {
+      display: flex; align-items: center; gap: 1.2rem;
+      padding: 1.2rem 1.4rem; background: var(--bg2);
+      border: 1px solid var(--border); text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
     }
-    #contact::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 50% 100%, rgba(196,97,58,0.2) 0%, transparent 60%);
-      pointer-events: none;
+    .ch-item:hover { border-color: var(--ink); background: var(--bg3); transform: translateX(4px); }
+    .ch-ico { font-size: 1.4rem; flex-shrink: 0; }
+    .ch-info {}
+    .ch-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .ch-val { font-size: 0.95rem; font-weight: 600; color: var(--ink); }
+    .ch-sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+    .contact-right {}
+    .contact-box {
+      background: var(--ink); color: var(--bg); padding: 2.5rem;
+      position: sticky; top: 6rem;
     }
-    .contact-eyebrow {
-      font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--sand); margin-bottom: 1.2rem;
+    .contact-box-title { font-family: var(--fs); font-size: 1.6rem; font-weight: 800; line-height: 1.1; margin-bottom: 0.6rem; }
+    .contact-box-sub { font-size: 0.88rem; color: rgba(255,255,255,0.55); margin-bottom: 2rem; line-height: 1.7; }
+    .contact-box .btn-wa {
+      display: flex; align-items: center; gap: 1rem;
+      background: #25d366; color: #fff;
+      padding: 1rem 1.5rem; text-decoration: none;
+      font-family: var(--fb); font-size: 0.95rem; font-weight: 700;
+      margin-bottom: 0.8rem;
+      transition: opacity 0.2s, transform 0.2s;
     }
-    .contact-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 4vw, 4.5rem);
-      font-weight: 300; color: var(--white);
-      line-height: 1.1; margin-bottom: 1.5rem;
+    .contact-box .btn-wa:hover { opacity: 0.9; transform: translateY(-2px); }
+    .contact-box .btn-email {
+      display: flex; align-items: center; gap: 1rem;
+      background: transparent; border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.8); padding: 0.9rem 1.5rem; text-decoration: none;
+      font-family: var(--fb); font-size: 0.88rem; font-weight: 600;
+      transition: border-color 0.2s, color 0.2s;
     }
-    .contact-title em { font-style: italic; color: var(--sand); }
-    .contact-text { font-size: 0.95rem; color: var(--mist); max-width: 45ch; margin: 0 auto 2.5rem; line-height: 1.75; }
-    .contact-btn {
-      display: inline-flex; align-items: center; gap: 0.8rem;
-      background: var(--coral);
-      color: var(--white);
-      padding: 1rem 2.4rem;
-      font-size: 0.82rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      font-family: var(--font-body);
-      font-weight: 500;
-      transition: background 0.25s, transform 0.2s;
-    }
-    .contact-btn:hover { background: #a84e2e; transform: translateY(-2px); }
+    .contact-box .btn-email:hover { border-color: #fff; color: #fff; }
+    .contact-note { font-size: 0.75rem; color: rgba(255,255,255,0.35); margin-top: 1.5rem; line-height: 1.6; }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--ink);
-      color: rgba(255,255,255,0.35);
+      background: var(--bg2); border-top: 1px solid var(--border);
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1.5rem 4rem;
-      font-size: 0.72rem; letter-spacing: 0.08em;
+      padding: 1.5rem 3rem;
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: var(--muted);
     }
-    footer strong { color: rgba(255,255,255,0.6); }
-    .footer-tagline {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 0.9rem;
-      color: var(--sand);
-    }
+    .f-logo { font-family: var(--fs); font-size: 0.9rem; font-weight: 800; color: var(--ink); }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--ink); }
 
-    /* ── ANIMATIONS ── */
-    .reveal {
-      opacity: 0; transform: translateY(28px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .nav-links { display: none; }
-      #hero { grid-template-columns: 1fr; }
-      .hero-left { min-height: 55vh; padding: 7rem 2rem 3rem; }
-      .hero-right { padding: 3rem 2rem 4rem; }
-      #about, #approach { grid-template-columns: 1fr; gap: 2.5rem; padding: 4rem 2rem; }
-      .services-grid { grid-template-columns: 1fr 1fr; }
-      .projects-grid { grid-template-columns: 1fr; }
-      section { padding: 4rem 2rem; }
-      #contact { padding: 5rem 2rem; }
-      footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 1.5rem; }
+    @media(max-width:900px){
+      nav{padding:1rem 1.5rem} .nav-links{display:none}
+      #hero{padding:8rem 1.5rem 4rem} .hero-grid{grid-template-columns:1fr}
+      section{padding:4rem 1.5rem}
+      .about-grid{grid-template-columns:1fr; gap:2.5rem}
+      .svc-grid{grid-template-columns:1fr}
+      .why-grid{grid-template-columns:1fr}
+      .process-steps{grid-template-columns:1fr 1fr}
+      .step{border-right:none;border-bottom:1px solid var(--border)}
+      .contact-grid{grid-template-columns:1fr}
+      footer{flex-direction:column;gap:0.8rem;padding:1.5rem;text-align:center}
     }
-    @media (max-width: 600px) {
-      .services-grid { grid-template-columns: 1fr; }
-      .about-skills { grid-template-columns: 1fr; }
+    @media(max-width:600px){
+      .about-stats{grid-template-columns:1fr 1fr}
+      .process-steps{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
 
+  <!-- WHATSAPP POPUP WIDGET -->
+  <div class="wa-popup" id="waPopup">
+    <div class="wa-popup-header">
+      <div class="wa-avatar">👋</div>
+      <div class="wa-header-info">
+        <div class="wa-header-name">Leandro · Delmar Digital</div>
+        <div class="wa-header-status">
+          <span class="wa-online-dot"></span>
+          <span class="en">Usually replies in minutes</span>
+          <span class="es">Responde en minutos</span>
+        </div>
+      </div>
+      <button class="wa-close" onclick="closeWA()" aria-label="Close">✕</button>
+    </div>
+    <div class="wa-popup-body">
+      <div class="wa-bubble">
+        <span class="en">Hi! 👋 Tell me about your business and what you need — I'll get back to you right away.</span>
+        <span class="es">¡Hola! 👋 Cuéntame sobre tu negocio y qué necesitas — te respondo enseguida.</span>
+        <div class="wa-bubble-time">Leandro · 🔒 Encrypted</div>
+      </div>
+    </div>
+    <div class="wa-popup-input">
+      <textarea class="wa-textarea" id="waText" placeholder="Write your message…"></textarea>
+      <button class="wa-send-btn" onclick="sendWA()">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        <span class="en">Send via WhatsApp</span>
+        <span class="es">Enviar por WhatsApp</span>
+      </button>
+    </div>
+  </div>
+
+  <button class="wa-fab" id="waFab" onclick="toggleWA()" aria-label="WhatsApp">
+    <div class="wa-badge"></div>
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </button>
+
+
   <!-- NAV -->
   <nav>
-    <a class="nav-logo" href="#hero">Del<span>mar</span> Digital</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <a class="nav-logo" href="#hero">Delmar <span>Digital</span></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#about"><span class="en">About</span><span class="es">Sobre mí</span></a></li>
+        <li><a href="#services"><span class="en">Services</span><span class="es">Servicios</span></a></li>
+        <li><a href="#contact"><span class="en">Contact</span><span class="es">Contacto</span></a></li>
+      </ul>
+      <button class="lang-btn" id="langToggle" onclick="toggleLang()">
+        <span id="enLabel" class="active">EN</span>
+        <span style="opacity:0.3">·</span>
+        <span id="esLabel">ES</span>
+      </button>
+      <a href="https://wa.me/34698971708" class="nav-cta" target="_blank">
+        <span class="en">Let's talk</span>
+        <span class="es">Hablemos</span>
+      </a>
+    </div>
   </nav>
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-left">
-      <p class="hero-eyebrow">Leandro · Delmar Digital</p>
-      <h1 class="hero-title">Helping businesses<br><em>grow online</em></h1>
-      <p class="hero-subtitle">
-        Websites&nbsp;&nbsp;·&nbsp;&nbsp;SEO&nbsp;&nbsp;·&nbsp;&nbsp;Google Maps<br>
-        Booking Systems&nbsp;&nbsp;·&nbsp;&nbsp;Automation
-      </p>
-    </div>
-    <div class="hero-right">
-      <p class="hero-intro">Hi, I'm Leandro.</p>
-      <p class="hero-body">
-        I help <strong>small businesses, freelancers and entrepreneurs</strong> improve their online presence and attract more clients through the internet.<br><br>
-        After years working with websites, digital marketing and travel projects, I now help businesses build a stronger digital presence and simplify their online systems.
-      </p>
-      <a href="#contact" class="hero-cta">
-        Let's work together
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+    <div class="hero-rule"></div>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">
+          <span class="hero-dot"></span>
+          <span class="en">Leandro · Delmar Digital · Palma, Spain</span>
+          <span class="es">Leandro · Delmar Digital · Palma, España</span>
+        </div>
+        <h1 class="en">Helping<br>businesses<br><em>grow online</em></h1>
+        <h1 class="es">Ayudo a<br>negocios a<br><em>crecer online</em></h1>
+      </div>
+      <div class="hero-right reveal">
+        <p class="hero-tagline en">Simple digital solutions<br>for real businesses.</p>
+        <p class="hero-tagline es">Soluciones digitales simples<br>para negocios reales.</p>
+        <p class="hero-desc en">I'm Leandro. I help small businesses, freelancers and entrepreneurs build a stronger online presence — through websites, SEO, booking systems and automation. No tech jargon. Just results.</p>
+        <p class="hero-desc es">Soy Leandro. Ayudo a pequeños negocios, freelancers y emprendedores a tener más presencia online — con webs, SEO, sistemas de reservas y automatización. Sin tecnicismos. Solo resultados.</p>
+        <div class="hero-services">
+          <span class="hero-pill en">🌐 Websites</span>
+          <span class="hero-pill es">🌐 Páginas web</span>
+          <span class="hero-pill en">📍 Google Maps & SEO</span>
+          <span class="hero-pill es">📍 Google Maps & SEO</span>
+          <span class="hero-pill en">📅 Booking Systems</span>
+          <span class="hero-pill es">📅 Sistemas de reserva</span>
+          <span class="hero-pill en">⚡ Automation</span>
+          <span class="hero-pill es">⚡ Automatización</span>
+        </div>
+        <div class="hero-cta-row">
+          <a href="https://wa.me/34698971708" class="btn-primary" target="_blank">
+            <span class="en">💬 WhatsApp me now</span>
+            <span class="es">💬 Escríbeme por WhatsApp</span>
+          </a>
+          <a href="#services" class="btn-secondary">
+            <span class="en">See services ↓</span>
+            <span class="es">Ver servicios ↓</span>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="strip-inner">
+      <span class="strip-item hi">Websites</span>
+      <span class="strip-item">SEO & Google Maps</span>
+      <span class="strip-item hi">Booking Systems</span>
+      <span class="strip-item">Digital Automation</span>
+      <span class="strip-item hi">Online Growth</span>
+      <span class="strip-item">Delmar Digital</span>
+      <span class="strip-item hi">Leandro</span>
+      <span class="strip-item">Palma · Spain</span>
+      <span class="strip-item hi">Websites</span>
+      <span class="strip-item">SEO & Google Maps</span>
+      <span class="strip-item hi">Booking Systems</span>
+      <span class="strip-item">Digital Automation</span>
+      <span class="strip-item hi">Online Growth</span>
+      <span class="strip-item">Delmar Digital</span>
+      <span class="strip-item hi">Leandro</span>
+      <span class="strip-item">Palma · Spain</span>
+    </div>
+  </div>
+
   <!-- ABOUT -->
   <section id="about">
-    <div>
-      <p class="section-label reveal">About me</p>
-      <h2 class="section-title reveal reveal-delay-1">My <em>Story</em></h2>
-      <div class="about-text reveal reveal-delay-2">
-        <p>My journey started with a passion for travel, digital tools and entrepreneurship.</p>
-        <p>Over the years I worked on different digital projects, including building websites, managing online visibility and creating travel content.</p>
-        <p>I've traveled through places like Thailand, Vietnam, Argentina and Europe — documenting experiences and learning how digital platforms help businesses reach people all over the world.</p>
-        <p>Today I use this experience to help local businesses and entrepreneurs improve their digital presence and attract more clients online.</p>
+    <div class="about-grid">
+      <div>
+        <p class="sec-label reveal en">About me</p>
+        <p class="sec-label reveal es">Sobre mí</p>
+        <h2 class="sec-title reveal d1 en">My<br><em>Story</em></h2>
+        <h2 class="sec-title reveal d1 es">Mi<br><em>Historia</em></h2>
+        <div class="about-stats reveal d2">
+          <div class="stat-box">
+            <span class="stat-num">5+</span>
+            <span class="stat-label en">Years experience</span>
+            <span class="stat-label es">Años experiencia</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">4</span>
+            <span class="stat-label en">Continents</span>
+            <span class="stat-label es">Continentes</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">6</span>
+            <span class="stat-label en">Core services</span>
+            <span class="stat-label es">Servicios</span>
+          </div>
+        </div>
+        <!-- PHOTO: replace div with <img src="your-photo.jpg" alt="Leandro"> -->
+        <div class="about-photo reveal d3">
+          <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <span class="en">Your photo here</span>
+          <span class="es">Tu foto aquí</span>
+        </div>
       </div>
-    </div>
-    <div class="about-skills reveal reveal-delay-2">
-      <div class="skill-item">
-        <div class="skill-icon">🌐</div>
-        <div class="skill-name">Website Creation</div>
-        <div class="skill-desc">Professional sites built to convert</div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-icon">📍</div>
-        <div class="skill-name">SEO & Google Maps</div>
-        <div class="skill-desc">Local visibility & rankings</div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-icon">📱</div>
-        <div class="skill-name">Social Media & Branding</div>
-        <div class="skill-desc">Online presence that stands out</div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-icon">⚙️</div>
-        <div class="skill-name">Digital Automation</div>
-        <div class="skill-desc">Simpler systems for your business</div>
+      <div>
+        <div class="about-text reveal d1">
+          <p class="en">My journey started with a passion for <strong>travel, digital tools and entrepreneurship</strong>. Over the years I've lived and worked across Southeast Asia, South America and Europe — learning first-hand how the internet can transform a small business.</p>
+          <p class="es">Mi camino comenzó con pasión por <strong>los viajes, las herramientas digitales y el emprendimiento</strong>. Con los años viví y trabajé por el Sudeste Asiático, Sudamérica y Europa — aprendiendo de primera mano cómo internet puede transformar un pequeño negocio.</p>
+          <p class="en" style="margin-top:1.1rem">I traveled through <strong>Thailand, Vietnam, Argentina and Europe</strong>, creating content and building digital projects that taught me what actually works online — and what's just noise.</p>
+          <p class="es" style="margin-top:1.1rem">Viajé por <strong>Tailandia, Vietnam, Argentina y Europa</strong>, creando contenido y construyendo proyectos digitales que me enseñaron qué funciona de verdad online — y qué es solo ruido.</p>
+          <p class="en" style="margin-top:1.1rem">Today, based in <strong>Palma de Mallorca</strong>, I help local businesses and entrepreneurs improve their digital presence and attract more clients — simply and affordably.</p>
+          <p class="es" style="margin-top:1.1rem">Hoy, desde <strong>Palma de Mallorca</strong>, ayudo a negocios locales y emprendedores a mejorar su presencia digital y atraer más clientes — de forma simple y asequible.</p>
+        </div>
+
+        <div style="margin-top:2.5rem">
+          <p class="sec-label reveal en">My skills</p>
+          <p class="sec-label reveal es">Mis habilidades</p>
+          <div class="skills-stack reveal d1">
+
+            <div class="sk">
+              <div class="sk-hdr" onclick="toggleSk(this)">
+                <div class="sk-hdr-l"><span class="sk-ico">🌐</span><span class="sk-n">01</span><span class="sk-title en">Website Creation</span><span class="sk-title es">Creación de webs</span></div>
+                <span class="sk-plus">+</span>
+              </div>
+              <div class="sk-body">
+                <p class="sk-desc en">I build professional, fast websites that make your business look serious and turn visitors into clients. Clean design, mobile-ready, and easy for you to update.</p>
+                <p class="sk-desc es">Construyo webs profesionales y rápidas que hacen que tu negocio parezca serio y convierte visitas en clientes. Diseño limpio, adaptado a móvil y fácil de actualizar.</p>
+                <div class="sk-chips"><span class="sk-chip en">Custom design</span><span class="sk-chip es">Diseño personalizado</span><span class="sk-chip en">Mobile-first</span><span class="sk-chip es">Primero móvil</span><span class="sk-chip en">Fast loading</span><span class="sk-chip es">Carga rápida</span><span class="sk-chip en">Contact forms</span><span class="sk-chip es">Formularios</span></div>
+              </div>
+            </div>
+
+            <div class="sk">
+              <div class="sk-hdr" onclick="toggleSk(this)">
+                <div class="sk-hdr-l"><span class="sk-ico">📍</span><span class="sk-n">02</span><span class="sk-title en">Google Maps & SEO</span><span class="sk-title es">Google Maps & SEO</span></div>
+                <span class="sk-plus">+</span>
+              </div>
+              <div class="sk-body">
+                <p class="sk-desc en">When someone searches for your service, I make sure you appear first. I optimise your Google Business profile so local clients find you — not your competitors.</p>
+                <p class="sk-desc es">Cuando alguien busca tu servicio, me aseguro de que aparezcas primero. Optimizo tu perfil de Google Business para que los clientes locales te encuentren a ti — no a tu competencia.</p>
+                <div class="sk-chips"><span class="sk-chip en">Google Business setup</span><span class="sk-chip es">Perfil Google</span><span class="sk-chip en">Local SEO</span><span class="sk-chip es">SEO local</span><span class="sk-chip en">Reviews strategy</span><span class="sk-chip es">Estrategia reseñas</span><span class="sk-chip en">Maps ranking</span><span class="sk-chip es">Posicionamiento Maps</span></div>
+              </div>
+            </div>
+
+            <div class="sk">
+              <div class="sk-hdr" onclick="toggleSk(this)">
+                <div class="sk-hdr-l"><span class="sk-ico">📱</span><span class="sk-n">03</span><span class="sk-title en">Social Media & Branding</span><span class="sk-title es">Redes sociales & marca</span></div>
+                <span class="sk-plus">+</span>
+              </div>
+              <div class="sk-body">
+                <p class="sk-desc en">Your Instagram and social profiles should work for you 24/7. I help you build a consistent, professional brand presence that builds trust and turns followers into clients.</p>
+                <p class="sk-desc es">Tu Instagram y redes sociales deben trabajar para ti las 24h. Te ayudo a construir una presencia de marca coherente y profesional que genera confianza y convierte seguidores en clientes.</p>
+                <div class="sk-chips"><span class="sk-chip en">Profile optimisation</span><span class="sk-chip es">Optimización perfil</span><span class="sk-chip en">Visual identity</span><span class="sk-chip es">Identidad visual</span><span class="sk-chip en">Content strategy</span><span class="sk-chip es">Estrategia contenido</span><span class="sk-chip en">Bio setup</span><span class="sk-chip es">Bio y enlaces</span></div>
+              </div>
+            </div>
+
+            <div class="sk">
+              <div class="sk-hdr" onclick="toggleSk(this)">
+                <div class="sk-hdr-l"><span class="sk-ico">📅</span><span class="sk-n">04</span><span class="sk-title en">Booking Systems</span><span class="sk-title es">Sistemas de reserva</span></div>
+                <span class="sk-plus">+</span>
+              </div>
+              <div class="sk-body">
+                <p class="sk-desc en">Stop losing clients to back-and-forth messages. I set up an online booking system so people can book your services any time — directly from your website or social media.</p>
+                <p class="sk-desc es">Deja de perder clientes con mensajes interminables. Configuro un sistema de reservas online para que tus clientes reserven en cualquier momento — desde tu web o redes sociales.</p>
+                <div class="sk-chips"><span class="sk-chip en">24/7 online booking</span><span class="sk-chip es">Reservas 24/7</span><span class="sk-chip en">Auto reminders</span><span class="sk-chip es">Recordatorios automáticos</span><span class="sk-chip en">Calendar sync</span><span class="sk-chip es">Sincronización agenda</span><span class="sk-chip en">Deposit collection</span><span class="sk-chip es">Cobro de depósito</span></div>
+              </div>
+            </div>
+
+            <div class="sk">
+              <div class="sk-hdr" onclick="toggleSk(this)">
+                <div class="sk-hdr-l"><span class="sk-ico">⚡</span><span class="sk-n">05</span><span class="sk-title en">Payment Automation</span><span class="sk-title es">Automatización de pagos</span></div>
+                <span class="sk-plus">+</span>
+              </div>
+              <div class="sk-body">
+                <p class="sk-desc en">Get paid automatically — no chasing invoices, no manual work. Clients pay securely at the moment they book or order. You wake up to money in your account.</p>
+                <p class="sk-desc es">Cobra automáticamente — sin perseguir facturas ni trabajo manual. Los clientes pagan de forma segura en el momento de reservar. Te despiertas con dinero en tu cuenta.</p>
+                <div class="sk-chips"><span class="sk-chip">Stripe / PayPal</span><span class="sk-chip en">Auto invoices</span><span class="sk-chip es">Facturas automáticas</span><span class="sk-chip en">Payment links</span><span class="sk-chip es">Links de pago</span><span class="sk-chip en">Subscriptions</span><span class="sk-chip es">Suscripciones</span></div>
+              </div>
+            </div>
+
+            <div class="sk">
+              <div class="sk-hdr" onclick="toggleSk(this)">
+                <div class="sk-hdr-l"><span class="sk-ico">🎥</span><span class="sk-n">06</span><span class="sk-title en">Travel & Digital Content</span><span class="sk-title es">Contenido digital & viajes</span></div>
+                <span class="sk-plus">+</span>
+              </div>
+              <div class="sk-body">
+                <p class="sk-desc en">Years creating travel content across Asia and Europe taught me what makes people stop scrolling. I apply these storytelling skills to help businesses create content that connects with their audience.</p>
+                <p class="sk-desc es">Años creando contenido de viajes por Asia y Europa me enseñaron qué hace que la gente deje de hacer scroll. Aplico estas habilidades narrativas para ayudar a negocios a crear contenido que conecta con su audiencia.</p>
+                <div class="sk-chips"><span class="sk-chip en">YouTube strategy</span><span class="sk-chip es">Estrategia YouTube</span><span class="sk-chip en">Video storytelling</span><span class="sk-chip es">Narrativa en video</span><span class="sk-chip en">Blog & SEO content</span><span class="sk-chip es">Blog & contenido SEO</span><span class="sk-chip en">Tourism marketing</span><span class="sk-chip es">Marketing turístico</span></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- SERVICES -->
   <section id="services">
-    <div class="services-header">
-      <p class="section-label reveal">What I do</p>
-      <h2 class="section-title reveal reveal-delay-1">Services <em>built</em><br>for real businesses</h2>
+    <p class="sec-label reveal en">Services & Pricing</p>
+    <p class="sec-label reveal es">Servicios & Precios</p>
+    <h2 class="sec-title reveal d1 en">What I<br><em>Build for you</em></h2>
+    <h2 class="sec-title reveal d1 es">Qué<br><em>construyo para ti</em></h2>
+    <p class="sec-sub reveal d2 en">No packages you don't need. No long contracts. Just the specific service your business needs — delivered clean and fast.</p>
+    <p class="sec-sub reveal d2 es">Sin paquetes que no necesitas. Sin contratos largos. Solo el servicio específico que tu negocio necesita — entregado limpio y rápido.</p>
+    <div class="svc-grid">
+
+      <div class="svc-card reveal">
+        <div class="svc-n">01 — WEBSITE</div>
+        <div class="svc-ico">🌐</div>
+        <h3 class="svc-title en">Professional Website</h3>
+        <h3 class="svc-title es">Página Web Profesional</h3>
+        <p class="svc-desc en">A clean, fast website that makes your business look credible and converts visitors into clients. Built in days, not months.</p>
+        <p class="svc-desc es">Una web limpia y rápida que hace que tu negocio parezca serio y convierte visitas en clientes. Lista en días, no meses.</p>
+        <ul class="svc-list en"><li>Up to 5 pages (Home, About, Services, Gallery, Contact)</li><li>Mobile-friendly design for all devices</li><li>Contact form so clients can reach you easily</li><li>Connected to your Google Business profile</li><li>Basic SEO so Google can find you</li><li>Delivered in 5–7 working days</li></ul>
+        <ul class="svc-list es"><li>Hasta 5 páginas (Inicio, Sobre mí, Servicios, Galería, Contacto)</li><li>Diseño adaptado a todos los dispositivos</li><li>Formulario de contacto fácil de usar</li><li>Conectada a tu perfil de Google Business</li><li>SEO básico para que Google te encuentre</li><li>Entregada en 5–7 días laborables</li></ul>
+        <p class="svc-for en"><strong>Perfect for:</strong> restaurants, salons, therapists, freelancers, tourism businesses, small shops</p>
+        <p class="svc-for es"><strong>Ideal para:</strong> restaurantes, salones, terapeútas, freelancers, negocios turísticos, tiendas pequeñas</p>
+      </div>
+
+      <div class="svc-card reveal d1">
+        <div class="svc-n">02 — GOOGLE MAPS & SEO</div>
+        <div class="svc-ico">📍</div>
+        <h3 class="svc-title en">Google Visibility</h3>
+        <h3 class="svc-title es">Visibilidad en Google</h3>
+        <p class="svc-desc en">Most people search Google before choosing a business. I make sure yours appears first — with great photos, reviews and the right information.</p>
+        <p class="svc-desc es">La mayoría de personas buscan en Google antes de elegir un negocio. Me aseguro de que el tuyo aparezca primero — con buenas fotos, reseñas e información correcta.</p>
+        <ul class="svc-list en"><li>Full Google Business profile setup or optimisation</li><li>Professional photos and descriptions</li><li>Strategy to get more 5-star reviews</li><li>Local keyword targeting for your area</li><li>Monthly visibility report</li><li>Ongoing support available</li></ul>
+        <ul class="svc-list es"><li>Configuración completa o mejora de tu perfil Google Business</li><li>Fotos y descripciones profesionales</li><li>Estrategia para conseguir más reseñas de 5 estrellas</li><li>Palabras clave locales para tu zona</li><li>Informe mensual de visibilidad</li><li>Soporte continuo disponible</li></ul>
+        <p class="svc-for en"><strong>Perfect for:</strong> any local business that wants more clients from Google searches</p>
+        <p class="svc-for es"><strong>Ideal para:</strong> cualquier negocio local que quiera más clientes desde búsquedas de Google</p>
+      </div>
+
+      <div class="svc-card reveal d2">
+        <div class="svc-n">03 — BOOKING SYSTEM</div>
+        <div class="svc-ico">📅</div>
+        <h3 class="svc-title en">Online Booking System</h3>
+        <h3 class="svc-title es">Sistema de Reservas Online</h3>
+        <p class="svc-desc en">Let clients book appointments directly from your website or Instagram — any time, any day. No more missed clients, no more WhatsApp ping-pong.</p>
+        <p class="svc-desc es">Deja que los clientes reserven directamente desde tu web o Instagram — cualquier día, a cualquier hora. Sin clientes perdidos, sin ir y venir de mensajes.</p>
+        <ul class="svc-list en"><li>Booking page integrated into your website</li><li>Automatic email & SMS reminders for clients</li><li>Your availability always up to date</li><li>Option to collect a deposit at booking</li><li>Works on mobile, tablet and desktop</li><li>Connects with Google Calendar</li></ul>
+        <ul class="svc-list es"><li>Página de reservas integrada en tu web</li><li>Recordatorios automáticos por email y SMS a los clientes</li><li>Tu disponibilidad siempre actualizada</li><li>Opción de cobrar un depósito al reservar</li><li>Funciona en móvil, tablet y ordenador</li><li>Se conecta con Google Calendar</li></ul>
+        <p class="svc-for en"><strong>Perfect for:</strong> yoga teachers, coaches, therapists, photographers, consultants, tour guides</p>
+        <p class="svc-for es"><strong>Ideal para:</strong> profesores de yoga, coaches, terapeútas, fotógrafos, consultores, guías turísticos</p>
+      </div>
+
+      <div class="svc-card reveal d3">
+        <div class="svc-n">04 — AUTOMATION</div>
+        <div class="svc-ico">⚡</div>
+        <h3 class="svc-title en">Payment & Automation</h3>
+        <h3 class="svc-title es">Pagos & Automatización</h3>
+        <p class="svc-desc en">Save hours every week. Payments, invoices and follow-ups happen automatically. You focus on your work — the system handles the rest.</p>
+        <p class="svc-desc es">Ahorra horas cada semana. Los pagos, facturas y seguimientos ocurren automáticamente. Tú te centras en tu trabajo — el sistema hace el resto.</p>
+        <ul class="svc-list en"><li>Online payment integration (Stripe, PayPal, Bizum)</li><li>Automatic invoice generation and sending</li><li>Automated follow-up emails after appointments</li><li>Digital contracts and e-signatures if needed</li><li>Custom workflows built around your business</li><li>Full setup and training included</li></ul>
+        <ul class="svc-list es"><li>Integración de pago online (Stripe, PayPal, Bizum)</li><li>Generación y envío automático de facturas</li><li>Emails de seguimiento automáticos tras las citas</li><li>Contratos digitales y firmas electrónicas si necesitas</li><li>Flujos de trabajo personalizados para tu negocio</li><li>Configuración completa y formación incluida</li></ul>
+        <p class="svc-for en"><strong>Perfect for:</strong> any business that wants to save time and get paid faster — without the manual work</p>
+        <p class="svc-for es"><strong>Ideal para:</strong> cualquier negocio que quiera ahorrar tiempo y cobrar más rápido — sin trabajo manual</p>
+      </div>
+
     </div>
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <div class="service-num">01</div>
-        <h3 class="service-title">Websites</h3>
-        <p class="service-desc">Professional and simple websites designed to help your business look credible and attract new clients.</p>
-        <div class="service-tags">
-          <span class="service-tag">Small business</span>
-          <span class="service-tag">Freelancers</span>
-          <span class="service-tag">Restaurants</span>
-          <span class="service-tag">Tourism</span>
-        </div>
+  </section>
+
+  <!-- WHY ME -->
+  <section id="why">
+    <p class="sec-label reveal en">Why work with me</p>
+    <p class="sec-label reveal es">Por qué trabajar conmigo</p>
+    <h2 class="sec-title reveal d1 en">No fluff.<br><em>Just results.</em></h2>
+    <h2 class="sec-title reveal d1 es">Sin rodeos.<br><em>Solo resultados.</em></h2>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-num">01</div>
+        <h3 class="why-title en">I speak your language</h3>
+        <h3 class="why-title es">Hablo tu idioma</h3>
+        <p class="why-text en">No tech jargon. No confusing proposals. I explain everything in plain terms so you always understand what's happening and why.</p>
+        <p class="why-text es">Sin tecnicismos. Sin propuestas confusas. Te explico todo en palabras simples para que siempre entiendas qué pasa y por qué.</p>
       </div>
-      <div class="service-card reveal reveal-delay-1">
-        <div class="service-num">02</div>
-        <h3 class="service-title">Google Maps & SEO</h3>
-        <p class="service-desc">Optimization of your Google Business profile to improve visibility and attract more local clients.</p>
-        <div class="service-tags">
-          <span class="service-tag">Profile setup</span>
-          <span class="service-tag">Reviews</span>
-          <span class="service-tag">Local SEO</span>
-          <span class="service-tag">Photos</span>
-        </div>
+      <div class="why-card reveal d1">
+        <div class="why-num">02</div>
+        <h3 class="why-title en">Fast delivery</h3>
+        <h3 class="why-title es">Entrega rápida</h3>
+        <p class="why-text en">Most projects are done in under 2 weeks. I don't disappear for months. You get updates, you get results, and you get back to running your business.</p>
+        <p class="why-text es">La mayoría de proyectos están listos en menos de 2 semanas. No desaparezco meses. Recibes actualizaciones, obtienes resultados y vuelves a gestionar tu negocio.</p>
       </div>
-      <div class="service-card reveal reveal-delay-2">
-        <div class="service-num">03</div>
-        <h3 class="service-title">Booking Systems</h3>
-        <p class="service-desc">Setup of online appointment and booking systems so clients can easily schedule your services.</p>
-        <div class="service-tags">
-          <span class="service-tag">Therapists</span>
-          <span class="service-tag">Yoga</span>
-          <span class="service-tag">Consultants</span>
-          <span class="service-tag">Tourism</span>
-        </div>
-      </div>
-      <div class="service-card reveal reveal-delay-3">
-        <div class="service-num">04</div>
-        <h3 class="service-title">Payment Automation</h3>
-        <p class="service-desc">Integration of online payment systems and automation to simplify your business operations.</p>
-        <div class="service-tags">
-          <span class="service-tag">Online payments</span>
-          <span class="service-tag">Auto-invoices</span>
-          <span class="service-tag">Booking payments</span>
-        </div>
+      <div class="why-card reveal d2">
+        <div class="why-num">03</div>
+        <h3 class="why-title en">Real experience</h3>
+        <h3 class="why-title es">Experiencia real</h3>
+        <p class="why-text en">I've built and run my own digital projects across multiple countries. I know what works because I've tested it myself — not just read about it in a course.</p>
+        <p class="why-text es">He construido y gestionado mis propios proyectos digitales en varios países. Sé lo que funciona porque lo he probado yo mismo — no solo lo he leído en un curso.</p>
       </div>
     </div>
   </section>
 
-  <!-- APPROACH -->
-  <section id="approach">
-    <div>
-      <blockquote class="approach-quote reveal">
-        "Simple digital solutions<br>for <span>real businesses.</span>"
-      </blockquote>
-    </div>
-    <div class="approach-content reveal reveal-delay-1">
-      <p class="section-label">My approach</p>
-      <h2 class="section-title">Focus on what <em>actually works</em></h2>
-      <div class="approach-text">
-        <p>Many businesses don't need complex systems. They need clear websites, strong Google presence and easy ways for clients to contact or book services.</p>
-        <p>My goal is to create practical digital tools that actually help businesses grow — without the overwhelm.</p>
+  <!-- PROCESS -->
+  <section id="process">
+    <p class="sec-label reveal en">How it works</p>
+    <p class="sec-label reveal es">Cómo funciona</p>
+    <h2 class="sec-title reveal d1 en">4 steps to<br><em>go online</em></h2>
+    <h2 class="sec-title reveal d1 es">4 pasos para<br><em>estar online</em></h2>
+    <div class="process-steps">
+      <div class="step reveal">
+        <div class="step-n">01</div>
+        <h3 class="step-title en">Say hi</h3>
+        <h3 class="step-title es">Dices hola</h3>
+        <p class="step-desc en">Send me a WhatsApp or email. Tell me about your business in 2 sentences. That's it. No forms, no lengthy briefings.</p>
+        <p class="step-desc es">Mándame un WhatsApp o email. Cuéntame tu negocio en 2 frases. Nada más. Sin formularios largos.</p>
       </div>
-      <div class="who-list">
-        <span class="who-pill">Small businesses</span>
-        <span class="who-pill">Entrepreneurs</span>
-        <span class="who-pill">Freelancers</span>
-        <span class="who-pill">Tourism</span>
-        <span class="who-pill">Consultants</span>
-        <span class="who-pill">Professionals</span>
+      <div class="step reveal d1">
+        <div class="step-n">02</div>
+        <h3 class="step-title en">We talk</h3>
+        <h3 class="step-title es">Hablamos</h3>
+        <p class="step-desc en">A quick 15-minute call to understand what you need and what will have the biggest impact for your business. No sales pitch.</p>
+        <p class="step-desc es">Una llamada rápida de 15 minutos para entender qué necesitas y qué tendrá mayor impacto para tu negocio. Sin ventas.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="projects-header">
-      <p class="section-label reveal">Portfolio</p>
-      <h2 class="section-title reveal reveal-delay-1">Recent <em>Projects</em></h2>
-    </div>
-    <div class="projects-grid">
-      <div class="project-card reveal">
-        <p class="project-tag">Content & Storytelling</p>
-        <h3 class="project-name">Travel Content Creation</h3>
-        <p class="project-desc">Digital storytelling across Southeast Asia and Europe — documenting experiences and building engaged audiences across YouTube and social platforms.</p>
-        <span class="project-arrow">↗</span>
+      <div class="step reveal d2">
+        <div class="step-n">03</div>
+        <h3 class="step-title en">I build it</h3>
+        <h3 class="step-title es">Lo construyo</h3>
+        <p class="step-desc en">I get to work and keep you updated. Most projects are ready in 5–14 days. You review, we tweak, you approve.</p>
+        <p class="step-desc es">Me pongo a trabajar y te mantengo informado. La mayoría de proyectos listos en 5–14 días. Revisas, ajustamos, apruebas.</p>
       </div>
-      <div class="project-card reveal reveal-delay-1">
-        <p class="project-tag">Google Business / SEO</p>
-        <h3 class="project-name">Online Presence Optimization</h3>
-        <p class="project-desc">Google Business profile setup and optimization for small businesses, improving local search visibility and attracting more clients organically.</p>
-        <span class="project-arrow">↗</span>
-      </div>
-      <div class="project-card reveal reveal-delay-2">
-        <p class="project-tag">Web Development</p>
-        <h3 class="project-name">Websites for Entrepreneurs</h3>
-        <p class="project-desc">Professional websites built for freelancers and small business owners — focused on clean design, clear messaging and generating leads.</p>
-        <span class="project-arrow">↗</span>
-      </div>
-      <div class="project-card reveal reveal-delay-3">
-        <p class="project-tag">Delmar Digital</p>
-        <h3 class="project-name">Digital Agency Project</h3>
-        <p class="project-desc">Building Delmar Digital as a full-service digital presence agency — combining websites, SEO, booking systems and automation for growing businesses.</p>
-        <span class="project-arrow">↗</span>
+      <div class="step reveal d3">
+        <div class="step-n">04</div>
+        <h3 class="step-title en">You grow</h3>
+        <h3 class="step-title es">Creces</h3>
+        <p class="step-desc en">Your new digital presence goes live. More clients find you, contact you and book you. I stay available for support whenever you need it.</p>
+        <p class="step-desc es">Tu nueva presencia digital se activa. Más clientes te encuentran, te contactan y reservan. Estoy disponible para soporte cuando lo necesites.</p>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact">
-    <p class="contact-eyebrow reveal">Get in touch</p>
-    <h2 class="contact-title reveal reveal-delay-1">Let's grow your<br><em>business online</em></h2>
-    <p class="contact-text reveal reveal-delay-2">
-      If you'd like to improve your website, online presence or digital systems, I'd love to hear about your project.
-    </p>
-    <a href="mailto:hello@delmardigital.com" class="contact-btn reveal reveal-delay-3">
-      Send a message
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
+    <div class="contact-grid">
+      <div>
+        <p class="sec-label reveal en">Contact</p>
+        <p class="sec-label reveal es">Contacto</p>
+        <h2 class="sec-title reveal d1 en">Let's build<br><em>something good</em></h2>
+        <h2 class="sec-title reveal d1 es">Construyamos<br><em>algo bueno</em></h2>
+        <p class="contact-intro reveal d2 en">Not sure what you need? That's completely fine. Just say hi and describe your business in a couple of lines. I'll come back with a simple, honest suggestion — no pressure, no sales pitch.</p>
+        <p class="contact-intro reveal d2 es">¿No sabes qué necesitas? Está bien. Solo di hola y describe tu negocio en un par de líneas. Te responderé con una sugerencia simple y honesta — sin presión, sin ventas.</p>
+        <div class="contact-channels reveal d3">
+          <a href="https://wa.me/34698971708" class="ch-item" target="_blank">
+            <span class="ch-ico">💬</span>
+            <div class="ch-info">
+              <div class="ch-label en">WhatsApp · Fastest reply</div>
+              <div class="ch-label es">WhatsApp · Respuesta más rápida</div>
+              <div class="ch-val">+34 698 971 708</div>
+              <div class="ch-sub en">Usually replies within a few hours</div>
+              <div class="ch-sub es">Normalmente responde en pocas horas</div>
+            </div>
+          </a>
+          <a href="mailto:hello@delmardigital.com" class="ch-item">
+            <span class="ch-ico">✉️</span>
+            <div class="ch-info">
+              <div class="ch-label">Email</div>
+              <div class="ch-val">hello@delmardigital.com</div>
+              <div class="ch-sub en">Reply within 24 hours</div>
+              <div class="ch-sub es">Respuesta en 24 horas</div>
+            </div>
+          </a>
+          <a href="https://instagram.com/delmardigital" class="ch-item" target="_blank">
+            <span class="ch-ico">📸</span>
+            <div class="ch-info">
+              <div class="ch-label">Instagram</div>
+              <div class="ch-val">@delmardigital</div>
+              <div class="ch-sub en">See what I'm working on</div>
+              <div class="ch-sub es">Mira en qué estoy trabajando</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-right">
+        <div class="contact-box reveal d2">
+          <h3 class="contact-box-title en">Ready to get started?</h3>
+          <h3 class="contact-box-title es">¿Listo para empezar?</h3>
+          <p class="contact-box-sub en">The easiest way is a quick WhatsApp message. No commitment — just a conversation about how I can help your business grow online.</p>
+          <p class="contact-box-sub es">La forma más fácil es un mensaje rápido de WhatsApp. Sin compromiso — solo una conversación sobre cómo puedo ayudarte a crecer online.</p>
+          <a href="https://wa.me/34698971708" class="btn-wa" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span class="en">WhatsApp · +34 698 971 708</span>
+            <span class="es">WhatsApp · +34 698 971 708</span>
+          </a>
+          <a href="mailto:hello@delmardigital.com" class="btn-email">
+            <span class="en">✉️ Send an email instead</span>
+            <span class="es">✉️ Enviar un email</span>
+          </a>
+          <p class="contact-note en">Based in Palma de Mallorca, Spain · Available worldwide · EN & ES</p>
+          <p class="contact-note es">Con sede en Palma de Mallorca, España · Disponible en todo el mundo · EN & ES</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <span>© 2025 <strong>Delmar Digital</strong> · Leandro</span>
-    <span class="footer-tagline">Simple digital solutions for real businesses.</span>
-    <span>Built with purpose.</span>
+    <span class="f-logo">Delmar Digital</span>
+    <span class="en">© 2025 Leandro · Simple digital solutions for real businesses.</span>
+    <span class="es">© 2025 Leandro · Soluciones digitales simples para negocios reales.</span>
+    <a href="https://wa.me/34698971708" target="_blank">+34 698 971 708</a>
   </footer>
 
   <script>
-    // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // Nav shadow on scroll
-    window.addEventListener('scroll', () => {
-      document.querySelector('nav').style.boxShadow =
-        window.scrollY > 20 ? '0 4px 20px rgba(0,0,0,0.08)' : 'none';
+    // WhatsApp popup
+    function toggleWA(){
+      document.getElementById('waPopup').classList.toggle('open');
+      document.getElementById('waText').focus();
+    }
+    function closeWA(){
+      document.getElementById('waPopup').classList.remove('open');
+    }
+    function sendWA(){
+      const txt = document.getElementById('waText').value.trim();
+      const msg = txt || 'Hi Leandro, I found your portfolio and I would like to know more about your services.';
+      const url = 'https://wa.me/34698971708?text=' + encodeURIComponent(msg);
+      window.open(url, '_blank');
+    }
+    // Close popup clicking outside
+    document.addEventListener('click', function(e){
+      const popup = document.getElementById('waPopup');
+      const fab = document.getElementById('waFab');
+      if(popup.classList.contains('open') && !popup.contains(e.target) && !fab.contains(e.target)){
+        popup.classList.remove('open');
+      }
     });
+
+    // Lang toggle
+    function toggleLang(){
+      const html=document.documentElement;
+      const isEN=html.getAttribute('data-lang')==='en';
+      html.setAttribute('data-lang', isEN?'es':'en');
+      document.getElementById('enLabel').classList.toggle('active',!isEN);
+      document.getElementById('esLabel').classList.toggle('active',isEN);
+    }
+
+    // Skill accordion
+    function toggleSk(hdr){
+      const card=hdr.parentElement;
+      const wasOpen=card.classList.contains('open');
+      document.querySelectorAll('.sk').forEach(c=>c.classList.remove('open'));
+      if(!wasOpen) card.classList.add('open');
+    }
+
+    // Scroll reveal
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+    },{threshold:0.08});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   </script>
 </body>
 </html>
