@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teckel's Multiverse Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;400;700&family=Orbitron:wght@700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================
+           TEMAS (CSS VARIABLES)
+           ========================================= */
+        
+        :root {
+            /* Tema 1: Classic Elegance (Default) */
+            --bg: #f9f7f2;
+            --header-bg: #ffffff;
+            --accent: #c5a059;
+            --secondary: #0a1d37;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --card: transparent;
+            --border: 1px dashed rgba(197, 160, 89, 0.3);
+            --font-head: 'Playfair Display', serif;
+            --font-body: 'Source Sans Pro', sans-serif;
+            --radius: 0px;
+        }
+
+        [data-theme="sunset-beach"] {
+            --bg: radial-gradient(circle at top, #1a252f 0%, #0a0f14 100%);
+            --header-bg: transparent;
+            --accent: #d4b996;
+            --secondary: #ffc107;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --card: rgba(255, 255, 255, 0.03);
+            --border: 1px solid rgba(212, 185, 150, 0.1);
+            --font-head: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --radius: 12px;
+        }
+
+        [data-theme="neon-urban"] {
+            --bg: #050505;
+            --header-bg: #000000;
+            --accent: #00f2ff;
+            --secondary: #ff0055;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --card: rgba(20, 20, 20, 0.9);
+            --border: 2px solid var(--secondary);
+            --font-head: 'Syncopate', sans-serif;
+            --font-body: 'Orbitron', sans-serif;
+            --radius: 4px;
+        }
+
+        /* =========================================
+           ESTILOS BASE (MOBILE FIRST)
+           ========================================= */
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.4s ease; }
+
+        body {
+            background: var(--bg);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            padding-bottom: 120px;
+        }
+
+        /* Selectores Flotantes */
+        .ui-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .control-group {
+            display: flex;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            padding: 5px;
+            border-radius: 50px;
+            border: 1px solid var(--accent);
+            justify-content: space-around;
+        }
+
+        .ui-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            padding: 8px 12px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            border-radius: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .ui-btn.active { background: var(--accent); color: #000; }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--header-bg);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        h1 {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--secondary);
+        }
+
+        [data-theme="neon-urban"] h1 {
+            text-shadow: 3px 3px 0px var(--secondary), -3px -3px 0px var(--accent);
+        }
+
+        .subtitle {
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-top: 10px;
+        }
+
+        /* Menu Content */
+        .container { padding: 20px; max-width: 1000px; margin: 0 auto; }
+
+        .section-title {
+            font-family: var(--font-head);
+            text-align: center;
+            margin: 50px 0 30px;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before, .section-title::after {
+            content: ""; flex: 1; height: 1px; background: var(--accent); opacity: 0.3;
+        }
+
+        .menu-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+
+        @media (min-width: 768px) {
+            .menu-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .menu-item {
+            background: var(--card);
+            padding: 20px;
+            border-radius: var(--radius);
+            border-bottom: var(--border);
+        }
+
+        [data-theme="neon-urban"] .menu-item { border-left: 5px solid var(--accent); border-bottom: none; }
+
+        .item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+
+        .item-name { font-weight: 700; text-transform: uppercase; font-size: 1rem; color: var(--text-main); }
+        
+        .item-price { font-weight: 700; color: var(--accent); font-family: var(--font-head); }
+
+        .item-desc { font-size: 0.85rem; color: var(--text-muted); font-style: italic; line-height: 1.4; }
+
+        footer { text-align: center; padding: 40px; font-size: 0.6rem; opacity: 0.5; letter-spacing: 2px; }
+    </style>
+</head>
+<body data-theme="default">
+
+    <div class="ui-controls">
+        <div class="control-group">
+            <button class="ui-btn active" onclick="setTheme('default', this)">Classic</button>
+            <button class="ui-btn" onclick="setTheme('sunset-beach', this)">Sunset</button>
+            <button class="ui-btn" onclick="setTheme('neon-urban', this)">Neon</button>
+        </div>
+        <div class="control-group">
+            <button class="ui-btn" onclick="setLang('de', this)">DE</button>
+            <button class="ui-btn" onclick="setLang('en', this)">EN</button>
+            <button class="ui-btn active" onclick="setLang('es', this)">ES</button>
+        </div>
+    </div>
+
+    <header>
+        <div class="subtitle">Balearic Flavors</div>
+        <h1 id="main-title">Teckel's</h1>
+        <div class="subtitle">Dine • Unwind • Ride</div>
+    </header>
+
+    <main class="container" id="menu-container"></main>
+
+    <footer>&copy; 2026 TECKEL'S RESTAURANT • PALMA DE MALLORCA</footer>
+
+    <script>
+        const menuData = {
+            es: {
+                starters: "Entrantes", main: "Platos Principales", burgers: "Hamburguesas", sides: "Extras", dessert: "Postres",
+                items: [
+                    { cat: "starters", name: "Carpaccio Wagyu", desc: "Wagyu ahumado, parmesano, trufa, sal volcánica", price: "16,90 €" },
+                    { cat: "starters", name: "Gambas al Ajillo", desc: "Black Tiger, aceite, ajo, pimentón y pan", price: "15,90 €" },
+                    { cat: "main", name: "Costillar BBQ", desc: "8 horas de cocción lenta, patatas fritas", price: "18,90 €" },
+                    { cat: "main", name: "Schnitzel", desc: "Cerdo o pollo crujiente con limón y patatas", price: "15,90 €" },
+                    { cat: "burgers", name: "Black Angus", desc: "200g ternera, cebolla frita, pan integral", price: "18,90 €" },
+                    { cat: "burgers", name: "Vegan Burger", desc: "Patty vegano, cheddar, lechuga fresca", price: "15,90 €" },
+                    { cat: "sides", name: "Patatas Teckel's", desc: "Corte grueso y extra crujientes", price: "4,90 €" },
+                    { cat: "dessert", name: "Coulant Chocolate", desc: "Corazón fundido con helado de vainilla", price: "6,90 €" }
+                ]
+            },
+            en: {
+                starters: "Starters", main: "Main Courses", burgers: "Burgers", sides: "Sides", dessert: "Desserts",
+                items: [
+                    { cat: "starters", name: "Wagyu Carpaccio", desc: "Smoked wagyu, parmesan, truffle, volcanic salt", price: "16,90 €" },
+                    { cat: "starters", name: "Garlic Prawns", desc: "Black Tiger prawns, garlic oil, bread", price: "15,90 €" },
+                    { cat: "main", name: "BBQ Ribs", desc: "8h slow cooked, served with fries", price: "18,90 €" },
+                    { cat: "main", name: "Schnitzel", desc: "Pork or chicken with lemon and fries", price: "15,90 €" },
+                    { cat: "burgers", name: "Black Angus", desc: "200g beef, roasted onions, wholemeal bun", price: "18,90 €" },
+                    { cat: "burgers", name: "Vegan Burger", desc: "Vegan patty, cheddar, fresh lettuce", price: "15,90 €" },
+                    { cat: "sides", name: "Teckel's Fries", desc: "Hand-cut crispy potatoes", price: "4,90 €" },
+                    { cat: "dessert", name: "Lava Cake", desc: "Molten heart with vanilla ice cream", price: "6,90 €" }
+                ]
+            },
+            de: {
+                starters: "Vorspeisen", main: "Hauptgerichte", burgers: "Burgers", sides: "Beilagen", dessert: "Nachspeisen",
+                items: [
+                    { cat: "starters", name: "Wagyu Carpaccio", desc: "Geräuchertes Wagyu, Trüffel, Vulkansalz", price: "16,90 €" },
+                    { cat: "starters", name: "Gambas al Ajillo", desc: "Black Tiger Garnelen in Knoblauchöl", price: "15,90 €" },
+                    { cat: "main", name: "Spare Ribs", desc: "8 Std. gegart, mit BBQ-Sauce und Fries", price: "18,90 €" },
+                    { cat: "main", name: "Schnitzel", desc: "Schwein oder Hähnchen mit Pommes", price: "15,90 €" },
+                    { cat: "burgers", name: "Black Angus", desc: "200g Beef, Röstzwiebeln, Vollkornbrötchen", price: "18,90 €" },
+                    { cat: "burgers", name: "Vegan Burger", desc: "Vegan Patty, Cheddar, frischer Salat", price: "15,90 €" },
+                    { cat: "sides", name: "Teckel's Fries", desc: "Hausgemachte knusprige Pommes", price: "4,90 €" },
+                    { cat: "dessert", name: "Lavakuchen", desc: "Flüssiger Kern mit Vanilleeis", price: "6,90 €" }
+                ]
+            }
+        };
+
+        let currentLang = 'es';
+
+        function setTheme(theme, btn) {
+            document.body.setAttribute('data-theme', theme);
+            updateBtnActive(btn);
+        }
+
+        function setLang(lang, btn) {
+            currentLang = lang;
+            renderMenu();
+            updateBtnActive(btn);
+        }
+
+        function updateBtnActive(btn) {
+            const siblings = btn.parentElement.querySelectorAll('.ui-btn');
+            siblings.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function renderMenu() {
+            const container = document.getElementById('menu-container');
+            const data = menuData[currentLang];
+            container.innerHTML = '';
+
+            const categories = ['starters', 'main', 'burgers', 'sides', 'dessert'];
+
+            categories.forEach(catKey => {
+                const section = document.createElement('section');
+                section.innerHTML = `<h2 class="section-title">${data[catKey]}</h2>`;
+                
+                const grid = document.createElement('div');
+                grid.className = 'menu-grid';
+
+                data.items.filter(i => i.cat === catKey).forEach(item => {
+                    grid.innerHTML += `
+                        <div class="menu-item">
+                            <div class="item-header">
+                                <span class="item-name">${item.name}</span>
+                                <span class="item-price">${item.price}</span>
+                            </div>
+                            <p class="item-desc">${item.desc}</p>
+                        </div>
+                    `;
+                });
+                section.appendChild(grid);
+                container.appendChild(section);
+            });
+        }
+
+        window.onload = renderMenu;
+    </script>
+</body>
+</html>
