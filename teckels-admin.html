@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Teckel's Admin Dashboard</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#0f1117;--sidebar:#0a0b0f;--card:#161820;--border:rgba(255,255,255,.07);--pink:#ff2d78;--cyan:#00f5ff;--gold:#f5c842;--green:#25D366;--text:#f0eee8;--muted:#888;--blue:#4f8ef7;}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden;}
+/* LOGIN */
+.login-wrap{display:flex;align-items:center;justify-content:center;height:100vh;background:radial-gradient(ellipse at 40% 40%,rgba(180,79,255,.15),transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(255,45,120,.12),transparent 60%),var(--bg);}
+.login-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2.5rem;width:100%;max-width:380px;}
+.login-logo{font-family:Georgia,serif;font-size:2rem;font-weight:900;letter-spacing:3px;text-align:center;margin-bottom:.3rem;}
+.login-logo span{color:var(--pink);}
+.login-sub{text-align:center;color:var(--muted);font-size:.78rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:2rem;}
+.lfield{margin-bottom:1rem;}
+.lfield label{display:block;font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;}
+.lfield input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem;color:var(--text);font-size:.9rem;outline:none;transition:border-color .3s;}
+.lfield input:focus{border-color:var(--pink);}
+.login-btn{width:100%;background:var(--pink);color:#fff;border:none;border-radius:12px;padding:.9rem;font-size:.9rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;margin-top:.5rem;transition:box-shadow .3s;}
+.login-btn:hover{box-shadow:0 0 24px rgba(255,45,120,.5);}
+.login-err{color:var(--pink);font-size:.75rem;text-align:center;margin-top:.7rem;display:none;}
+/* LAYOUT */
+.app{display:none;height:100vh;overflow:hidden;}
+.app.show{display:flex;}
+/* SIDEBAR */
+.sidebar{width:240px;min-width:240px;background:var(--sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;}
+.sb-logo{padding:1.5rem 1.4rem;border-bottom:1px solid var(--border);}
+.sb-logo-text{font-family:Georgia,serif;font-size:1.4rem;font-weight:900;letter-spacing:2px;}
+.sb-logo-text span{color:var(--pink);}
+.sb-logo-sub{font-size:.65rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:.2rem;}
+.sb-nav{padding:.8rem 0;flex:1;}
+.sb-section-label{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:rgba(136,136,136,.5);padding:.8rem 1.4rem .3rem;}
+.sb-item{display:flex;align-items:center;gap:.75rem;padding:.65rem 1.4rem;color:var(--muted);text-decoration:none;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;border-left:3px solid transparent;}
+.sb-item:hover{color:var(--text);background:rgba(255,255,255,.04);}
+.sb-item.active{color:var(--pink);background:rgba(255,45,120,.08);border-left-color:var(--pink);}
+.sb-item-icon{width:18px;height:18px;opacity:.7;flex-shrink:0;}
+.sb-item.active .sb-item-icon{opacity:1;}
+.sb-footer{padding:1rem 1.4rem;border-top:1px solid var(--border);}
+.sb-footer-btn{display:flex;align-items:center;gap:.6rem;color:var(--muted);font-size:.78rem;font-weight:600;cursor:pointer;transition:color .2s;text-decoration:none;}
+.sb-footer-btn:hover{color:var(--text);}
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.8rem;border-bottom:1px solid var(--border);background:var(--sidebar);flex-shrink:0;}
+.topbar-title{font-size:1rem;font-weight:800;letter-spacing:.5px;}
+.topbar-actions{display:flex;gap:.7rem;align-items:center;}
+.save-btn{background:var(--pink);color:#fff;border:none;border-radius:10px;padding:.55rem 1.4rem;font-size:.8rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:box-shadow .3s,transform .2s;}
+.save-btn:hover{box-shadow:0 0 18px rgba(255,45,120,.5);transform:translateY(-1px);}
+.save-btn:active{transform:scale(.97);}
+.preview-btn{background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.25);color:var(--cyan);border-radius:10px;padding:.55rem 1.2rem;font-size:.8rem;font-weight:700;cursor:pointer;text-decoration:none;transition:box-shadow .3s;}
+.preview-btn:hover{box-shadow:0 0 14px rgba(0,245,255,.3);}
+.saved-badge{background:rgba(37,211,102,.15);border:1px solid rgba(37,211,102,.3);color:var(--green);border-radius:8px;padding:.4rem .9rem;font-size:.75rem;font-weight:700;opacity:0;transition:opacity .4s;}
+.saved-badge.show{opacity:1;}
+.content{flex:1;overflow-y:auto;padding:1.8rem;}
+/* PANELS */
+.panel{display:none;}
+.panel.active{display:block;}
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.4rem;margin-bottom:1.2rem;}
+.card-title{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--pink);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;}
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.field{margin-bottom:.9rem;}
+.field label{display:block;font-size:.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem;}
+.field input,.field textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:.65rem .9rem;color:var(--text);font-family:inherit;font-size:.85rem;outline:none;transition:border-color .3s;resize:vertical;}
+.field input:focus,.field textarea:focus{border-color:var(--cyan);}
+.field input[type=color]{height:38px;padding:.2rem .4rem;cursor:pointer;}
+.field-hint{font-size:.68rem;color:var(--muted);margin-top:.3rem;}
+/* STAT CARDS */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.4rem;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.2rem;}
+.stat-card-num{font-size:2rem;font-weight:900;line-height:1;}
+.stat-card-label{font-size:.68rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:.3rem;}
+/* IMAGE GRID */
+.img-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-top:1rem;}
+.img-slot{border:2px dashed rgba(255,255,255,.12);border-radius:14px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;cursor:pointer;transition:border-color .3s;overflow:hidden;position:relative;background:rgba(255,255,255,.02);}
+.img-slot:hover{border-color:var(--pink);}
+.img-slot img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+.img-slot .slot-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;gap:.5rem;flex-direction:column;}
+.img-slot:hover .slot-overlay{display:flex;}
+.img-slot input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:3;}
+.slot-label{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;z-index:1;position:relative;}
+.slot-del{background:rgba(255,45,120,.8);color:#fff;border:none;border-radius:6px;padding:.3rem .6rem;font-size:.7rem;cursor:pointer;z-index:4;position:relative;}
+/* FEED GRID - 3 cols */
+.feed-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:1rem;}
+/* TOGGLE */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid var(--border);}
+.toggle-row:last-child{border-bottom:none;}
+.toggle-label{font-size:.85rem;font-weight:600;}
+.toggle-sub{font-size:.72rem;color:var(--muted);}
+.toggle{position:relative;width:44px;height:24px;flex-shrink:0;}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;cursor:pointer;inset:0;background:rgba(255,255,255,.1);border-radius:24px;transition:.3s;}
+.toggle-slider::before{content:'';position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.3s;}
+.toggle input:checked+.toggle-slider{background:var(--pink);}
+.toggle input:checked+.toggle-slider::before{transform:translateX(20px);}
+/* TABS */
+.tabs{display:flex;gap:.5rem;margin-bottom:1.2rem;}
+.tab{padding:.5rem 1rem;border-radius:8px;font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:1px solid var(--border);color:var(--muted);background:transparent;transition:all .2s;}
+.tab.active{background:rgba(255,45,120,.12);border-color:var(--pink);color:var(--pink);}
+/* QUICK ACTIONS */
+.qa-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;}
+.qa-btn{display:flex;align-items:center;gap:.8rem;padding:1rem;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;cursor:pointer;transition:all .2s;color:var(--text);font-size:.82rem;font-weight:600;}
+.qa-btn:hover{border-color:var(--pink);background:rgba(255,45,120,.06);}
+.qa-icon{font-size:1.4rem;}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-box">
+    <div class="login-logo">Teckel<span>'</span>s</div>
+    <div class="login-sub">Admin Dashboard</div>
+    <div class="lfield"><label>Username</label><input type="text" id="lu" placeholder="admin" autocomplete="off"/></div>
+    <div class="lfield"><label>Password</label><input type="password" id="lp" placeholder="••••••••"/></div>
+    <div class="login-err" id="lerr">❌ Invalid credentials. Try again.</div>
+    <button class="login-btn" onclick="doLogin()">Sign In</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app" id="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-text">Teckel<span>'</span>s</div>
+      <div class="sb-logo-sub">Admin Dashboard</div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section-label">Overview</div>
+      <div class="sb-item active" onclick="showPanel('dashboard')">
+        <svg class="sb-item-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+        Dashboard
+      </div>
+      <div class="sb-section-label">Content</div>
+      <div class="sb-item" onclick="showPanel('links')">
+        <svg class="sb-item-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
+        Links & Contacts
+      </div>
+      <div class="sb-item" onclick="showPanel('reviews')">
+        <svg class="sb-item-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        Reviews
+      </div>
+      <div class="sb-section-label">Media</div>
+      <div class="sb-item" onclick="showPanel('gallery')">
+        <svg class="sb-item-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+        Gallery & Carousel
+      </div>
+      <div class="sb-item" onclick="showPanel('social')">
+        <svg class="sb-item-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0z"/></svg>
+        Instagram Feed
+      </div>
+      <div class="sb-section-label">Appearance</div>
+      <div class="sb-item" onclick="showPanel('hero')">
+        <svg class="sb-item-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+        Hero & Appearance
+      </div>
+      <div class="sb-item" onclick="showPanel('settings')">
+        <svg class="sb-item-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></svg>
+        Settings & Export
+      </div>
+    </nav>
+    <div class="sb-footer">
+      <a class="sb-footer-btn" href="teckels.html" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+        View Live Site
+      </a>
+      <div class="sb-footer-btn" style="margin-top:.8rem;" onclick="logout()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+        Logout
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="topbarTitle">Dashboard</div>
+      <div class="topbar-actions">
+        <div class="saved-badge" id="savedBadge">✅ Saved!</div>
+        <a class="preview-btn" href="teckels.html" target="_blank">👁 Preview Site</a>
+        <button class="save-btn" onclick="saveAll()">💾 Save Changes</button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <div class="panel active" id="panel-dashboard">
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-card-num" style="color:var(--gold)" id="dash-reviews">598+</div>
+            <div class="stat-card-label">Google Reviews</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-num" style="color:var(--cyan)" id="dash-rating">4.8</div>
+            <div class="stat-card-label">Average Rating</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-num" style="color:var(--green)" id="dash-photos">0</div>
+            <div class="stat-card-label">Photos Uploaded</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">⚡ Quick Actions</div>
+          <div class="qa-grid">
+            <div class="qa-btn" onclick="showPanel('gallery')"><span class="qa-icon">🖼</span><div><div>Upload Photos</div><div style="font-size:.7rem;color:var(--muted);">Gallery & Carousel</div></div></div>
+            <div class="qa-btn" onclick="showPanel('links')"><span class="qa-icon">📞</span><div><div>Edit Contacts</div><div style="font-size:.7rem;color:var(--muted);">WhatsApp, Email, Maps</div></div></div>
+            <div class="qa-btn" onclick="showPanel('social')"><span class="qa-icon">📸</span><div><div>Instagram Feed</div><div style="font-size:.7rem;color:var(--muted);">Up to 9 posts</div></div></div>
+            <div class="qa-btn" onclick="showPanel('reviews')"><span class="qa-icon">⭐</span><div><div>Update Reviews</div><div style="font-size:.7rem;color:var(--muted);">Count & Rating</div></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">💡 Pro Tips</div>
+          <div style="display:flex;flex-direction:column;gap:.7rem;font-size:.82rem;color:var(--muted);">
+            <div>🔥 Upload high-resolution food photos (1080x1080px+) for the best quality on screen.</div>
+            <div>📱 The site is mobile-first — check on your phone after saving.</div>
+            <div>⭐ Update your Google review count regularly to build social proof.</div>
+            <div>📸 Instagram feed photos work best at square format (1:1 ratio).</div>
+            <div>🔗 Make sure your WhatsApp number includes country code (e.g. 34613962833).</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LINKS & CONTACTS -->
+      <div class="panel" id="panel-links">
+        <div class="card">
+          <div class="card-title">📞 Contact & Booking</div>
+          <div class="card-grid">
+            <div class="field"><label>WhatsApp Number <span style="color:var(--muted)">(no + or spaces)</span></label><input type="text" id="aWa" placeholder="34613962833"/><div class="field-hint">Used for all booking buttons</div></div>
+            <div class="field"><label>Email Address</label><input type="text" id="aMail" placeholder="info@teckels-mallorca.com"/></div>
+            <div class="field"><label>Instagram Handle</label><input type="text" id="aIg" placeholder="teckelsmallorca"/><div class="field-hint">Without @</div></div>
+            <div class="field"><label>Phone Display</label><input type="text" id="aPhone" placeholder="+34 613 962 833"/><div class="field-hint">How it shows in UI</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">📍 Location & Navigation</div>
+          <div class="field"><label>Google Maps Link</label><input type="text" id="aMaps" placeholder="https://maps.google.com/?q=..."/></div>
+          <div class="field"><label>Address Display</label><input type="text" id="aAddress" placeholder="Calle de Llaut 8, Playa de Palma"/></div>
+          <div class="field"><label>Menu Link (PDF or URL)</label><input type="text" id="aMenuLink" placeholder="https://your-menu-url.com"/><div class="field-hint">Leave blank to link to menu section on page</div></div>
+        </div>
+      </div>
+
+      <!-- REVIEWS -->
+      <div class="panel" id="panel-reviews">
+        <div class="card">
+          <div class="card-title">⭐ Google Reviews Display</div>
+          <div class="card-grid">
+            <div class="field"><label>Total Review Count</label><input type="number" id="aRevCount" placeholder="598"/><div class="field-hint">Shown as "598+" across the site</div></div>
+            <div class="field"><label>Average Rating</label><input type="text" id="aRevRating" placeholder="4.8"/><div class="field-hint">e.g. 4.8</div></div>
+          </div>
+          <div class="field"><label>Google Reviews URL</label><input type="text" id="aGoogleReviews" placeholder="https://g.page/r/..."/><div class="field-hint">Link to your Google Business reviews page</div></div>
+        </div>
+      </div>
+
+      <!-- GALLERY -->
+      <div class="panel" id="panel-gallery">
+        <div class="card">
+          <div class="card-title">🎠 Carousel Photos <span style="color:var(--muted);font-weight:400;">(shown in hero carousel)</span></div>
+          <p style="font-size:.78rem;color:var(--muted);margin-bottom:1rem;">Upload up to 8 photos. Recommended: 1200x800px or wider, JPG/WebP for best quality.</p>
+          <div class="img-grid" id="carouselGrid" style="grid-template-columns:repeat(4,1fr);"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">🖼 Hero Background</div>
+          <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+            <div id="heroBgPreview" style="width:120px;height:80px;border-radius:10px;border:1px solid var(--border);background:var(--bg);overflow:hidden;flex-shrink:0;">
+              <img id="heroBgImg" src="" style="width:100%;height:100%;object-fit:cover;display:none;"/>
+            </div>
+            <div style="flex:1;">
+              <label style="display:inline-flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:.7rem 1.2rem;cursor:pointer;font-size:.8rem;font-weight:700;color:var(--text);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+                Upload Hero Background
+                <input type="file" accept="image/*" style="display:none;" onchange="handleHeroBg(this)"/>
+              </label>
+              <div class="field-hint" style="margin-top:.5rem;">Appears behind the hero title. Use a dark, moody food photo.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOCIAL / INSTAGRAM -->
+      <div class="panel" id="panel-social">
+        <div class="card">
+          <div class="card-title">📸 Instagram Feed Photos</div>
+          <p style="font-size:.78rem;color:var(--muted);margin-bottom:1rem;">Upload up to 9 photos to display in the Instagram-style feed section. Square photos (1:1) work best.</p>
+          <div class="feed-grid" id="feedGrid"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">🔗 Social Links</div>
+          <div class="card-grid">
+            <div class="field"><label>Instagram URL</label><input type="text" id="aIgUrl" placeholder="https://instagram.com/teckelsmallorca"/></div>
+            <div class="field"><label>TripAdvisor URL <span style="color:var(--muted)">(optional)</span></label><input type="text" id="aTripAdvisor" placeholder="https://tripadvisor.com/..."/></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO & APPEARANCE -->
+      <div class="panel" id="panel-hero">
+        <div class="card">
+          <div class="card-title">🎨 Brand Colors</div>
+          <div class="card-grid">
+            <div class="field"><label>Accent Color (Pink)</label><input type="color" id="aColorPink" value="#ff2d78"/></div>
+            <div class="field"><label>Highlight Color (Gold)</label><input type="color" id="aColorGold" value="#f5c842"/></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">🔧 Site Features</div>
+          <div class="toggle-row">
+            <div><div class="toggle-label">Smoke Effect</div><div class="toggle-sub">Animated smoke in hero section</div></div>
+            <label class="toggle"><input type="checkbox" id="tSmoke" checked/><span class="toggle-slider"></span></label>
+          </div>
+          <div class="toggle-row">
+            <div><div class="toggle-label">Review Ticker</div><div class="toggle-sub">Scrolling testimonials strip</div></div>
+            <label class="toggle"><input type="checkbox" id="tReviews" checked/><span class="toggle-slider"></span></label>
+          </div>
+          <div class="toggle-row">
+            <div><div class="toggle-label">Floating WhatsApp Button</div><div class="toggle-sub">Sticky book button on mobile</div></div>
+            <label class="toggle"><input type="checkbox" id="tWaFloat" checked/><span class="toggle-slider"></span></label>
+          </div>
+          <div class="toggle-row">
+            <div><div class="toggle-label">Instagram Feed Section</div><div class="toggle-sub">Show social photos section</div></div>
+            <label class="toggle"><input type="checkbox" id="tFeed" checked/><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="panel" id="panel-settings">
+        <div class="card">
+          <div class="card-title">💾 Backup & Restore</div>
+          <div style="display:flex;gap:.8rem;flex-wrap:wrap;">
+            <button onclick="exportSettings()" style="background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.25);color:var(--cyan);border-radius:10px;padding:.7rem 1.4rem;font-size:.8rem;font-weight:700;cursor:pointer;">📥 Export Settings JSON</button>
+            <label style="background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:.7rem 1.4rem;font-size:.8rem;font-weight:700;cursor:pointer;">
+              📤 Import Settings JSON
+              <input type="file" accept=".json" style="display:none;" onchange="importSettings(this)"/>
+            </label>
+            <button onclick="if(confirm('Reset all settings to default?'))resetSettings()" style="background:rgba(255,45,120,.1);border:1px solid rgba(255,45,120,.25);color:var(--pink);border-radius:10px;padding:.7rem 1.4rem;font-size:.8rem;font-weight:700;cursor:pointer;">⚠️ Reset to Defaults</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">ℹ️ Info</div>
+          <div style="font-size:.82rem;color:var(--muted);line-height:1.8;">
+            <div>📁 Settings stored in browser localStorage</div>
+            <div>🔄 Changes apply instantly when you open teckels.html</div>
+            <div>💡 Export JSON to back up before making big changes</div>
+            <div>🌐 Both files must be on the same domain for sharing to work</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<script>
+const DEFAULTS={wa:'34613962833',mail:'info@teckels-mallorca.com',ig:'teckelsmallorca',phone:'+34 613 962 833',maps:'https://maps.google.com/?q=Carrer+del+Llaut+8+Playa+de+Palma+Mallorca',address:'Calle de Llaut 8, Playa de Palma',menuLink:'',reviewCount:598,reviewRating:'4.8',googleReviews:'',igUrl:'https://instagram.com/teckelsmallorca',tripAdvisor:'',heroBg:'',carousel:[],feed:[],colorPink:'#ff2d78',colorGold:'#f5c842',smokeEffect:true,reviewTicker:true,waFloat:true,showFeed:true};
+let cfg={...DEFAULTS,...JSON.parse(localStorage.getItem('teckels_cfg')||'{}')};
+if(!cfg.carousel)cfg.carousel=[];
+if(!cfg.feed)cfg.feed=[];
+
+function doLogin(){
+  if(document.getElementById('lu').value==='admin'&&document.getElementById('lp').value==='teckels2000!!'){
+    document.getElementById('loginWrap').style.display='none';
+    document.getElementById('app').classList.add('show');
+    loadAll();
+  }else{document.getElementById('lerr').style.display='block';}
+}
+document.addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+function logout(){document.getElementById('app').classList.remove('show');document.getElementById('loginWrap').style.display='flex';document.getElementById('lu').value='';document.getElementById('lp').value='';}
+
+const panelTitles={dashboard:'Dashboard',links:'Links & Contacts',reviews:'Reviews',gallery:'Gallery & Carousel',social:'Instagram Feed',hero:'Hero & Appearance',settings:'Settings & Export'};
+function showPanel(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  document.getElementById('topbarTitle').textContent=panelTitles[id]||id;
+}
+
+function loadAll(){
+  document.getElementById('aWa').value=cfg.wa||'';
+  document.getElementById('aMail').value=cfg.mail||'';
+  document.getElementById('aIg').value=cfg.ig||'';
+  document.getElementById('aPhone').value=cfg.phone||'';
+  document.getElementById('aMaps').value=cfg.maps||'';
+  document.getElementById('aAddress').value=cfg.address||'';
+  document.getElementById('aMenuLink').value=cfg.menuLink||'';
+  document.getElementById('aRevCount').value=cfg.reviewCount||598;
+  document.getElementById('aRevRating').value=cfg.reviewRating||'4.8';
+  document.getElementById('aGoogleReviews').value=cfg.googleReviews||'';
+  document.getElementById('aIgUrl').value=cfg.igUrl||'';
+  document.getElementById('aTripAdvisor').value=cfg.tripAdvisor||'';
+  document.getElementById('aColorPink').value=cfg.colorPink||'#ff2d78';
+  document.getElementById('aColorGold').value=cfg.colorGold||'#f5c842';
+  document.getElementById('tSmoke').checked=cfg.smokeEffect!==false;
+  document.getElementById('tReviews').checked=cfg.reviewTicker!==false;
+  document.getElementById('tWaFloat').checked=cfg.waFloat!==false;
+  document.getElementById('tFeed').checked=cfg.showFeed!==false;
+  if(cfg.heroBg){document.getElementById('heroBgImg').src=cfg.heroBg;document.getElementById('heroBgImg').style.display='block';}
+  renderCarouselGrid();renderFeedGrid();updateDash();
+}
+
+function updateDash(){
+  document.getElementById('dash-reviews').textContent=(cfg.reviewCount||598)+'+';
+  document.getElementById('dash-rating').textContent=cfg.reviewRating||'4.8';
+  const photos=(cfg.carousel||[]).filter(Boolean).length+(cfg.feed||[]).filter(Boolean).length;
+  document.getElementById('dash-photos').textContent=photos;
+}
+
+function renderCarouselGrid(){
+  const g=document.getElementById('carouselGrid');g.innerHTML='';
+  const slots=8;
+  for(let i=0;i<slots;i++){
+    const s=document.createElement('div');s.className='img-slot';
+    const img=cfg.carousel[i];
+    if(img){
+      s.innerHTML=`<img src="${img}"/><div class="slot-overlay"><button class="slot-del" onclick="delCarousel(${i},event)">🗑 Delete</button></div>`;
+    }else{
+      s.innerHTML=`<svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(255,255,255,.25)"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg><span class="slot-label">Photo ${i+1}</span>`;
+    }
+    const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
+    inp.onchange=e=>handleCarouselImg(e,i);
+    s.appendChild(inp);g.appendChild(s);
+  }
+}
+
+function renderFeedGrid(){
+  const g=document.getElementById('feedGrid');g.innerHTML='';
+  const slots=9;
+  for(let i=0;i<slots;i++){
+    const s=document.createElement('div');s.className='img-slot';
+    const img=cfg.feed[i];
+    if(img){
+      s.innerHTML=`<img src="${img}"/><div class="slot-overlay"><button class="slot-del" onclick="delFeed(${i},event)">🗑 Delete</button></div>`;
+    }else{
+      s.innerHTML=`<svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(255,255,255,.25)"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg><span class="slot-label">Post ${i+1}</span>`;
+    }
+    const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
+    inp.onchange=e=>handleFeedImg(e,i);
+    s.appendChild(inp);g.appendChild(s);
+  }
+}
+
+function handleCarouselImg(e,i){
+  const f=e.target.files[0];if(!f)return;
+  compressImage(f,1200,0.88,data=>{
+    if(!cfg.carousel)cfg.carousel=[];
+    cfg.carousel[i]=data;
+    renderCarouselGrid();updateDash();
+  });
+}
+function handleFeedImg(e,i){
+  const f=e.target.files[0];if(!f)return;
+  compressImage(f,900,0.85,data=>{
+    if(!cfg.feed)cfg.feed=[];
+    cfg.feed[i]=data;
+    renderFeedGrid();updateDash();
+  });
+}
+function delCarousel(i,ev){ev.stopPropagation();cfg.carousel[i]='';renderCarouselGrid();updateDash();}
+function delFeed(i,ev){ev.stopPropagation();cfg.feed[i]='';renderFeedGrid();updateDash();}
+
+function handleHeroBg(inp){
+  const f=inp.files[0];if(!f)return;
+  compressImage(f,1920,0.85,data=>{
+    cfg.heroBg=data;
+    document.getElementById('heroBgImg').src=data;
+    document.getElementById('heroBgImg').style.display='block';
+  });
+}
+
+function compressImage(file,maxW,quality,cb){
+  const r=new FileReader();
+  r.onload=ev=>{
+    const img=new Image();
+    img.onload=()=>{
+      const canvas=document.createElement('canvas');
+      let w=img.width,h=img.height;
+      if(w>maxW){h=Math.round(h*maxW/w);w=maxW;}
+      canvas.width=w;canvas.height=h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);
+      cb(canvas.toDataURL('image/jpeg',quality));
+    };
+    img.src=ev.target.result;
+  };
+  r.readAsDataURL(file);
+}
+
+function saveAll(){
+  cfg.wa=document.getElementById('aWa').value.trim().replace(/\D/g,'');
+  cfg.mail=document.getElementById('aMail').value.trim();
+  cfg.ig=document.getElementById('aIg').value.trim().replace('@','');
+  cfg.phone=document.getElementById('aPhone').value.trim();
+  cfg.maps=document.getElementById('aMaps').value.trim()||DEFAULTS.maps;
+  cfg.address=document.getElementById('aAddress').value.trim()||DEFAULTS.address;
+  cfg.menuLink=document.getElementById('aMenuLink').value.trim();
+  cfg.reviewCount=parseInt(document.getElementById('aRevCount').value)||598;
+  cfg.reviewRating=document.getElementById('aRevRating').value.trim()||'4.8';
+  cfg.googleReviews=document.getElementById('aGoogleReviews').value.trim();
+  cfg.igUrl=document.getElementById('aIgUrl').value.trim();
+  cfg.tripAdvisor=document.getElementById('aTripAdvisor').value.trim();
+  cfg.colorPink=document.getElementById('aColorPink').value;
+  cfg.colorGold=document.getElementById('aColorGold').value;
+  cfg.smokeEffect=document.getElementById('tSmoke').checked;
+  cfg.reviewTicker=document.getElementById('tReviews').checked;
+  cfg.waFloat=document.getElementById('tWaFloat').checked;
+  cfg.showFeed=document.getElementById('tFeed').checked;
+  localStorage.setItem('teckels_cfg',JSON.stringify(cfg));
+  updateDash();
+  const b=document.getElementById('savedBadge');
+  b.classList.add('show');
+  setTimeout(()=>b.classList.remove('show'),2500);
+}
+
+function exportSettings(){
+  const {heroBg,carousel,feed,...meta}=cfg;
+  const blob=new Blob([JSON.stringify({...meta,carousel:carousel.map(()=>'[image]'),feed:feed.map(()=>'[image]')},null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='teckels-settings.json';a.click();
+}
+function importSettings(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();r.onload=e=>{
+    try{const d=JSON.parse(e.target.result);Object.assign(cfg,d);loadAll();}catch(err){alert('Invalid JSON file');}
+  };r.readAsText(f);
+}
+function resetSettings(){cfg={...DEFAULTS,carousel:[],feed:[]};localStorage.setItem('teckels_cfg',JSON.stringify(cfg));loadAll();}
+</script>
+</body>
+</html>
