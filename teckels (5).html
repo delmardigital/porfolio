@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Teckel's Food &amp; Drinks – Playa de Palma, Mallorca</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet"/>
+<style>
+/* ─── RESET ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;background:#0a0a0c;}
+body{background:#0a0a0c;color:#f0eee8;font-family:'Inter','Segoe UI',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+/* ─── TOKENS ─── */
+:root{
+  --pink:#ff2d78;--cyan:#00f5ff;--gold:#f5c842;--green:#25D366;
+  --bg:#0a0a0c;--surface:#111116;--card:#16161e;
+  --border:rgba(255,255,255,.08);--text:#f0eee8;--muted:#777;
+  --radius:14px;
+}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.8rem 1.4rem;
+  background:rgba(10,10,12,.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px;color:var(--text);text-decoration:none;user-select:none;cursor:pointer;flex-shrink:0;}
+.nav-logo span{color:var(--pink);}
+.nav-center{display:none;gap:2rem;list-style:none;}
+.nav-center a{color:var(--muted);text-decoration:none;font-size:.78rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;}
+.nav-center a:hover{color:var(--cyan);}
+.nav-right{display:flex;align-items:center;gap:.5rem;}
+.lang-btns{display:flex;gap:.25rem;}
+.lang-btn{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted);padding:.3rem .55rem;border-radius:8px;font-size:.65rem;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .2s;font-family:inherit;}
+.lang-btn.active,.lang-btn:hover{background:rgba(0,245,255,.1);border-color:var(--cyan);color:var(--cyan);}
+.nav-book{background:var(--pink);color:#fff;padding:.5rem 1.1rem;border-radius:50px;font-size:.72rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:box-shadow .3s;font-family:inherit;}
+.nav-book:hover{box-shadow:0 0 20px rgba(255,45,120,.5);}
+@media(min-width:768px){.nav-center{display:flex;}.nav-book{font-size:.78rem;}}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding:7rem 1.4rem 3rem;
+  position:relative;overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .6s;pointer-events:none;}
+.glow{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;}
+.glow-1{width:350px;height:350px;background:radial-gradient(circle,rgba(180,79,255,.35),transparent 70%);top:-80px;left:-100px;animation:ga 9s ease-in-out infinite alternate;}
+.glow-2{width:300px;height:300px;background:radial-gradient(circle,rgba(255,45,120,.3),transparent 70%);bottom:0;right:-80px;animation:gb 11s ease-in-out infinite alternate;}
+@keyframes ga{to{transform:translate(40px,60px);}}
+@keyframes gb{to{transform:translate(-40px,-30px);}}
+@media(min-width:768px){.glow-1{width:600px;height:600px;}.glow-2{width:480px;height:480px;}}
+.hero-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;max-width:700px;}
+#smokeCanvas{position:absolute;inset:0;pointer-events:none;z-index:0;width:100%;height:100%;}
+.hero-pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,245,255,.07);border:1px solid rgba(0,245,255,.2);padding:.35rem 1rem;border-radius:50px;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:1.2rem;}
+.hero-pill::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,18vw,10rem);line-height:.92;letter-spacing:-1px;}
+.hero-title .outline{display:block;-webkit-text-stroke:1.5px var(--pink);color:transparent;text-shadow:0 0 40px rgba(255,45,120,.3);}
+.hero-sub{font-family:'Caveat',cursive;font-size:1.35rem;color:var(--gold);margin:.8rem 0 1.2rem;}
+.hero-badge{display:inline-flex;align-items:center;gap:.8rem;background:rgba(255,255,255,.04);border:1px solid rgba(245,200,66,.22);border-radius:14px;padding:.65rem 1.1rem;margin-bottom:1.8rem;cursor:pointer;transition:border-color .25s;text-decoration:none;color:inherit;}
+.hero-badge:hover{border-color:var(--gold);}
+.hb-num{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--gold);line-height:1;}
+.hb-sep{width:1px;height:28px;background:rgba(255,255,255,.1);}
+.hb-info strong{display:block;font-size:.8rem;font-weight:700;}
+.hb-info span{font-size:.68rem;color:var(--muted);}
+.hero-ctas{display:flex;flex-direction:column;gap:.7rem;width:100%;max-width:340px;}
+.btn-row{display:flex;gap:.7rem;}
+.btn-row .btn{flex:1;}
+@media(min-width:768px){
+  .hero-ctas{flex-direction:row;max-width:none;justify-content:center;}
+  .btn-row{display:contents;}
+  .btn-row .btn{flex:unset;}
+  .hero-ctas .btn-full{width:auto;}
+}
+
+/* ─── BUTTONS ─── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:.82rem 1.2rem;border-radius:var(--radius);
+  font-family:'Inter',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;border:none;white-space:nowrap;
+  transition:transform .2s,box-shadow .25s,opacity .2s;
+}
+.btn:active{opacity:.85;}
+.btn svg{width:17px;height:17px;fill:currentColor;flex-shrink:0;}
+.btn-wa{background:var(--green);color:#fff;}
+.btn-wa:hover{box-shadow:0 0 22px rgba(37,211,102,.5);transform:translateY(-2px);}
+.btn-menu{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.14);color:var(--text);}
+.btn-menu:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+.btn-dir{background:rgba(0,245,255,.07);border:1.5px solid rgba(0,245,255,.22);color:var(--cyan);}
+.btn-dir:hover{box-shadow:0 0 18px rgba(0,245,255,.22);transform:translateY(-2px);}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text);}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+.btn-full{width:100%;}
+
+/* ─── BADGES BAR ─── */
+.badges{display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap;padding:1.4rem 1.2rem;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.badge{display:flex;align-items:center;gap:.4rem;padding:.45rem .85rem;background:var(--card);border:1px solid var(--border);border-radius:50px;font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;}
+
+/* ─── REVIEWS ─── */
+.reviews-section{background:var(--bg);padding:3.5rem 1.4rem;overflow:hidden;}
+.reviews-inner{max-width:1100px;margin:0 auto;}
+.reviews-headline{text-align:center;margin-bottom:2rem;}
+.reviews-big{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,20vw,10rem);line-height:.9;background:linear-gradient(135deg,var(--gold),#ffaa00 50%,var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stars-big{font-size:1.8rem;letter-spacing:4px;margin:.4rem 0;}
+.reviews-sub{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:.4rem;}
+.reviews-stats{display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap;margin-bottom:2rem;}
+.rstat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.4rem;text-align:center;min-width:110px;}
+.rstat:hover{border-color:var(--gold);transform:translateY(-2px);transition:all .25s;}
+.rstat-num{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--gold);line-height:1;}
+.rstat-label{font-size:.64rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:.2rem;}
+.track-wrap{overflow:hidden;mask:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent);-webkit-mask:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent);}
+.track{display:flex;gap:1rem;width:max-content;animation:scrollx 32s linear infinite;}
+.track:hover{animation-play-state:paused;}
+@keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.rcard{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.3rem;width:255px;flex-shrink:0;}
+.rcard-stars{font-size:.85rem;margin-bottom:.45rem;}
+.rcard-text{font-size:.8rem;line-height:1.55;margin-bottom:.7rem;}
+.rcard-author{font-size:.7rem;color:var(--muted);font-weight:700;}
+
+/* ─── CAROUSEL ─── */
+.carousel-section{background:var(--bg);}
+.c-wrap{position:relative;overflow:hidden;background:var(--card);}
+.c-track{display:flex;transition:transform .55s cubic-bezier(.25,.46,.45,.94);}
+.c-slide{min-width:100%;position:relative;overflow:hidden;}
+.c-slide img{width:100%;height:300px;object-fit:cover;display:block;filter:brightness(.82);}
+.c-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,12,.65),transparent 55%);}
+@media(min-width:768px){.c-slide img{height:500px;}}
+.c-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:5;background:rgba(10,10,12,.6);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.15);color:#fff;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:grid;place-items:center;transition:background .2s;padding:0;line-height:1;}
+.c-btn:hover{background:var(--pink);}
+.c-prev{left:.9rem;}.c-next{right:.9rem;}
+.c-dots{display:flex;justify-content:center;gap:.5rem;padding:.9rem 0 1.2rem;background:var(--bg);}
+.c-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18);cursor:pointer;transition:all .3s;}
+.c-dot.active{background:var(--pink);width:22px;border-radius:4px;}
+.c-empty{min-width:100%;height:180px;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:2px;}
+
+/* ─── MENU ─── */
+.menu-section{background:var(--surface);padding:3.5rem 1.4rem;}
+.menu-inner{max-width:900px;margin:0 auto;}
+.menu-cats{display:flex;gap:.5rem;flex-wrap:wrap;margin:1.2rem 0 1.8rem;}
+.mcat-btn{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--muted);padding:.42rem .95rem;border-radius:50px;font-size:.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;white-space:nowrap;font-family:inherit;}
+.mcat-btn:hover,.mcat-btn.active{background:rgba(255,45,120,.1);border-color:var(--pink);color:var(--pink);}
+.mcat-content{display:none;animation:fadeUp .3s ease;}
+.mcat-content.show{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.mcat-title{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;letter-spacing:1px;margin-bottom:.25rem;}
+.mcat-sub{font-size:.75rem;color:var(--muted);font-style:italic;margin-bottom:1.2rem;line-height:1.5;}
+.mitems{display:flex;flex-direction:column;gap:.65rem;}
+.mitem{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.1rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);transition:border-color .2s;}
+.mitem:hover{border-color:rgba(255,45,120,.28);}
+.mitem-body{flex:1;}
+.mitem-name{font-weight:700;font-size:.88rem;margin-bottom:.2rem;line-height:1.3;}
+.mitem-desc{font-size:.76rem;color:var(--muted);line-height:1.5;}
+.mitem-price{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold);white-space:nowrap;flex-shrink:0;letter-spacing:.5px;}
+
+/* ─── INSTAGRAM FEED ─── */
+.feed-section{background:var(--card);padding:3.5rem 1.4rem;}
+.feed-inner{max-width:1000px;margin:0 auto;}
+.feed-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.3rem;gap:1rem;flex-wrap:wrap;}
+.ig-btn{display:inline-flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,rgba(240,148,51,.15),rgba(220,39,67,.15));border:1px solid rgba(220,39,67,.25);color:#e1306c;padding:.5rem 1.1rem;border-radius:50px;font-size:.72rem;font-weight:700;text-decoration:none;transition:box-shadow .25s;white-space:nowrap;}
+.ig-btn:hover{box-shadow:0 0 18px rgba(220,39,67,.3);}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;}
+@media(min-width:640px){.ig-grid{gap:.8rem;}}
+.ig-cell{aspect-ratio:1;overflow:hidden;border-radius:12px;position:relative;cursor:pointer;border:1px solid var(--border);}
+.ig-cell img{width:100%;height:100%;object-fit:cover;transition:transform .4s,filter .35s;filter:brightness(.9);}
+.ig-cell:hover img{transform:scale(1.07);filter:brightness(1.05);}
+.ig-overlay{position:absolute;inset:0;background:rgba(255,45,120,.15);opacity:0;transition:opacity .3s;display:flex;align-items:center;justify-content:center;}
+.ig-cell:hover .ig-overlay{opacity:1;}
+.ig-empty{aspect-ratio:1;border:2px dashed rgba(255,255,255,.07);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:rgba(136,136,136,.3);text-transform:uppercase;letter-spacing:1px;}
+
+/* ─── LOCATION ─── */
+.location-section{background:var(--bg);padding:3.5rem 1.4rem;}
+.location-inner{max-width:1100px;margin:0 auto;}
+.loc-grid{display:flex;flex-direction:column;gap:2.5rem;}
+@media(min-width:768px){.loc-grid{flex-direction:row;gap:4rem;align-items:start;}}
+.loc-left{flex:1;}
+.review-pill{display:flex;align-items:center;gap:.9rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.2rem;margin-bottom:1.4rem;}
+.rp-stars{font-size:1rem;}
+.rp-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gold);line-height:1;}
+.rp-label{font-size:.7rem;color:var(--muted);margin-top:.1rem;}
+.dir-btns{display:flex;flex-direction:column;gap:.65rem;margin-top:1.2rem;}
+@media(min-width:480px){.dir-btns{flex-direction:row;}}
+.map-wrap{flex:1.4;border-radius:18px;overflow:hidden;border:1px solid var(--border);position:relative;}
+.map-wrap iframe{width:100%;height:280px;border:0;display:block;}
+@media(min-width:768px){.map-wrap iframe{height:380px;}}
+.map-label{position:absolute;bottom:0;left:0;right:0;padding:.75rem 1rem;background:linear-gradient(to top,rgba(10,10,12,.95) 60%,transparent);font-size:.78rem;font-weight:600;display:flex;align-items:center;gap:.4rem;}
+
+/* ─── RESERVATION ─── */
+.reservation-section{background:var(--surface);padding:3.5rem 1.4rem;position:relative;overflow:hidden;}
+.reservation-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(255,45,120,.08),transparent 60%);pointer-events:none;}
+.reservation-inner{max-width:1100px;margin:0 auto;}
+.res-grid{display:flex;flex-direction:column;gap:2.5rem;}
+@media(min-width:768px){.res-grid{flex-direction:row;gap:4rem;align-items:start;}}
+.res-left{flex:1;}
+.res-desc{color:var(--muted);line-height:1.7;font-size:.88rem;max-width:380px;}
+.channels{display:flex;flex-direction:column;gap:.75rem;flex:1;}
+.ch{display:flex;align-items:center;gap:1rem;padding:1.05rem 1.2rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;color:var(--text);transition:transform .2s,box-shadow .25s,border-color .25s;}
+.ch:hover{transform:translateX(5px);}
+.ch.wa{border-left:3px solid var(--green);}.ch.wa:hover{border-color:var(--green);box-shadow:-3px 0 16px rgba(37,211,102,.2);}
+.ch.ig{border-left:3px solid #dc2743;}.ch.ig:hover{border-color:#dc2743;box-shadow:-3px 0 14px rgba(220,39,67,.2);}
+.ch.mail{border-left:3px solid var(--cyan);}.ch.mail:hover{border-color:var(--cyan);box-shadow:-3px 0 14px rgba(0,245,255,.15);}
+.ch.tel{border-left:3px solid var(--gold);}.ch.tel:hover{border-color:var(--gold);box-shadow:-3px 0 14px rgba(245,200,66,.18);}
+.ch-ico{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;}
+.ch-ico.wa{background:rgba(37,211,102,.1);}
+.ch-ico.ig{background:rgba(220,39,67,.1);}
+.ch-ico.mail{background:rgba(0,245,255,.07);}
+.ch-ico.tel{background:rgba(245,200,66,.08);}
+.ch-ico svg{width:19px;height:19px;}
+.ch-body{flex:1;}
+.ch-name{font-weight:700;font-size:.86rem;}
+.ch-detail{font-size:.72rem;color:var(--muted);margin-top:.1rem;}
+.ch-arrow{color:var(--muted);font-size:.85rem;transition:transform .25s;}
+.ch:hover .ch-arrow{transform:translateX(4px);}
+
+/* ─── SECTION LABELS ─── */
+.s-label{font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--pink);margin-bottom:.5rem;}
+.s-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,8vw,4rem);line-height:1;margin-bottom:.9rem;}
+
+/* ─── FLOATING WA ─── */
+.wa-float{position:fixed;bottom:1.3rem;right:1.3rem;z-index:400;width:54px;height:54px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(37,211,102,.45);text-decoration:none;transition:transform .25s;}
+.wa-float:hover{transform:scale(1.08);}
+.wa-float svg{width:26px;height:26px;fill:#fff;}
+.wa-pulse{position:absolute;inset:0;border-radius:50%;background:rgba(37,211,102,.35);animation:wapulse 2.2s ease-out infinite;}
+@keyframes wapulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.8);opacity:0}}
+
+/* ─── FOOTER ─── */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:2.5rem 1.4rem;text-align:center;}
+.f-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:4px;}
+.f-logo span{color:var(--pink);}
+.f-sub{color:var(--muted);font-size:.68rem;letter-spacing:2px;text-transform:uppercase;margin-top:.25rem;}
+.f-links{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;margin:1.2rem 0 .9rem;}
+.f-links a{padding:.4rem .95rem;border:1px solid var(--border);border-radius:50px;color:var(--muted);text-decoration:none;font-size:.7rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:color .2s,border-color .2s;}
+.f-links a:hover{color:var(--text);border-color:var(--pink);}
+.f-copy{font-size:.64rem;color:rgba(136,136,136,.35);}
+.f-admin{font-size:.58rem;color:rgba(136,136,136,.18);cursor:pointer;margin-top:.7rem;text-decoration:underline;}
+.f-admin:hover{color:var(--muted);}
+
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.in{opacity:1;transform:none;}
+
+/* ─── ADMIN OVERLAY ─── */
+.a-overlay{position:fixed;inset:0;z-index:9000;display:none;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:1rem;}
+.a-overlay.show{display:flex;}
+.a-modal{background:#111118;border:1px solid rgba(255,255,255,.1);border-radius:20px;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;padding:1.8rem;}
+.a-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem;}
+.a-head-title{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:2px;}
+.a-close{background:rgba(255,255,255,.07);border:1px solid var(--border);color:var(--text);width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:.95rem;display:grid;place-items:center;}
+.a-sec{margin-bottom:1.5rem;}
+.a-sec-t{font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--pink);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border);}
+.a-field{margin-bottom:.75rem;}
+.a-field label{display:block;font-size:.68rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem;}
+.a-field input{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:.65rem .9rem;color:var(--text);font-family:inherit;font-size:.85rem;outline:none;transition:border-color .25s;}
+.a-field input:focus{border-color:var(--cyan);}
+.a-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+.a-img-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem;margin-top:.8rem;}
+.a-slot{border:2px dashed rgba(255,255,255,.1);border-radius:12px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;cursor:pointer;transition:border-color .25s;overflow:hidden;position:relative;background:rgba(255,255,255,.02);}
+.a-slot:hover{border-color:var(--pink);}
+.a-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.a-slot .del-btn{position:absolute;top:.3rem;right:.3rem;background:rgba(255,45,120,.85);border:none;color:#fff;border-radius:5px;padding:.15rem .4rem;font-size:.65rem;cursor:pointer;z-index:3;display:none;}
+.a-slot:hover .del-btn{display:block;}
+.a-slot input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2;}
+.a-slot-lbl{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.a-save{background:var(--pink);color:#fff;border:none;border-radius:12px;padding:.82rem 2rem;font-size:.82rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;width:100%;transition:box-shadow .25s;font-family:inherit;}
+.a-save:hover{box-shadow:0 0 20px rgba(255,45,120,.45);}
+.a-ok{display:none;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.3);color:#25D366;border-radius:10px;padding:.65rem 1rem;font-size:.78rem;font-weight:700;text-align:center;margin-top:.75rem;}
+.a-login{display:flex;flex-direction:column;gap:.85rem;}
+.a-login-t{font-family:'Bebas Neue',sans-serif;font-size:2rem;text-align:center;letter-spacing:2px;}
+.a-err{color:var(--pink);font-size:.73rem;text-align:center;display:none;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" id="logoBtn">Teckel<span>'</span>s</a>
+  <ul class="nav-center">
+    <li><a href="#hero" data-i18n="nav_home">Home</a></li>
+    <li><a href="#menu" data-i18n="nav_menu">Menu</a></li>
+    <li><a href="#location" data-i18n="nav_location">Location</a></li>
+    <li><a href="#reserve" data-i18n="nav_reserve">Reserve</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-btns">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+    <a id="navBook" href="#" class="nav-book" data-i18n="book_btn">Book a Table</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <canvas id="smokeCanvas"></canvas>
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="hero-inner">
+    <div class="hero-pill">Playa de Palma · Mallorca</div>
+    <h1 class="hero-title">Teckel's<br><span class="outline">Food &amp; Drinks</span></h1>
+    <p class="hero-sub">Fresh · Organic · Free Range · 100% Real</p>
+    <a href="#reviews" class="hero-badge">
+      <div class="hb-num" id="heroBadgeNum">4.8</div>
+      <span style="font-size:1.1rem">⭐⭐⭐⭐⭐</span>
+      <div class="hb-sep"></div>
+      <div class="hb-info">
+        <strong id="heroBadgeCount">598+ Reviews</strong>
+        <span data-i18n="on_google">on Google Maps</span>
+      </div>
+    </a>
+    <div class="hero-ctas">
+      <a id="heroWa" href="#" class="btn btn-wa btn-full" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span data-i18n="book_btn">Book a Table</span>
+      </a>
+      <div class="btn-row">
+        <a href="#menu" class="btn btn-menu">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+          <span data-i18n="our_menu">Our Menu</span>
+        </a>
+        <a id="heroDir" href="#" class="btn btn-dir" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          <span data-i18n="get_there">Get There</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BADGES -->
+<div class="badges reveal">
+  <span class="badge">🌿 <span data-i18n="b_eco">Eco Friendly</span></span>
+  <span class="badge">🐓 <span data-i18n="b_free">Free Range</span></span>
+  <span class="badge">✨ <span data-i18n="b_fresh">100% Fresh</span></span>
+  <span class="badge">⭐ <span data-i18n="b_stars">4.8 Stars</span></span>
+</div>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="reviews-inner">
+    <div class="reviews-headline reveal">
+      <div class="reviews-big" id="bigNum">598+</div>
+      <div class="stars-big">⭐⭐⭐⭐⭐</div>
+      <div class="reviews-sub" data-i18n="reviews_sub">Verified Google Reviews · Rated 4.8 out of 5</div>
+    </div>
+    <div class="reviews-stats reveal">
+      <div class="rstat"><div class="rstat-num" id="statRating">4.8</div><div class="rstat-label" data-i18n="avg_rating">Avg Rating</div></div>
+      <div class="rstat"><div class="rstat-num" id="statCount">598+</div><div class="rstat-label" data-i18n="reviews_label">Reviews</div></div>
+      <div class="rstat"><div class="rstat-num">🏆</div><div class="rstat-label" data-i18n="top_rated">Top Rated</div></div>
+    </div>
+    <div class="track-wrap reveal"><div class="track" id="track"></div></div>
+  </div>
+</section>
+
+<!-- CAROUSEL -->
+<section class="carousel-section" id="gallery">
+  <div class="c-wrap" id="cWrap">
+    <div class="c-track" id="cTrack"></div>
+    <button class="c-btn c-prev" onclick="cPrev()">&#8249;</button>
+    <button class="c-btn c-next" onclick="cNext()">&#8250;</button>
+  </div>
+  <div class="c-dots" id="cDots"></div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-inner">
+    <p class="s-label" data-i18n="menu_label">Menu</p>
+    <h2 class="s-title" data-i18n="menu_title">Our Menu</h2>
+    <div class="menu-cats" id="menuCats"></div>
+    <div id="menuContent"></div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="feed-section" id="instagram">
+  <div class="feed-inner">
+    <div class="feed-header">
+      <div>
+        <p class="s-label">Instagram</p>
+        <h2 class="s-title" style="margin-bottom:0">@teckelsmallorca</h2>
+      </div>
+      <a id="igFollowBtn" href="#" class="ig-btn" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        <span data-i18n="follow_ig">Follow on Instagram</span>
+      </a>
+    </div>
+    <div class="ig-grid" id="igGrid"></div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section" id="location">
+  <div class="location-inner">
+    <div class="loc-grid">
+      <div class="loc-left reveal">
+        <p class="s-label" data-i18n="loc_label">Where to Find Us</p>
+        <h2 class="s-title" data-i18n="loc_title">Playa de Palma</h2>
+        <div class="review-pill">
+          <div class="rp-stars">⭐⭐⭐⭐⭐</div>
+          <div>
+            <div class="rp-num" id="locRating">4.8</div>
+            <div class="rp-label" id="locLabel">Over 598+ Google Reviews</div>
+          </div>
+        </div>
+        <p style="color:var(--muted);line-height:1.7;font-size:.86rem;" data-i18n="loc_desc">
+          Right by the beach in Playa de Palma.<br>Calle de Llaut 8 — easy to find, hard to forget.
+        </p>
+        <div class="dir-btns">
+          <a id="mapsBtn" href="#" class="btn btn-dir" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span data-i18n="how_to_get">How to Get There</span>
+          </a>
+          <a href="https://maps.apple.com/?q=Carrer+del+Llaut+8+Playa+de+Palma+Mallorca" class="btn btn-outline" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Apple Maps
+          </a>
+        </div>
+      </div>
+      <div class="map-wrap reveal">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d831.2!2d2.74459!3d39.52278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1297937f6d4c6d1f%3A0x5f5c5c5c5c5c5c5c!2sCarrer%20del%20Llaut%2C%208%2C%2007610%20Palma%2C%20Illes%20Balears!5e0!3m2!1sen!2ses!4v1714000000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-label">📍 Calle de Llaut 8 · Playa de Palma · Mallorca</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section class="reservation-section" id="reserve">
+  <div class="reservation-inner">
+    <div class="res-grid">
+      <div class="res-left reveal">
+        <p class="s-label" data-i18n="res_label">Reservations</p>
+        <h2 class="s-title" data-i18n="res_title">Book Your Table</h2>
+        <p class="res-desc" data-i18n="res_desc">Reach us on WhatsApp or Instagram and we'll confirm your table in minutes.</p>
+      </div>
+      <div class="channels reveal">
+        <a class="ch wa" id="chWa" href="#" target="_blank">
+          <div class="ch-ico wa"><svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+          <div class="ch-body"><div class="ch-name">WhatsApp</div><div class="ch-detail" id="chWaD">Said · +34 613 962 833</div></div>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="ch ig" id="chIg" href="#" target="_blank">
+          <div class="ch-ico ig"><svg viewBox="0 0 24 24" fill="#e1306c"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+          <div class="ch-body"><div class="ch-name">Instagram DM</div><div class="ch-detail" id="chIgD">@teckelsmallorca</div></div>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="ch mail" id="chMail" href="#">
+          <div class="ch-ico mail"><svg viewBox="0 0 24 24" fill="#00f5ff"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+          <div class="ch-body"><div class="ch-name">Email</div><div class="ch-detail" id="chMailD">info@teckels-mallorca.com</div></div>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="ch tel" id="chTel" href="#">
+          <div class="ch-ico tel"><svg viewBox="0 0 24 24" fill="#f5c842"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+          <div class="ch-body"><div class="ch-name" data-i18n="call_us">Call Us</div><div class="ch-detail" id="chTelD">Said · +34 613 962 833</div></div>
+          <span class="ch-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOATING WA -->
+<a id="waFloat" href="#" class="wa-float" target="_blank" title="Book via WhatsApp">
+  <div class="wa-pulse"></div>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Teckel<span>'</span>s</div>
+  <div class="f-sub">Food &amp; Drinks · Mallorca</div>
+  <div class="f-links">
+    <a id="fIg" href="#" target="_blank">@teckelsmallorca</a>
+    <a id="fWa" href="#" target="_blank">WhatsApp</a>
+    <a id="fMail" href="#">Email</a>
+    <a id="fDir" href="#" target="_blank" data-i18n="directions">Directions</a>
+  </div>
+  <p class="f-copy">© 2026 Teckel's Food &amp; Drinks · Calle de Llaut 8, Playa de Palma</p>
+  <div class="f-admin" onclick="openAdmin()">⚙ Admin</div>
+</footer>
+
+<!-- ADMIN OVERLAY -->
+<div class="a-overlay" id="aOverlay">
+  <div class="a-modal">
+    <div id="aLogin">
+      <div class="a-login">
+        <div class="a-login-t">🔐 Admin</div>
+        <p style="color:var(--muted);font-size:.78rem;text-align:center;">Teckel's Management</p>
+        <div class="a-field"><label>Username</label><input id="aUser" type="text" autocomplete="off" placeholder="admin"/></div>
+        <div class="a-field"><label>Password</label><input id="aPass" type="password" placeholder="••••••••"/></div>
+        <div class="a-err" id="aErr">❌ Wrong credentials</div>
+        <button class="a-save" onclick="doLogin()">Sign In</button>
+        <button onclick="closeAdmin()" style="background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:12px;padding:.7rem;font-size:.78rem;font-weight:700;cursor:pointer;width:100%;margin-top:.4rem;font-family:inherit;">Cancel</button>
+      </div>
+    </div>
+    <div id="aPanel" style="display:none">
+      <div class="a-head">
+        <div class="a-head-title">⚙ Admin Panel</div>
+        <button class="a-close" onclick="closeAdmin()">✕</button>
+      </div>
+      <div class="a-sec">
+        <div class="a-sec-t">🔗 Links &amp; Contacts</div>
+        <div class="a-grid">
+          <div class="a-field"><label>WhatsApp (no spaces)</label><input id="cfgWa" type="text" placeholder="34613962833"/></div>
+          <div class="a-field"><label>Email</label><input id="cfgMail" type="text" placeholder="info@teckels-mallorca.com"/></div>
+          <div class="a-field"><label>Instagram</label><input id="cfgIg" type="text" placeholder="teckelsmallorca"/></div>
+          <div class="a-field"><label>Google Maps URL</label><input id="cfgMaps" type="text"/></div>
+        </div>
+      </div>
+      <div class="a-sec">
+        <div class="a-sec-t">⭐ Reviews</div>
+        <div class="a-grid">
+          <div class="a-field"><label>Total Count</label><input id="cfgRev" type="number" placeholder="598"/></div>
+          <div class="a-field"><label>Rating</label><input id="cfgRat" type="text" placeholder="4.8"/></div>
+        </div>
+      </div>
+      <div class="a-sec">
+        <div class="a-sec-t">🌆 Hero Background</div>
+        <div style="position:relative;border:2px dashed rgba(255,255,255,.1);border-radius:12px;padding:1.4rem;text-align:center;cursor:pointer;overflow:hidden;">
+          <span id="heroBgLbl" style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Click to upload hero image</span>
+          <input type="file" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;" onchange="handleHeroBg(this)"/>
+        </div>
+      </div>
+      <div class="a-sec">
+        <div class="a-sec-t">🎠 Carousel Photos</div>
+        <div class="a-img-grid" id="aCarousel"></div>
+      </div>
+      <div class="a-sec">
+        <div class="a-sec-t">📸 Instagram Feed Photos</div>
+        <div class="a-img-grid" id="aFeed"></div>
+      </div>
+      <button class="a-save" onclick="saveAdmin()">💾 Save Changes</button>
+      <div class="a-ok" id="aOk">✅ Saved successfully!</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══ TRANSLATIONS ═══
+const T = {
+  en:{nav_home:'Home',nav_menu:'Menu',nav_location:'Location',nav_reserve:'Reserve',book_btn:'Book a Table',our_menu:'Our Menu',get_there:'Get There',on_google:'on Google Maps',b_eco:'Eco Friendly',b_free:'Free Range',b_fresh:'100% Fresh',b_stars:'4.8 Stars',reviews_sub:'Verified Google Reviews · Rated 4.8 out of 5',avg_rating:'Avg Rating',reviews_label:'Reviews',top_rated:'Top Rated',menu_label:'Menu',menu_title:'Our Menu',follow_ig:'Follow on Instagram',loc_label:'Where to Find Us',loc_title:'Playa de Palma',loc_desc:'Right by the beach in Playa de Palma.<br>Calle de Llaut 8 — easy to find, hard to forget.',how_to_get:'How to Get There',res_label:'Reservations',res_title:'Book Your Table',res_desc:"Reach us on WhatsApp or Instagram and we'll confirm your table in minutes.",call_us:'Call Us',directions:'Directions'},
+  de:{nav_home:'Start',nav_menu:'Speisekarte',nav_location:'Lage',nav_reserve:'Reservieren',book_btn:'Tisch reservieren',our_menu:'Unsere Karte',get_there:'Anfahrt',on_google:'auf Google Maps',b_eco:'Umweltfreundlich',b_free:'Freilandhaltung',b_fresh:'100% Frisch',b_stars:'4,8 Sterne',reviews_sub:'Verifizierte Google-Bewertungen · Durchschnitt 4,8 von 5',avg_rating:'Ø Bewertung',reviews_label:'Bewertungen',top_rated:'Top bewertet',menu_label:'Speisekarte',menu_title:'Unsere Karte',follow_ig:'Auf Instagram folgen',loc_label:'Wo wir sind',loc_title:'Playa de Palma',loc_desc:'Direkt am Strand in Playa de Palma.<br>Calle de Llaut 8 — leicht zu finden, unvergesslich.',how_to_get:'So kommen Sie zu uns',res_label:'Reservierungen',res_title:'Ihren Tisch reservieren',res_desc:'Schreiben Sie uns auf WhatsApp und wir bestätigen Ihren Tisch in Minuten.',call_us:'Anrufen',directions:'Wegbeschreibung'},
+  es:{nav_home:'Inicio',nav_menu:'Menú',nav_location:'Ubicación',nav_reserve:'Reservar',book_btn:'Reservar Mesa',our_menu:'Nuestro Menú',get_there:'Cómo llegar',on_google:'en Google Maps',b_eco:'Eco Friendly',b_free:'Crianza Libre',b_fresh:'100% Fresco',b_stars:'4,8 Estrellas',reviews_sub:'Reseñas verificadas en Google · Valorado 4,8 sobre 5',avg_rating:'Valoración media',reviews_label:'Reseñas',top_rated:'Mejor valorado',menu_label:'Menú',menu_title:'Nuestro Menú',follow_ig:'Seguir en Instagram',loc_label:'Dónde Encontrarnos',loc_title:'Playa de Palma',loc_desc:'Justo junto a la playa en Playa de Palma.<br>Calle de Llaut 8 — fácil de encontrar, imposible de olvidar.',how_to_get:'Cómo llegar',res_label:'Reservas',res_title:'Reserva tu Mesa',res_desc:'Escríbenos por WhatsApp o Instagram y confirmamos tu mesa en minutos.',call_us:'Llamar',directions:'Cómo llegar'}
+};
+let lang = localStorage.getItem('tl') || 'en';
+
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('tl', l);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+    if (T[lang][k] !== undefined) el.innerHTML = T[lang][k];
+  });
+  buildMenu();
+}
+
+// ═══ CONFIG ═══
+const DEF = {wa:'34613962833',mail:'info@teckels-mallorca.com',ig:'teckelsmallorca',maps:'https://maps.google.com/?q=Carrer+del+Llaut+8+Playa+de+Palma+Mallorca',reviewCount:598,reviewRating:'4.8',heroBg:'',carousel:[],feed:[]};
+let cfg = Object.assign({}, DEF, JSON.parse(localStorage.getItem('teckels_cfg') || '{}'));
+if (!Array.isArray(cfg.carousel)) cfg.carousel = [];
+if (!Array.isArray(cfg.feed)) cfg.feed = [];
+
+function saveConfig() { localStorage.setItem('teckels_cfg', JSON.stringify(cfg)); }
+
+function applyConfig() {
+  const msg = encodeURIComponent("Hi! I would like to book a table at Teckel's.");
+  const waUrl = 'https://wa.me/' + cfg.wa + '?text=' + msg;
+  const igUrl = 'https://instagram.com/' + cfg.ig;
+  const mapsUrl = cfg.maps || DEF.maps;
+  // Nav & hero
+  document.getElementById('navBook').href = waUrl;
+  document.getElementById('heroWa').href = waUrl;
+  document.getElementById('heroDir').href = mapsUrl;
+  // Channels
+  document.getElementById('chWa').href = waUrl;
+  document.getElementById('chWaD').textContent = 'Said · +' + cfg.wa;
+  document.getElementById('chIg').href = igUrl;
+  document.getElementById('chIgD').textContent = '@' + cfg.ig;
+  document.getElementById('chMail').href = 'mailto:' + cfg.mail;
+  document.getElementById('chMailD').textContent = cfg.mail;
+  document.getElementById('chTel').href = 'tel:+' + cfg.wa;
+  document.getElementById('chTelD').textContent = 'Said · +' + cfg.wa;
+  // Floating WA
+  document.getElementById('waFloat').href = waUrl;
+  // Instagram
+  document.getElementById('igFollowBtn').href = igUrl;
+  document.getElementById('fIg').href = igUrl;
+  document.getElementById('fIg').textContent = '@' + cfg.ig;
+  document.getElementById('fWa').href = waUrl;
+  document.getElementById('fMail').href = 'mailto:' + cfg.mail;
+  document.getElementById('fDir').href = mapsUrl;
+  document.getElementById('mapsBtn').href = mapsUrl;
+  // Review numbers
+  const rn = cfg.reviewCount + '+';
+  document.getElementById('bigNum').textContent = rn;
+  document.getElementById('statRating').textContent = cfg.reviewRating;
+  document.getElementById('statCount').textContent = rn;
+  document.getElementById('heroBadgeNum').textContent = cfg.reviewRating;
+  document.getElementById('heroBadgeCount').textContent = rn + ' Reviews';
+  document.getElementById('locRating').textContent = cfg.reviewRating;
+  document.getElementById('locLabel').textContent = 'Over ' + rn + ' Google Reviews';
+  // Hero bg
+  if (cfg.heroBg) {
+    const bg = document.getElementById('heroBg');
+    bg.style.backgroundImage = 'url(' + cfg.heroBg + ')';
+    bg.style.opacity = '.22';
+  }
+  renderCarousel();
+  renderFeed();
+  setLang(lang);
+}
+
+// ═══ TESTIMONIALS ═══
+const REVIEWS = [
+  {t:"Absolutely the best burger in Mallorca! Fresh ingredients, amazing.",a:"Sarah M.",f:"🇬🇧"},
+  {t:"Das beste Restaurant in Playa de Palma! Frische Zutaten und top Service.",a:"Klaus W.",f:"🇩🇪"},
+  {t:"¡Espectacular! La carne es de primera calidad y todo muy fresco.",a:"María G.",f:"🇪🇸"},
+  {t:"Hidden gem! Great food, super friendly staff. Will definitely be back.",a:"Tom B.",f:"🇬🇧"},
+  {t:"Wir kommen jedes Jahr nach Mallorca und essen immer bei Teckels!",a:"Anna K.",f:"🇩🇪"},
+  {t:"La mejor hamburguesa que he probado. 100% recomendado.",a:"Carlos R.",f:"🇪🇸"},
+  {t:"Loved every bite! The organic ingredients really make a difference.",a:"James L.",f:"🇺🇸"},
+  {t:"Sehr lecker und frisch. Der Burger war einfach perfekt!",a:"Petra S.",f:"🇩🇪"},
+  {t:"Increíble. Ambiente genial y comida de calidad. Volvemos seguro.",a:"Lucía F.",f:"🇪🇸"},
+  {t:"Best decision of our holiday! Teckel's is a must-visit.",a:"Emily R.",f:"🇦🇺"},
+];
+function buildTrack() {
+  const tr = document.getElementById('track');
+  if (!tr) return;
+  const d = [...REVIEWS, ...REVIEWS];
+  tr.innerHTML = d.map(r => '<div class="rcard"><div class="rcard-stars">⭐⭐⭐⭐⭐</div><div class="rcard-text">"' + r.t + '"</div><div class="rcard-author">' + r.f + ' ' + r.a + '</div></div>').join('');
+}
+
+// ═══ CAROUSEL ═══
+let cIdx = 0, cTimer;
+function renderCarousel() {
+  const track = document.getElementById('cTrack');
+  const dots = document.getElementById('cDots');
+  if (!track) return;
+  const imgs = (cfg.carousel || []).filter(Boolean);
+  if (!imgs.length) {
+    track.innerHTML = '<div class="c-empty">Upload photos in Admin ↑</div>';
+    dots.innerHTML = '';
+    return;
+  }
+  track.innerHTML = imgs.map((src, i) => '<div class="c-slide"><img src="' + src + '" alt="Teckel\'s photo ' + (i+1) + '" loading="lazy"/></div>').join('');
+  dots.innerHTML = imgs.map((_, i) => '<div class="c-dot' + (i===0?' active':'') + '" onclick="goC(' + i + ')"></div>').join('');
+  cIdx = 0;
+  clearInterval(cTimer);
+  cTimer = setInterval(cNext, 4500);
+}
+function goC(n) {
+  const imgs = (cfg.carousel || []).filter(Boolean);
+  if (!imgs.length) return;
+  cIdx = (n + imgs.length) % imgs.length;
+  const t = document.getElementById('cTrack');
+  if (t) t.style.transform = 'translateX(-' + (cIdx * 100) + '%)';
+  document.querySelectorAll('.c-dot').forEach((d, i) => d.classList.toggle('active', i === cIdx));
+  clearInterval(cTimer);
+  cTimer = setInterval(cNext, 4500);
+}
+function cNext() { goC(cIdx + 1); }
+function cPrev() { goC(cIdx - 1); }
+// Swipe
+(function() {
+  let sx = 0;
+  const el = document.getElementById('cWrap');
+  if (!el) return;
+  el.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, {passive:true});
+  el.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 40) { dx < 0 ? cNext() : cPrev(); }
+  }, {passive:true});
+})();
+
+// ═══ INSTAGRAM FEED ═══
+function renderFeed() {
+  const grid = document.getElementById('igGrid');
+  if (!grid) return;
+  const imgs = (cfg.feed || []).filter(Boolean);
+  const igUrl = 'https://instagram.com/' + (cfg.ig || 'teckelsmallorca');
+  if (!imgs.length) {
+    grid.innerHTML = Array(6).fill(0).map((_, i) => '<div class="ig-empty">📸 ' + (i+1) + '</div>').join('');
+    return;
+  }
+  grid.innerHTML = imgs.slice(0, 9).map(src =>
+    '<div class="ig-cell"><img src="' + src + '" loading="lazy"/><div class="ig-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0z"/></svg></div></div>'
+  ).join('');
+  grid.querySelectorAll('.ig-cell').forEach(el => el.addEventListener('click', () => window.open(igUrl, '_blank')));
+}
+
+// ═══ MENU DATA ═══
+const MENU = [
+  {id:'starters',e:'🥗',name:{en:'Starters',de:'Vorspeisen',es:'Entrantes'},sub:{en:'',de:'',es:''},items:[
+    {n:{en:'Pan y Alioli',de:'Pan y Alioli',es:'Pan y Alioli'},d:{en:'Bread with alioli',de:'Brot mit Alioli',es:'Pan con alioli'},p:'4,90 €'},
+    {n:{en:'Pimientos de Padrón',de:'Pimientos de Padrón',es:'Pimientos de Padrón'},d:{en:'Spanish green peppers fried in olive oil with coarse sea salt',de:'Spanische grüne Paprika in Olivenöl mit grobem Meersalz',es:'Pimientos fritos en aceite de oliva con sal gruesa'},p:'7,90 €'},
+    {n:{en:'Albóndigas',de:'Albóndigas',es:'Albóndigas'},d:{en:'Homemade Spanish meatballs in tomato sauce, served with bread',de:'Hausgemachte spanische Fleischbällchen in Tomatensauce mit Brot',es:'Albóndigas caseras en salsa de tomate, con pan'},p:'11,90 €'},
+    {n:{en:'Gambas al Ajillo',de:'Gambas al Ajillo',es:'Gambas al Ajillo'},d:{en:'Black Tiger prawns in olive oil with garlic, paprika, tomatoes and bread',de:'Black-Tiger-Garnelen in Olivenöl mit Knoblauch, Paprika, Tomaten und Brot',es:'Gambas tigre en aceite de oliva con ajo, pimentón, tomates y pan'},p:'15,90 €'},
+    {n:{en:'Tabla de Quesos',de:'Käseplatte',es:'Tabla de Quesos'},d:{en:'Spanish cheeses with fig jam and bread',de:'Spanische Käse mit Feigenmarmelade und Brot',es:'Quesos españoles con mermelada de higo y pan'},p:'11,90 €'},
+    {n:{en:'Tabla de Jamón y Queso',de:'Serrano & Käse',es:'Tabla de Jamón y Queso'},d:{en:'Serrano ham and cheese with olives and bread',de:'Serranoschinken und Käse mit Oliven und Brot',es:'Jamón serrano y queso con aceitunas y pan'},p:'16,90 €'},
+    {n:{en:'Burrata',de:'Burrata',es:'Burrata'},d:{en:'Burrata with tomato sauce, cherry tomatoes and bread',de:'Burrata mit Tomatensauce, Kirschtomaten und Brot',es:'Burrata con salsa de tomate, tomates cherry y pan'},p:'13,90 €'},
+    {n:{en:'Smoked Wagyu Carpaccio',de:'Geräuchertes Wagyu Carpaccio',es:'Carpaccio de Wagyu Ahumado'},d:{en:'Wagyu with Parmesan, arugula, truffle mayo & black volcanic salt',de:'Wagyu mit Parmesan, Rucola, Trüffel-Mayo und schwarzem Vulkansalz',es:'Wagyu con parmesano, rúcula, mayonesa de trufa y sal volcánica negra'},p:'16,90 €'},
+  ]},
+  {id:'salads',e:'🥬',name:{en:'Salads',de:'Salate',es:'Ensaladas'},sub:{en:'',de:'',es:''},items:[
+    {n:{en:'Ensalada',de:'Ensalada',es:'Ensalada'},d:{en:'Mixed salad with cherry tomatoes, onions, cress and bread',de:'Gemischter Salat mit Kirschtomaten, Zwiebeln, Kresse und Brot',es:'Ensalada mixta con tomates cherry, cebolla, berros y pan'},p:'8,90 €'},
+    {n:{en:'Ensalada de Gambas',de:'Garnelensalat',es:'Ensalada de Gambas'},d:{en:'Mixed salad with Black Tiger prawns, cherry tomatoes, onions and bread',de:'Gemischter Salat mit Black-Tiger-Garnelen, Kirschtomaten, Zwiebeln und Brot',es:'Ensalada mixta con gambas tigre, tomates cherry, cebolla y pan'},p:'14,90 €'},
+  ]},
+  {id:'burgers',e:'🍔',name:{en:'Burgers',de:'Burger',es:'Burgers'},sub:{en:'All burgers served in a whole grain bun with roasted onions and salad.',de:'Alle Burger im Vollkornbrötchen mit gerösteten Zwiebeln und Salat.',es:'Todos los burgers en pan integral con cebolla asada y ensalada.'},items:[
+    {n:{en:'Black Angus Burger',de:'Black Angus Burger',es:'Black Angus Burger'},d:{en:'200g Mallorcan Black Angus beef',de:'200g mallorquinisches Black-Angus-Rindfleisch',es:'200g de ternera Black Angus mallorquina'},p:'18,90 €'},
+    {n:{en:'Chicken Fillet Burger',de:'Hähnchenbrust Burger',es:'Burger de Pollo'},d:{en:'Grilled chicken breast fillet',de:'Gegrilltes Hähnchenbrustfilet',es:'Filete de pechuga de pollo a la plancha'},p:'17,90 €'},
+    {n:{en:'Vegan Meat Burger',de:'Veganer Burger',es:'Burger Vegano'},d:{en:'Vegan meat patty with cheddar cheese',de:'Veganes Patty mit Cheddar-Käse',es:'Hamburguesa vegana con queso cheddar'},p:'15,90 €'},
+  ]},
+  {id:'mains',e:'🍖',name:{en:'Main Courses',de:'Hauptgerichte',es:'Platos Principales'},sub:{en:'',de:'',es:''},items:[
+    {n:{en:'Chicken Wings',de:'Chicken Wings',es:'Alitas de Pollo'},d:{en:"Marinated farm chicken wings with dip and Teckel's Fries",de:"Marinierte Hähnchenflügel mit Dip und Teckel's Pommes",es:"Alitas de pollo marinadas con salsa y Teckel's Fries"},p:'12,90 €'},
+    {n:{en:'Spare Ribs',de:'Spare Ribs',es:'Costillas'},d:{en:"Homemade spare ribs with BBQ sauce and Teckel's Fries",de:"Hausgemachte Spareribs mit BBQ-Sauce und Teckel's Pommes",es:"Costillas caseras con salsa BBQ y Teckel's Fries"},p:'18,90 €'},
+    {n:{en:'Schnitzel with Fries',de:'Schnitzel mit Pommes',es:'Escalope con Patatas'},d:{en:"Pork or chicken schnitzel with Teckel's Fries and lemon",de:"Schweine- oder Hähnchensch nitzel mit Teckel's Pommes und Zitrone",es:"Escalope de cerdo o pollo con Teckel's Fries y limón"},p:'15,90 €'},
+    {n:{en:'Linguini',de:'Linguini',es:'Linguini'},d:{en:'Pasta with tomato-ricotta sauce and Parmesan',de:'Pasta mit Tomaten-Ricotta-Sauce und Parmesan',es:'Pasta con salsa de tomate-ricotta y parmesano'},p:'10,90 €'},
+  ]},
+  {id:'sides',e:'🍟',name:{en:'Sides & Extras',de:'Beilagen & Extras',es:'Guarniciones & Extras'},sub:{en:'',de:'',es:''},items:[
+    {n:{en:"Teckel's Fries",de:"Teckel's Pommes",es:"Teckel's Fries"},d:{en:'',de:'',es:''},p:'4,90 €'},
+    {n:{en:'Side Salad',de:'Salat Beilage',es:'Ensalada pequeña'},d:{en:'',de:'',es:''},p:'3,90 €'},
+    {n:{en:'Olives',de:'Oliven',es:'Aceitunas'},d:{en:'',de:'',es:''},p:'2,90 €'},
+    {n:{en:'Extra Bacon',de:'Extra Bacon',es:'Bacon extra'},d:{en:'',de:'',es:''},p:'2,50 €'},
+    {n:{en:'Extra Prawns (5 pcs)',de:'Extra Garnelen (5 Stk.)',es:'Gambas extra (5 uds.)'},d:{en:'5 extra prawns',de:'5 extra Garnelen',es:'5 gambas extra'},p:'5,50 €'},
+    {n:{en:'Extra Chicken Strips',de:'Extra Hähnchenstreifen',es:'Tiras de pollo extra'},d:{en:'',de:'',es:''},p:'3,50 €'},
+    {n:{en:'Extra Bread',de:'Extra Brot',es:'Pan extra'},d:{en:'',de:'',es:''},p:'1,50 €'},
+  ]},
+  {id:'desserts',e:'🍫',name:{en:'Desserts',de:'Nachspeisen',es:'Postres'},sub:{en:'',de:'',es:''},items:[
+    {n:{en:'Lavakuchen',de:'Lavakuchen',es:'Coulant de Chocolate'},d:{en:'Chocolate lava cake with liquid center and vanilla ice cream',de:'Schokoladenkuchen mit flüssigem Kern und Vanilleeis',es:'Bizcocho de chocolate con centro líquido y helado de vainilla'},p:'6,90 €'},
+    {n:{en:'Vanilla Ice Cream Wild Berry',de:'Vanilleeis Wild Berry',es:'Helado de Vainilla Wild Berry'},d:{en:'Vanilla ice cream with wild berries and fresh mint',de:'Vanilleeis mit Wildbeeren und frischer Minze',es:'Helado de vainilla con frutos del bosque y menta fresca'},p:'4,90 €'},
+  ]},
+];
+
+let activeCat = 'starters';
+function buildMenu() {
+  const catsEl = document.getElementById('menuCats');
+  const contentEl = document.getElementById('menuContent');
+  if (!catsEl || !contentEl) return;
+  catsEl.innerHTML = '';
+  contentEl.innerHTML = '';
+  MENU.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'mcat-btn' + (cat.id === activeCat ? ' active' : '');
+    btn.textContent = cat.e + ' ' + cat.name[lang];
+    btn.onclick = () => {
+      activeCat = cat.id;
+      document.querySelectorAll('.mcat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.mcat-content').forEach(c => c.classList.remove('show'));
+      document.getElementById('mc-' + cat.id).classList.add('show');
+    };
+    catsEl.appendChild(btn);
+    const sec = document.createElement('div');
+    sec.className = 'mcat-content' + (cat.id === activeCat ? ' show' : '');
+    sec.id = 'mc-' + cat.id;
+    const sub = cat.sub[lang] || '';
+    sec.innerHTML = '<div class="mcat-title">' + cat.e + ' ' + cat.name[lang] + '</div>' +
+      (sub ? '<div class="mcat-sub">' + sub + '</div>' : '') +
+      '<div class="mitems">' + cat.items.map(item => {
+        const nm = item.n[lang] || item.n.en;
+        const ds = item.d[lang] || item.d.en;
+        return '<div class="mitem"><div class="mitem-body"><div class="mitem-name">' + nm + '</div>' +
+          (ds ? '<div class="mitem-desc">' + ds + '</div>' : '') + '</div><div class="mitem-price">' + item.p + '</div></div>';
+      }).join('') + '</div>';
+    contentEl.appendChild(sec);
+  });
+}
+
+// ═══ SMOKE ═══
+(function() {
+  function init() {
+    const canvas = document.getElementById('smokeCanvas');
+    const hero = document.querySelector('.hero');
+    if (!canvas || !hero) return;
+    canvas.width = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+    const ctx = canvas.getContext('2d');
+    const cx = canvas.width / 2;
+    const cy = canvas.height * 0.65;
+    const particles = [];
+    function Particle() {
+      this.x = cx + (Math.random() - .5) * 50;
+      this.y = cy;
+      this.vx = (Math.random() - .5) * .7;
+      this.vy = -(Math.random() * 1.3 + .5);
+      this.life = 1;
+      this.decay = Math.random() * .006 + .003;
+      this.size = Math.random() * 16 + 8;
+      this.growth = Math.random() * .2 + .07;
+    }
+    Particle.prototype.update = function() {
+      this.x += this.vx; this.y += this.vy; this.life -= this.decay;
+      this.size += this.growth; this.vx += (Math.random() - .5) * .07;
+    };
+    Particle.prototype.draw = function() {
+      ctx.save(); ctx.globalAlpha = this.life * .18;
+      const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+      g.addColorStop(0, 'rgba(210,210,220,.9)');
+      g.addColorStop(1, 'rgba(80,80,100,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    };
+    let frame = 0;
+    (function loop() {
+      requestAnimationFrame(loop);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      frame++;
+      if (frame % 3 === 0 && particles.length < 55) { particles.push(new Particle()); particles.push(new Particle()); }
+      for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update(); particles[i].draw();
+        if (particles[i].life <= 0) particles.splice(i, 1);
+      }
+    })();
+    window.addEventListener('resize', function() {
+      canvas.width = hero.offsetWidth; canvas.height = hero.offsetHeight;
+    }, {passive: true});
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
+  else { setTimeout(init, 200); }
+})();
+
+// ═══ ADMIN ═══
+function openAdmin() {
+  document.getElementById('aOverlay').classList.add('show');
+  document.getElementById('aLogin').style.display = '';
+  document.getElementById('aPanel').style.display = 'none';
+  document.getElementById('aErr').style.display = 'none';
+  document.getElementById('aUser').value = '';
+  document.getElementById('aPass').value = '';
+}
+function closeAdmin() { document.getElementById('aOverlay').classList.remove('show'); }
+function doLogin() {
+  if (document.getElementById('aUser').value === 'admin' && document.getElementById('aPass').value === 'teckels2000!!') {
+    document.getElementById('aLogin').style.display = 'none';
+    document.getElementById('aPanel').style.display = '';
+    loadAdminFields();
+  } else { document.getElementById('aErr').style.display = 'block'; }
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && document.getElementById('aOverlay').classList.contains('show') && document.getElementById('aLogin').style.display !== 'none') doLogin();
+});
+document.getElementById('aOverlay').addEventListener('click', function(e) { if (e.target === this) closeAdmin(); });
+
+function loadAdminFields() {
+  document.getElementById('cfgWa').value = cfg.wa;
+  document.getElementById('cfgMail').value = cfg.mail;
+  document.getElementById('cfgIg').value = cfg.ig;
+  document.getElementById('cfgMaps').value = cfg.maps;
+  document.getElementById('cfgRev').value = cfg.reviewCount;
+  document.getElementById('cfgRat').value = cfg.reviewRating;
+  if (cfg.heroBg) document.getElementById('heroBgLbl').textContent = '✅ Image loaded (click to replace)';
+  buildAdminSlots('aCarousel', cfg.carousel, 8, 'carousel');
+  buildAdminSlots('aFeed', cfg.feed, 9, 'feed');
+}
+
+function buildAdminSlots(gridId, arr, count, type) {
+  const g = document.getElementById(gridId);
+  if (!g) return;
+  g.innerHTML = '';
+  for (let i = 0; i < count; i++) {
+    const s = document.createElement('div');
+    s.className = 'a-slot';
+    if (arr[i]) {
+      s.innerHTML = '<img src="' + arr[i] + '"/><button class="del-btn" onclick="delSlot(event,\'' + type + '\',' + i + ')">✕</button>';
+    } else {
+      s.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(255,255,255,.25)"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg><span class="a-slot-lbl">' + (i + 1) + '</span>';
+    }
+    const inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = 'image/*';
+    inp.onchange = (function(idx, t) { return function(e) { handleSlotImg(e, idx, t); }; })(i, type);
+    s.appendChild(inp);
+    g.appendChild(s);
+  }
+}
+
+function delSlot(e, type, idx) {
+  e.stopPropagation();
+  if (type === 'carousel') cfg.carousel[idx] = '';
+  else cfg.feed[idx] = '';
+  buildAdminSlots(type === 'carousel' ? 'aCarousel' : 'aFeed', type === 'carousel' ? cfg.carousel : cfg.feed, type === 'carousel' ? 8 : 9, type);
+}
+
+function handleSlotImg(e, idx, type) {
+  const file = e.target.files[0];
+  if (!file) return;
+  compress(file, type === 'feed' ? 900 : 1200, .88, function(data) {
+    if (type === 'carousel') { cfg.carousel[idx] = data; buildAdminSlots('aCarousel', cfg.carousel, 8, 'carousel'); }
+    else { cfg.feed[idx] = data; buildAdminSlots('aFeed', cfg.feed, 9, 'feed'); }
+  });
+}
+
+function handleHeroBg(inp) {
+  const file = inp.files[0];
+  if (!file) return;
+  compress(file, 1920, .85, function(data) {
+    cfg.heroBg = data;
+    document.getElementById('heroBgLbl').textContent = '✅ Image loaded (click to replace)';
+  });
+}
+
+function compress(file, maxW, quality, cb) {
+  const r = new FileReader();
+  r.onload = function(ev) {
+    const img = new Image();
+    img.onload = function() {
+      const c = document.createElement('canvas');
+      let w = img.width, h = img.height;
+      if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+      c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      cb(c.toDataURL('image/jpeg', quality));
+    };
+    img.src = ev.target.result;
+  };
+  r.readAsDataURL(file);
+}
+
+function saveAdmin() {
+  cfg.wa = document.getElementById('cfgWa').value.trim().replace(/\D/g, '');
+  cfg.mail = document.getElementById('cfgMail').value.trim();
+  cfg.ig = document.getElementById('cfgIg').value.trim().replace('@', '');
+  cfg.maps = document.getElementById('cfgMaps').value.trim() || DEF.maps;
+  cfg.reviewCount = parseInt(document.getElementById('cfgRev').value) || 598;
+  cfg.reviewRating = document.getElementById('cfgRat').value.trim() || '4.8';
+  saveConfig();
+  applyConfig();
+  const ok = document.getElementById('aOk');
+  ok.style.display = 'block';
+  setTimeout(function() { ok.style.display = 'none'; }, 2500);
+}
+
+// Logo 5x click = admin
+let lc = 0, lt;
+document.getElementById('logoBtn').addEventListener('click', function(e) {
+  e.preventDefault();
+  lc++;
+  clearTimeout(lt);
+  lt = setTimeout(function() { lc = 0; }, 2000);
+  if (lc >= 5) { lc = 0; openAdmin(); }
+});
+
+// ═══ REVEAL ═══
+const revObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('in'); });
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal').forEach(function(el) { revObs.observe(el); });
+
+// ═══ INIT ═══
+buildTrack();
+buildMenu();
+applyConfig();
+setLang(lang);
+
+// Smooth scroll to anchors with offset
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+  anchor.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({top: top, behavior: 'smooth'});
+    }
+  });
+});
+</script>
+</body>
+</html>
