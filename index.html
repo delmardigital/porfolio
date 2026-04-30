@@ -9,28 +9,9 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;overflow-x:hidden;background:#f9f9f7;}
 body{background:#f9f9f7;color:#0d0d0d;font-family:'DM Sans',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
-
-:root{
-  --black:#0d0d0d;
-  --white:#f9f9f7;
-  --gray:#6b6b6b;
-  --lightgray:#e5e5e2;
-  --midgray:#c2c2be;
-  --green:#1a7a3c;
-  --radius:4px;
-  --border:rgba(0,0,0,.10);
-}
-
-/* ─── NAV ─── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:300;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:.9rem 2rem;
-  background:rgba(249,249,247,.95);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-}
-.nav-logo{font-family:'DM Serif Display',serif;font-size:1.45rem;letter-spacing:.5px;color:var(--black);text-decoration:none;user-select:none;cursor:pointer;flex-shrink:0;}
+:root{--black:#0d0d0d;--white:#f9f9f7;--gray:#6b6b6b;--lightgray:#e5e5e2;--midgray:#c2c2be;--border:rgba(0,0,0,.10);--radius:4px;}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2rem;background:rgba(249,249,247,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:1.45rem;letter-spacing:.5px;color:var(--black);text-decoration:none;user-select:none;flex-shrink:0;}
 .nav-center{display:none;gap:2.2rem;list-style:none;}
 .nav-center a{color:var(--gray);text-decoration:none;font-size:.75rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:color .2s;}
 .nav-center a:hover{color:var(--black);}
@@ -41,19 +22,7 @@ nav{
 .nav-book{background:var(--black);color:var(--white);padding:.5rem 1.2rem;border-radius:3px;font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:opacity .2s;}
 .nav-book:hover{opacity:.75;}
 @media(min-width:768px){.nav-center{display:flex;}}
-
-/* ─── HERO ─── */
-.hero{
-  min-height:100svh;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;
-  padding:7rem 1.6rem 3rem;
-  position:relative;overflow:hidden;
-  background:#0d0d0d;
-  color:var(--white);
-}
-.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .6s;pointer-events:none;}
-.hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:.35;pointer-events:none;}
+.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7rem 1.6rem 3rem;position:relative;overflow:hidden;background:#0d0d0d;color:var(--white);}
 .hero-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;max-width:720px;}
 .hero-pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);padding:.35rem 1rem;border-radius:2px;font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:1.5rem;}
 .hero-pill::before{content:'';width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.5);animation:blink 2.5s infinite;}
@@ -61,7 +30,7 @@ nav{
 .hero-title{font-family:'DM Serif Display',serif;font-size:clamp(4.5rem,16vw,10rem);line-height:.9;letter-spacing:-2px;color:var(--white);}
 .hero-title em{display:block;font-style:italic;color:rgba(255,255,255,.35);}
 .hero-sub{font-size:.75rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.4);margin:1.4rem 0 1.8rem;font-weight:400;}
-.hero-badge{display:inline-flex;align-items:center;gap:.9rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:3px;padding:.7rem 1.2rem;margin-bottom:2rem;cursor:pointer;transition:border-color .25s;text-decoration:none;color:inherit;}
+.hero-badge{display:inline-flex;align-items:center;gap:.9rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:3px;padding:.7rem 1.2rem;margin-bottom:2rem;text-decoration:none;color:inherit;transition:border-color .25s;}
 .hero-badge:hover{border-color:rgba(255,255,255,.3);}
 .hb-num{font-family:'DM Serif Display',serif;font-size:1.9rem;color:var(--white);line-height:1;}
 .hb-sep{width:1px;height:28px;background:rgba(255,255,255,.12);}
@@ -70,45 +39,23 @@ nav{
 .hero-ctas{display:flex;flex-direction:column;gap:.65rem;width:100%;max-width:340px;}
 .btn-row{display:flex;gap:.65rem;}
 .btn-row .btn{flex:1;}
-@media(min-width:768px){
-  .hero-ctas{flex-direction:row;max-width:none;justify-content:center;}
-  .btn-row{display:contents;}
-  .btn-row .btn{flex:unset;}
-}
-
-/* ─── BUTTONS ─── */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
-  padding:.82rem 1.4rem;border-radius:3px;
-  font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  text-decoration:none;cursor:pointer;border:none;white-space:nowrap;
-  transition:opacity .2s,transform .2s;
-}
+@media(min-width:768px){.hero-ctas{flex-direction:row;max-width:none;justify-content:center;}.btn-row{display:contents;}.btn-row .btn{flex:unset;}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.82rem 1.4rem;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;white-space:nowrap;transition:opacity .2s,transform .2s;}
 .btn:active{opacity:.8;}
 .btn svg{width:16px;height:16px;fill:currentColor;flex-shrink:0;}
-.btn-wa{background:#f9f9f7;color:#0d0d0d;}
-.btn-wa:hover{opacity:.85;transform:translateY(-1px);}
-.btn-menu{background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--white);}
-.btn-menu:hover{border-color:rgba(255,255,255,.5);transform:translateY(-1px);}
-.btn-dir{background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--white);}
-.btn-dir:hover{border-color:rgba(255,255,255,.5);transform:translateY(-1px);}
-/* Light section buttons */
-.btn-dark{background:var(--black);color:var(--white);}
-.btn-dark:hover{opacity:.75;transform:translateY(-1px);}
-.btn-outline-dark{background:transparent;border:1px solid var(--border);color:var(--black);}
-.btn-outline-dark:hover{border-color:var(--black);}
+.btn-wa{background:#f9f9f7;color:#0d0d0d;}.btn-wa:hover{opacity:.85;transform:translateY(-1px);}
+.btn-menu{background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--white);}.btn-menu:hover{border-color:rgba(255,255,255,.5);transform:translateY(-1px);}
+.btn-dir{background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--white);}.btn-dir:hover{border-color:rgba(255,255,255,.5);transform:translateY(-1px);}
+.btn-dark{background:var(--black);color:var(--white);}.btn-dark:hover{opacity:.75;transform:translateY(-1px);}
+.btn-outline-dark{background:transparent;border:1px solid var(--border);color:var(--black);}.btn-outline-dark:hover{border-color:var(--black);}
 .btn-full{width:100%;}
-
-/* ─── BADGES BAR ─── */
-.badges{display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap;padding:1.2rem 1.2rem;background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-.badge{display:flex;align-items:center;gap:.4rem;padding:.4rem .85rem;background:transparent;border:1px solid var(--border);border-radius:2px;font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;color:var(--gray);}
-
-/* ─── REVIEWS ─── */
+.badges{display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap;padding:1.2rem;background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.badge{display:flex;align-items:center;gap:.4rem;padding:.4rem .85rem;border:1px solid var(--border);border-radius:2px;font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;color:var(--gray);}
 .reviews-section{background:var(--white);padding:4rem 1.6rem;overflow:hidden;}
 .reviews-inner{max-width:1100px;margin:0 auto;}
 .reviews-headline{text-align:center;margin-bottom:2.5rem;}
 .reviews-big{font-family:'DM Serif Display',serif;font-size:clamp(5rem,20vw,10rem);line-height:.88;color:var(--black);}
-.stars-big{font-size:1.4rem;letter-spacing:3px;margin:.5rem 0;color:var(--black);}
+.stars-big{font-size:1.4rem;letter-spacing:3px;margin:.5rem 0;}
 .reviews-sub{font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-top:.5rem;}
 .reviews-stats{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-bottom:2.5rem;}
 .rstat{background:var(--white);border:1px solid var(--border);border-radius:3px;padding:1.1rem 1.4rem;text-align:center;min-width:110px;transition:border-color .2s;}
@@ -123,24 +70,6 @@ nav{
 .rcard-stars{font-size:.8rem;margin-bottom:.5rem;}
 .rcard-text{font-size:.8rem;line-height:1.6;margin-bottom:.7rem;color:var(--black);}
 .rcard-author{font-size:.68rem;color:var(--gray);font-weight:700;letter-spacing:.5px;}
-
-/* ─── CAROUSEL ─── */
-.carousel-section{background:var(--black);}
-.c-wrap{position:relative;overflow:hidden;}
-.c-track{display:flex;transition:transform .55s cubic-bezier(.25,.46,.45,.94);}
-.c-slide{min-width:100%;position:relative;overflow:hidden;}
-.c-slide img{width:100%;height:320px;object-fit:cover;display:block;filter:brightness(.75) grayscale(.3);}
-.c-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 55%);}
-@media(min-width:768px){.c-slide img{height:520px;}}
-.c-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:5;background:rgba(0,0,0,.4);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.2);color:#fff;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1rem;display:grid;place-items:center;transition:background .2s;padding:0;line-height:1;}
-.c-btn:hover{background:rgba(255,255,255,.15);}
-.c-prev{left:.9rem;}.c-next{right:.9rem;}
-.c-dots{display:flex;justify-content:center;gap:.45rem;padding:.9rem 0 1.2rem;background:var(--black);}
-.c-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .3s;}
-.c-dot.active{background:#f9f9f7;width:20px;border-radius:3px;}
-.c-empty{min-width:100%;height:180px;display:flex;align-items:center;justify-content:center;font-size:.72rem;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:2px;}
-
-/* ─── MENU ─── */
 .menu-section{background:var(--white);padding:4rem 1.6rem;}
 .menu-inner{max-width:900px;margin:0 auto;}
 .menu-cats{display:flex;gap:.4rem;flex-wrap:wrap;margin:1.2rem 0 2rem;}
@@ -158,23 +87,19 @@ nav{
 .mitem-name{font-weight:700;font-size:.88rem;margin-bottom:.18rem;line-height:1.3;}
 .mitem-desc{font-size:.75rem;color:var(--gray);line-height:1.5;}
 .mitem-price{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--black);white-space:nowrap;flex-shrink:0;}
-
-/* ─── INSTAGRAM FEED ─── */
 .feed-section{background:#f0f0ee;padding:4rem 1.6rem;}
 .feed-inner{max-width:1000px;margin:0 auto;}
 .feed-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.5rem;gap:1rem;flex-wrap:wrap;}
-.ig-btn{display:inline-flex;align-items:center;gap:.6rem;background:transparent;border:1px solid var(--border);color:var(--black);padding:.5rem 1.1rem;border-radius:2px;font-size:.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:border-color .2s,background .2s;white-space:nowrap;}
+.ig-btn{display:inline-flex;align-items:center;gap:.6rem;background:transparent;border:1px solid var(--border);color:var(--black);padding:.5rem 1.1rem;border-radius:2px;font-size:.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:background .2s,border-color .2s;white-space:nowrap;}
 .ig-btn:hover{background:var(--black);color:var(--white);border-color:var(--black);}
 .ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;}
 @media(min-width:640px){.ig-grid{gap:.7rem;}}
 .ig-cell{aspect-ratio:1;overflow:hidden;border-radius:2px;position:relative;cursor:pointer;border:1px solid var(--border);}
-.ig-cell img{width:100%;height:100%;object-fit:cover;transition:transform .4s,filter .35s;filter:grayscale(.2);}
+.ig-cell img{width:100%;height:100%;object-fit:cover;transition:transform .4s;filter:grayscale(.2);}
 .ig-cell:hover img{transform:scale(1.05);filter:grayscale(0);}
 .ig-overlay{position:absolute;inset:0;background:rgba(0,0,0,.2);opacity:0;transition:opacity .3s;}
 .ig-cell:hover .ig-overlay{opacity:1;}
 .ig-empty{aspect-ratio:1;border:1px dashed var(--border);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:.62rem;color:var(--midgray);text-transform:uppercase;letter-spacing:1px;}
-
-/* ─── LOCATION ─── */
 .location-section{background:var(--white);padding:4rem 1.6rem;}
 .location-inner{max-width:1100px;margin:0 auto;}
 .loc-grid{display:flex;flex-direction:column;gap:2.5rem;}
@@ -183,21 +108,19 @@ nav{
 .review-pill{display:flex;align-items:center;gap:.9rem;background:var(--white);border:1px solid var(--border);border-radius:3px;padding:1rem 1.2rem;margin-bottom:1.5rem;}
 .rp-stars{font-size:.9rem;}
 .rp-num{font-family:'DM Serif Display',serif;font-size:2.2rem;color:var(--black);line-height:1;}
-.rp-label{font-size:.68rem;color:var(--gray);margin-top:.1rem;letter-spacing:.5px;}
+.rp-label{font-size:.68rem;color:var(--gray);margin-top:.1rem;}
 .dir-btns{display:flex;flex-direction:column;gap:.55rem;margin-top:1.4rem;}
 @media(min-width:480px){.dir-btns{flex-direction:row;}}
 .map-wrap{flex:1.4;border-radius:3px;overflow:hidden;border:1px solid var(--border);position:relative;}
 .map-wrap iframe{width:100%;height:280px;border:0;display:block;filter:grayscale(1);}
 @media(min-width:768px){.map-wrap iframe{height:380px;}}
-.map-label{position:absolute;bottom:0;left:0;right:0;padding:.75rem 1rem;background:rgba(249,249,247,.95);font-size:.74rem;font-weight:600;letter-spacing:.5px;display:flex;align-items:center;gap:.4rem;border-top:1px solid var(--border);}
-
-/* ─── RESERVATION ─── */
+.map-label{position:absolute;bottom:0;left:0;right:0;padding:.75rem 1rem;background:rgba(249,249,247,.95);font-size:.74rem;font-weight:600;display:flex;align-items:center;gap:.4rem;border-top:1px solid var(--border);}
 .reservation-section{background:#0d0d0d;padding:4rem 1.6rem;color:var(--white);}
 .reservation-inner{max-width:1100px;margin:0 auto;}
 .res-grid{display:flex;flex-direction:column;gap:2.5rem;}
 @media(min-width:768px){.res-grid{flex-direction:row;gap:4rem;align-items:start;}}
 .res-left{flex:1;}
-.res-desc{color:rgba(255,255,255,.45);line-height:1.7;font-size:.87rem;max-width:380px;font-weight:400;}
+.res-desc{color:rgba(255,255,255,.45);line-height:1.7;font-size:.87rem;max-width:380px;}
 .channels{display:flex;flex-direction:column;gap:.5rem;flex:1;}
 .ch{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;text-decoration:none;color:var(--white);transition:background .2s,border-color .2s;}
 .ch:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);}
@@ -208,41 +131,27 @@ nav{
 .ch-detail{font-size:.7rem;color:rgba(255,255,255,.4);margin-top:.1rem;}
 .ch-arrow{color:rgba(255,255,255,.3);font-size:.85rem;transition:transform .25s;}
 .ch:hover .ch-arrow{transform:translateX(4px);color:rgba(255,255,255,.7);}
-
-/* ─── SECTION LABELS ─── */
 .s-label{font-size:.6rem;letter-spacing:4px;text-transform:uppercase;color:var(--gray);margin-bottom:.6rem;}
 .s-title{font-family:'DM Serif Display',serif;font-size:clamp(2.6rem,8vw,4.2rem);line-height:.95;margin-bottom:1rem;letter-spacing:-.5px;}
-/* In dark sections */
-.dark .s-label{color:rgba(255,255,255,.35);}
-.dark .s-title{color:var(--white);}
-
-/* ─── FLOATING WA ─── */
+.reservation-section .s-label{color:rgba(255,255,255,.35);}
+.reservation-section .s-title{color:var(--white);}
 .wa-float{position:fixed;bottom:1.4rem;right:1.4rem;z-index:400;width:52px;height:52px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.25);text-decoration:none;transition:transform .25s;border:1px solid rgba(255,255,255,.1);}
 .wa-float:hover{transform:scale(1.08);}
 .wa-float svg{width:24px;height:24px;fill:#fff;}
-
-/* ─── FOOTER ─── */
 footer{background:var(--black);color:var(--white);border-top:1px solid rgba(255,255,255,.07);padding:2.5rem 1.6rem;text-align:center;}
-.f-logo{font-family:'DM Serif Display',serif;font-size:2rem;letter-spacing:.5px;color:var(--white);}
+.f-logo{font-family:'DM Serif Display',serif;font-size:2rem;letter-spacing:.5px;}
 .f-sub{color:rgba(255,255,255,.3);font-size:.65rem;letter-spacing:3px;text-transform:uppercase;margin-top:.3rem;}
 .f-links{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin:1.4rem 0 1rem;}
 .f-links a{padding:.38rem .9rem;border:1px solid rgba(255,255,255,.1);border-radius:2px;color:rgba(255,255,255,.4);text-decoration:none;font-size:.67rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s,border-color .2s;}
 .f-links a:hover{color:var(--white);border-color:rgba(255,255,255,.35);}
 .f-copy{font-size:.62rem;color:rgba(255,255,255,.18);}
-
-/* ─── DIVIDER ─── */
-.divider{height:1px;background:var(--border);margin:0;}
-
-/* ─── REVEAL ─── */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease;}
 .reveal.in{opacity:1;transform:none;}
 </style>
 </head>
 <body>
-
-<!-- NAV -->
 <nav>
-  <a class="nav-logo" id="logoBtn">Teckel's</a>
+  <span class="nav-logo">Teckel's</span>
   <ul class="nav-center">
     <li><a href="#hero" data-i18n="nav_home">Home</a></li>
     <li><a href="#menu" data-i18n="nav_menu">Menu</a></li>
@@ -258,11 +167,7 @@ footer{background:var(--black);color:var(--white);border-top:1px solid rgba(255,
     <a id="navBook" href="#" class="nav-book" data-i18n="book_btn">Book a Table</a>
   </div>
 </nav>
-
-<!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-bg" id="heroBg"></div>
-  <div class="hero-noise"></div>
   <div class="hero-inner">
     <div class="hero-pill">Playa de Palma · Mallorca</div>
     <h1 class="hero-title">Teckel's<em>Food &amp; Drinks</em></h1>
@@ -271,10 +176,7 @@ footer{background:var(--black);color:var(--white);border-top:1px solid rgba(255,
       <div class="hb-num" id="heroBadgeNum">4.8</div>
       <span style="font-size:1rem;letter-spacing:2px">⭐⭐⭐⭐⭐</span>
       <div class="hb-sep"></div>
-      <div class="hb-info">
-        <strong id="heroBadgeCount">598+ Reviews</strong>
-        <span data-i18n="on_google">on Google Maps</span>
-      </div>
+      <div class="hb-info"><strong id="heroBadgeCount">598+ Reviews</strong><span data-i18n="on_google">on Google Maps</span></div>
     </a>
     <div class="hero-ctas">
       <a id="heroWa" href="#" class="btn btn-wa btn-full" target="_blank">
@@ -282,28 +184,18 @@ footer{background:var(--black);color:var(--white);border-top:1px solid rgba(255,
         <span data-i18n="book_btn">Book a Table</span>
       </a>
       <div class="btn-row">
-        <a href="#menu" class="btn btn-menu">
-          <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
-          <span data-i18n="our_menu">Our Menu</span>
-        </a>
-        <a id="heroDir" href="#" class="btn btn-dir" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          <span data-i18n="get_there">Get There</span>
-        </a>
+        <a href="#menu" class="btn btn-menu"><svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg><span data-i18n="our_menu">Our Menu</span></a>
+        <a id="heroDir" href="#" class="btn btn-dir" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg><span data-i18n="get_there">Get There</span></a>
       </div>
     </div>
   </div>
 </section>
-
-<!-- BADGES -->
 <div class="badges reveal">
   <span class="badge">🌿 <span data-i18n="b_eco">Eco Friendly</span></span>
   <span class="badge">🐓 <span data-i18n="b_free">Free Range</span></span>
   <span class="badge">✨ <span data-i18n="b_fresh">100% Fresh</span></span>
   <span class="badge">⭐ <span data-i18n="b_stars">4.8 Stars</span></span>
 </div>
-
-<!-- REVIEWS -->
 <section class="reviews-section" id="reviews">
   <div class="reviews-inner">
     <div class="reviews-headline reveal">
@@ -319,18 +211,6 @@ footer{background:var(--black);color:var(--white);border-top:1px solid rgba(255,
     <div class="track-wrap reveal"><div class="track" id="track"></div></div>
   </div>
 </section>
-
-<!-- CAROUSEL -->
-<section class="carousel-section" id="gallery">
-  <div class="c-wrap" id="cWrap">
-    <div class="c-track" id="cTrack"></div>
-    <button class="c-btn c-prev" onclick="cPrev()">&#8249;</button>
-    <button class="c-btn c-next" onclick="cNext()">&#8250;</button>
-  </div>
-  <div class="c-dots" id="cDots"></div>
-</section>
-
-<!-- MENU -->
 <section class="menu-section" id="menu">
   <div class="menu-inner">
     <p class="s-label" data-i18n="menu_label">Menu</p>
@@ -339,15 +219,10 @@ footer{background:var(--black);color:var(--white);border-top:1px solid rgba(255,
     <div id="menuContent"></div>
   </div>
 </section>
-
-<!-- INSTAGRAM -->
 <section class="feed-section" id="instagram">
   <div class="feed-inner">
     <div class="feed-header">
-      <div>
-        <p class="s-label">Instagram</p>
-        <h2 class="s-title" style="margin-bottom:0">@teckelsmallorca</h2>
-      </div>
+      <div><p class="s-label">Instagram</p><h2 class="s-title" style="margin-bottom:0">@teckelsmallorca</h2></div>
       <a id="igFollowBtn" href="#" class="ig-btn" target="_blank">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
         <span data-i18n="follow_ig">Follow on Instagram</span>
@@ -356,8 +231,6 @@ footer{background:var(--black);color:var(--white);border-top:1px solid rgba(255,
     <div class="ig-grid" id="igGrid"></div>
   </div>
 </section>
-
-<!-- LOCATION -->
 <section class="location-section" id="location">
   <div class="location-inner">
     <div class="loc-grid">
@@ -366,23 +239,12 @@ footer{background:var(--black);color:var(--white);border-top:1px solid rgba(255,
         <h2 class="s-title" data-i18n="loc_title">Playa de Palma</h2>
         <div class="review-pill">
           <div class="rp-stars">⭐⭐⭐⭐⭐</div>
-          <div>
-            <div class="rp-num" id="locRating">4.8</div>
-            <div class="rp-label" id="locLabel">Over 598+ Google Reviews</div>
-          </div>
+          <div><div class="rp-num" id="locRating">4.8</div><div class="rp-label" id="locLabel">Over 598+ Google Reviews</div></div>
         </div>
-        <p style="color:var(--gray);line-height:1.7;font-size:.86rem;" data-i18n="loc_desc">
-          Right by the beach in Playa de Palma.<br>Calle de Llaut 8 — easy to find, hard to forget.
-        </p>
+        <p style="color:var(--gray);line-height:1.7;font-size:.86rem;" data-i18n="loc_desc">Right by the beach in Playa de Palma.<br>Calle de Llaut 8 — easy to find, hard to forget.</p>
         <div class="dir-btns">
-          <a id="mapsBtn" href="#" class="btn btn-dark" target="_blank">
-            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            <span data-i18n="how_to_get">How to Get There</span>
-          </a>
-          <a href="https://maps.apple.com/?q=Carrer+del+Llaut+8+Playa+de+Palma+Mallorca" class="btn btn-outline-dark" target="_blank">
-            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            Apple Maps
-          </a>
+          <a id="mapsBtn" href="#" class="btn btn-dark" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg><span data-i18n="how_to_get">How to Get There</span></a>
+          <a href="https://maps.apple.com/?q=Carrer+del+Llaut+8+Playa+de+Palma+Mallorca" class="btn btn-outline-dark" target="_blank"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>Apple Maps</a>
         </div>
       </div>
       <div class="map-wrap reveal">
@@ -392,9 +254,7 @@ footer{background:var(--black);color:var(--white);border-top:1px solid rgba(255,
     </div>
   </div>
 </section>
-
-<!-- RESERVATION -->
-<section class="reservation-section dark" id="reserve">
+<section class="reservation-section" id="reserve">
   <div class="reservation-inner">
     <div class="res-grid">
       <div class="res-left reveal">
@@ -403,37 +263,17 @@ footer{background:var(--black);color:var(--white);border-top:1px solid rgba(255,
         <p class="res-desc" data-i18n="res_desc">Reach us on WhatsApp or Instagram and we'll confirm your table in minutes.</p>
       </div>
       <div class="channels reveal">
-        <a class="ch" id="chWa" href="#" target="_blank">
-          <div class="ch-ico"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
-          <div class="ch-body"><div class="ch-name">WhatsApp</div><div class="ch-detail" id="chWaD">Said · +34 613 962 833</div></div>
-          <span class="ch-arrow">→</span>
-        </a>
-        <a class="ch" id="chIg" href="#" target="_blank">
-          <div class="ch-ico"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
-          <div class="ch-body"><div class="ch-name">Instagram DM</div><div class="ch-detail" id="chIgD">@teckelsmallorca</div></div>
-          <span class="ch-arrow">→</span>
-        </a>
-        <a class="ch" id="chMail" href="#">
-          <div class="ch-ico"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
-          <div class="ch-body"><div class="ch-name">Email</div><div class="ch-detail" id="chMailD">info@teckels-mallorca.com</div></div>
-          <span class="ch-arrow">→</span>
-        </a>
-        <a class="ch" id="chTel" href="#">
-          <div class="ch-ico"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
-          <div class="ch-body"><div class="ch-name" data-i18n="call_us">Call Us</div><div class="ch-detail" id="chTelD">Said · +34 613 962 833</div></div>
-          <span class="ch-arrow">→</span>
-        </a>
+        <a class="ch" id="chWa" href="#" target="_blank"><div class="ch-ico"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div><div class="ch-body"><div class="ch-name">WhatsApp</div><div class="ch-detail" id="chWaD">Said · +34 613 962 833</div></div><span class="ch-arrow">→</span></a>
+        <a class="ch" id="chIg" href="#" target="_blank"><div class="ch-ico"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div><div class="ch-body"><div class="ch-name">Instagram DM</div><div class="ch-detail" id="chIgD">@teckelsmallorca</div></div><span class="ch-arrow">→</span></a>
+        <a class="ch" id="chMail" href="#"><div class="ch-ico"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div><div class="ch-body"><div class="ch-name">Email</div><div class="ch-detail" id="chMailD">info@teckels-mallorca.com</div></div><span class="ch-arrow">→</span></a>
+        <a class="ch" id="chTel" href="#"><div class="ch-ico"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div><div class="ch-body"><div class="ch-name" data-i18n="call_us">Call Us</div><div class="ch-detail" id="chTelD">Said · +34 613 962 833</div></div><span class="ch-arrow">→</span></a>
       </div>
     </div>
   </div>
 </section>
-
-<!-- FLOATING WA -->
-<a id="waFloat" href="#" class="wa-float" target="_blank" title="Book via WhatsApp">
+<a id="waFloat" href="#" class="wa-float" target="_blank">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
-
-<!-- FOOTER -->
 <footer>
   <div class="f-logo">Teckel's</div>
   <div class="f-sub">Food &amp; Drinks · Mallorca</div>
@@ -445,257 +285,21 @@ footer{background:var(--black);color:var(--white);border-top:1px solid rgba(255,
   </div>
   <p class="f-copy">© 2026 Teckel's Food &amp; Drinks · Calle de Llaut 8, Playa de Palma</p>
 </footer>
-
 <script>
-// ═══ TRANSLATIONS ═══
-const T = {
-  en:{nav_home:'Home',nav_menu:'Menu',nav_location:'Location',nav_reserve:'Reserve',book_btn:'Book a Table',our_menu:'Our Menu',get_there:'Get There',on_google:'on Google Maps',b_eco:'Eco Friendly',b_free:'Free Range',b_fresh:'100% Fresh',b_stars:'4.8 Stars',reviews_sub:'Verified Google Reviews · Rated 4.8 out of 5',avg_rating:'Avg Rating',reviews_label:'Reviews',top_rated:'Top Rated',menu_label:'Menu',menu_title:'Our Menu',follow_ig:'Follow on Instagram',loc_label:'Where to Find Us',loc_title:'Playa de Palma',loc_desc:'Right by the beach in Playa de Palma.<br>Calle de Llaut 8 — easy to find, hard to forget.',how_to_get:'How to Get There',res_label:'Reservations',res_title:'Book Your Table',res_desc:"Reach us on WhatsApp or Instagram and we'll confirm your table in minutes.",call_us:'Call Us',directions:'Directions'},
-  de:{nav_home:'Start',nav_menu:'Speisekarte',nav_location:'Lage',nav_reserve:'Reservieren',book_btn:'Tisch reservieren',our_menu:'Unsere Karte',get_there:'Anfahrt',on_google:'auf Google Maps',b_eco:'Umweltfreundlich',b_free:'Freilandhaltung',b_fresh:'100% Frisch',b_stars:'4,8 Sterne',reviews_sub:'Verifizierte Google-Bewertungen · Durchschnitt 4,8 von 5',avg_rating:'Ø Bewertung',reviews_label:'Bewertungen',top_rated:'Top bewertet',menu_label:'Speisekarte',menu_title:'Unsere Karte',follow_ig:'Auf Instagram folgen',loc_label:'Wo wir sind',loc_title:'Playa de Palma',loc_desc:'Direkt am Strand in Playa de Palma.<br>Calle de Llaut 8 — leicht zu finden, unvergesslich.',how_to_get:'So kommen Sie zu uns',res_label:'Reservierungen',res_title:'Ihren Tisch reservieren',res_desc:'Schreiben Sie uns auf WhatsApp und wir bestätigen Ihren Tisch in Minuten.',call_us:'Anrufen',directions:'Wegbeschreibung'},
-  es:{nav_home:'Inicio',nav_menu:'Menú',nav_location:'Ubicación',nav_reserve:'Reservar',book_btn:'Reservar Mesa',our_menu:'Nuestro Menú',get_there:'Cómo llegar',on_google:'en Google Maps',b_eco:'Eco Friendly',b_free:'Crianza Libre',b_fresh:'100% Fresco',b_stars:'4,8 Estrellas',reviews_sub:'Reseñas verificadas en Google · Valorado 4,8 sobre 5',avg_rating:'Valoración media',reviews_label:'Reseñas',top_rated:'Mejor valorado',menu_label:'Menú',menu_title:'Nuestro Menú',follow_ig:'Seguir en Instagram',loc_label:'Dónde Encontrarnos',loc_title:'Playa de Palma',loc_desc:'Justo junto a la playa en Playa de Palma.<br>Calle de Llaut 8 — fácil de encontrar, imposible de olvidar.',how_to_get:'Cómo llegar',res_label:'Reservas',res_title:'Reserva tu Mesa',res_desc:'Escríbenos por WhatsApp o Instagram y confirmamos tu mesa en minutos.',call_us:'Llamar',directions:'Cómo llegar'}
-};
-let lang = localStorage.getItem('tl') || 'en';
-
-function setLang(l) {
-  lang = l;
-  localStorage.setItem('tl', l);
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const k = el.dataset.i18n;
-    if (T[lang][k] !== undefined) el.innerHTML = T[lang][k];
-  });
-  buildMenu();
-}
-
-// ═══ CONFIG (static – no admin) ═══
-const cfg = {
-  wa:'34613962833',
-  mail:'info@teckels-mallorca.com',
-  ig:'teckelsmallorca',
-  maps:'https://maps.google.com/?q=Carrer+del+Llaut+8+Playa+de+Palma+Mallorca',
-  reviewCount:598,
-  reviewRating:'4.8',
-  carousel:[],
-  feed:[]
-};
-
-function applyConfig() {
-  const msg = encodeURIComponent("Hi! I would like to book a table at Teckel's.");
-  const waUrl = 'https://wa.me/' + cfg.wa + '?text=' + msg;
-  const igUrl = 'https://instagram.com/' + cfg.ig;
-  const mapsUrl = cfg.maps;
-  document.getElementById('navBook').href = waUrl;
-  document.getElementById('heroWa').href = waUrl;
-  document.getElementById('heroDir').href = mapsUrl;
-  document.getElementById('chWa').href = waUrl;
-  document.getElementById('chWaD').textContent = 'Said · +' + cfg.wa;
-  document.getElementById('chIg').href = igUrl;
-  document.getElementById('chIgD').textContent = '@' + cfg.ig;
-  document.getElementById('chMail').href = 'mailto:' + cfg.mail;
-  document.getElementById('chMailD').textContent = cfg.mail;
-  document.getElementById('chTel').href = 'tel:+' + cfg.wa;
-  document.getElementById('chTelD').textContent = 'Said · +' + cfg.wa;
-  document.getElementById('waFloat').href = waUrl;
-  document.getElementById('igFollowBtn').href = igUrl;
-  document.getElementById('fIg').href = igUrl;
-  document.getElementById('fIg').textContent = '@' + cfg.ig;
-  document.getElementById('fWa').href = waUrl;
-  document.getElementById('fMail').href = 'mailto:' + cfg.mail;
-  document.getElementById('fDir').href = mapsUrl;
-  document.getElementById('mapsBtn').href = mapsUrl;
-  const rn = cfg.reviewCount + '+';
-  document.getElementById('bigNum').textContent = rn;
-  document.getElementById('statRating').textContent = cfg.reviewRating;
-  document.getElementById('statCount').textContent = rn;
-  document.getElementById('heroBadgeNum').textContent = cfg.reviewRating;
-  document.getElementById('heroBadgeCount').textContent = rn + ' Reviews';
-  document.getElementById('locRating').textContent = cfg.reviewRating;
-  document.getElementById('locLabel').textContent = 'Over ' + rn + ' Google Reviews';
-  renderCarousel();
-  renderFeed();
-  setLang(lang);
-}
-
-// ═══ TESTIMONIALS ═══
-const REVIEWS = [
-  {t:"Absolutely the best burger in Mallorca! Fresh ingredients, amazing.",a:"Sarah M.",f:"🇬🇧"},
-  {t:"Das beste Restaurant in Playa de Palma! Frische Zutaten und top Service.",a:"Klaus W.",f:"🇩🇪"},
-  {t:"¡Espectacular! La carne es de primera calidad y todo muy fresco.",a:"María G.",f:"🇪🇸"},
-  {t:"Hidden gem! Great food, super friendly staff. Will definitely be back.",a:"Tom B.",f:"🇬🇧"},
-  {t:"Wir kommen jedes Jahr nach Mallorca und essen immer bei Teckels!",a:"Anna K.",f:"🇩🇪"},
-  {t:"La mejor hamburguesa que he probado. 100% recomendado.",a:"Carlos R.",f:"🇪🇸"},
-  {t:"Loved every bite! The organic ingredients really make a difference.",a:"James L.",f:"🇺🇸"},
-  {t:"Sehr lecker und frisch. Der Burger war einfach perfekt!",a:"Petra S.",f:"🇩🇪"},
-  {t:"Increíble. Ambiente genial y comida de calidad. Volvemos seguro.",a:"Lucía F.",f:"🇪🇸"},
-  {t:"Best decision of our holiday! Teckel's is a must-visit.",a:"Emily R.",f:"🇦🇺"},
-];
-function buildTrack() {
-  const tr = document.getElementById('track');
-  if (!tr) return;
-  const d = [...REVIEWS, ...REVIEWS];
-  tr.innerHTML = d.map(r => '<div class="rcard"><div class="rcard-stars">⭐⭐⭐⭐⭐</div><div class="rcard-text">"' + r.t + '"</div><div class="rcard-author">' + r.f + ' ' + r.a + '</div></div>').join('');
-}
-
-// ═══ CAROUSEL ═══
-let cIdx = 0, cTimer;
-function renderCarousel() {
-  const track = document.getElementById('cTrack');
-  const dots = document.getElementById('cDots');
-  if (!track) return;
-  const imgs = (cfg.carousel || []).filter(Boolean);
-  if (!imgs.length) {
-    track.innerHTML = '';
-    dots.innerHTML = '';
-    document.getElementById('gallery').style.display = 'none';
-    return;
-  }
-  document.getElementById('gallery').style.display = '';
-  track.innerHTML = imgs.map((src, i) => '<div class="c-slide"><img src="' + src + '" alt="Teckel\'s photo ' + (i+1) + '" loading="lazy"/></div>').join('');
-  dots.innerHTML = imgs.map((_, i) => '<div class="c-dot' + (i===0?' active':'') + '" onclick="goC(' + i + ')"></div>').join('');
-  cIdx = 0;
-  clearInterval(cTimer);
-  cTimer = setInterval(cNext, 4500);
-}
-function goC(n) {
-  const imgs = (cfg.carousel || []).filter(Boolean);
-  if (!imgs.length) return;
-  cIdx = (n + imgs.length) % imgs.length;
-  const t = document.getElementById('cTrack');
-  if (t) t.style.transform = 'translateX(-' + (cIdx * 100) + '%)';
-  document.querySelectorAll('.c-dot').forEach((d, i) => d.classList.toggle('active', i === cIdx));
-  clearInterval(cTimer);
-  cTimer = setInterval(cNext, 4500);
-}
-function cNext() { goC(cIdx + 1); }
-function cPrev() { goC(cIdx - 1); }
-(function() {
-  let sx = 0;
-  const el = document.getElementById('cWrap');
-  if (!el) return;
-  el.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, {passive:true});
-  el.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - sx;
-    if (Math.abs(dx) > 40) { dx < 0 ? cNext() : cPrev(); }
-  }, {passive:true});
-})();
-
-// ═══ INSTAGRAM FEED ═══
-function renderFeed() {
-  const grid = document.getElementById('igGrid');
-  if (!grid) return;
-  const imgs = (cfg.feed || []).filter(Boolean);
-  const igUrl = 'https://instagram.com/' + cfg.ig;
-  if (!imgs.length) {
-    grid.innerHTML = Array(6).fill(0).map((_, i) => '<div class="ig-empty">📸</div>').join('');
-    return;
-  }
-  grid.innerHTML = imgs.slice(0, 9).map(src =>
-    '<div class="ig-cell"><img src="' + src + '" loading="lazy"/><div class="ig-overlay"></div></div>'
-  ).join('');
-  grid.querySelectorAll('.ig-cell').forEach(el => el.addEventListener('click', () => window.open(igUrl, '_blank')));
-}
-
-// ═══ MENU DATA ═══
-const MENU = [
-  {id:'starters',e:'🥗',name:{en:'Starters',de:'Vorspeisen',es:'Entrantes'},sub:{en:'',de:'',es:''},items:[
-    {n:{en:'Pan y Alioli',de:'Pan y Alioli',es:'Pan y Alioli'},d:{en:'Bread with alioli',de:'Brot mit Alioli',es:'Pan con alioli'},p:'4,90 €'},
-    {n:{en:'Pimientos de Padrón',de:'Pimientos de Padrón',es:'Pimientos de Padrón'},d:{en:'Spanish green peppers fried in olive oil with coarse sea salt',de:'Spanische grüne Paprika in Olivenöl mit grobem Meersalz',es:'Pimientos fritos en aceite de oliva con sal gruesa'},p:'7,90 €'},
-    {n:{en:'Albóndigas',de:'Albóndigas',es:'Albóndigas'},d:{en:'Homemade Spanish meatballs in tomato sauce, served with bread',de:'Hausgemachte spanische Fleischbällchen in Tomatensauce mit Brot',es:'Albóndigas caseras en salsa de tomate, con pan'},p:'11,90 €'},
-    {n:{en:'Gambas al Ajillo',de:'Gambas al Ajillo',es:'Gambas al Ajillo'},d:{en:'Black Tiger prawns in olive oil with garlic, paprika, tomatoes and bread',de:'Black-Tiger-Garnelen in Olivenöl mit Knoblauch, Paprika, Tomaten und Brot',es:'Gambas tigre en aceite de oliva con ajo, pimentón, tomates y pan'},p:'15,90 €'},
-    {n:{en:'Tabla de Quesos',de:'Käseplatte',es:'Tabla de Quesos'},d:{en:'Spanish cheeses with fig jam and bread',de:'Spanische Käse mit Feigenmarmelade und Brot',es:'Quesos españoles con mermelada de higo y pan'},p:'11,90 €'},
-    {n:{en:'Tabla de Jamón y Queso',de:'Serrano & Käse',es:'Tabla de Jamón y Queso'},d:{en:'Serrano ham and cheese with olives and bread',de:'Serranoschinken und Käse mit Oliven und Brot',es:'Jamón serrano y queso con aceitunas y pan'},p:'16,90 €'},
-    {n:{en:'Burrata',de:'Burrata',es:'Burrata'},d:{en:'Burrata with tomato sauce, cherry tomatoes and bread',de:'Burrata mit Tomatensauce, Kirschtomaten und Brot',es:'Burrata con salsa de tomate, tomates cherry y pan'},p:'13,90 €'},
-    {n:{en:'Smoked Wagyu Carpaccio',de:'Geräuchertes Wagyu Carpaccio',es:'Carpaccio de Wagyu Ahumado'},d:{en:'Wagyu with Parmesan, arugula, truffle mayo & black volcanic salt',de:'Wagyu mit Parmesan, Rucola, Trüffel-Mayo und schwarzem Vulkansalz',es:'Wagyu con parmesano, rúcula, mayonesa de trufa y sal volcánica negra'},p:'16,90 €'},
-  ]},
-  {id:'salads',e:'🥬',name:{en:'Salads',de:'Salate',es:'Ensaladas'},sub:{en:'',de:'',es:''},items:[
-    {n:{en:'Ensalada',de:'Ensalada',es:'Ensalada'},d:{en:'Mixed salad with cherry tomatoes, onions, cress and bread',de:'Gemischter Salat mit Kirschtomaten, Zwiebeln, Kresse und Brot',es:'Ensalada mixta con tomates cherry, cebolla, berros y pan'},p:'8,90 €'},
-    {n:{en:'Ensalada de Gambas',de:'Garnelensalat',es:'Ensalada de Gambas'},d:{en:'Mixed salad with Black Tiger prawns, cherry tomatoes, onions and bread',de:'Gemischter Salat mit Black-Tiger-Garnelen, Kirschtomaten, Zwiebeln und Brot',es:'Ensalada mixta con gambas tigre, tomates cherry, cebolla y pan'},p:'14,90 €'},
-  ]},
-  {id:'burgers',e:'🍔',name:{en:'Burgers',de:'Burger',es:'Burgers'},sub:{en:'All burgers served in a whole grain bun with roasted onions and salad.',de:'Alle Burger im Vollkornbrötchen mit gerösteten Zwiebeln und Salat.',es:'Todos los burgers en pan integral con cebolla asada y ensalada.'},items:[
-    {n:{en:'Black Angus Burger',de:'Black Angus Burger',es:'Black Angus Burger'},d:{en:'200g Mallorcan Black Angus beef',de:'200g mallorquinisches Black-Angus-Rindfleisch',es:'200g de ternera Black Angus mallorquina'},p:'18,90 €'},
-    {n:{en:'Chicken Fillet Burger',de:'Hähnchenbrust Burger',es:'Burger de Pollo'},d:{en:'Grilled chicken breast fillet',de:'Gegrilltes Hähnchenbrustfilet',es:'Filete de pechuga de pollo a la plancha'},p:'17,90 €'},
-    {n:{en:'Vegan Meat Burger',de:'Veganer Burger',es:'Burger Vegano'},d:{en:'Vegan meat patty with cheddar cheese',de:'Veganes Patty mit Cheddar-Käse',es:'Hamburguesa vegana con queso cheddar'},p:'15,90 €'},
-  ]},
-  {id:'mains',e:'🍖',name:{en:'Main Courses',de:'Hauptgerichte',es:'Platos Principales'},sub:{en:'',de:'',es:''},items:[
-    {n:{en:'Chicken Wings',de:'Chicken Wings',es:'Alitas de Pollo'},d:{en:"Marinated farm chicken wings with dip and Teckel's Fries",de:"Marinierte Hähnchenflügel mit Dip und Teckel's Pommes",es:"Alitas de pollo marinadas con salsa y Teckel's Fries"},p:'12,90 €'},
-    {n:{en:'Spare Ribs',de:'Spare Ribs',es:'Costillas'},d:{en:"Homemade spare ribs with BBQ sauce and Teckel's Fries",de:"Hausgemachte Spareribs mit BBQ-Sauce und Teckel's Pommes",es:"Costillas caseras con salsa BBQ y Teckel's Fries"},p:'18,90 €'},
-    {n:{en:'Schnitzel with Fries',de:'Schnitzel mit Pommes',es:'Escalope con Patatas'},d:{en:"Pork or chicken schnitzel with Teckel's Fries and lemon",de:"Schweine- oder Hähnchenschnitzel mit Teckel's Pommes und Zitrone",es:"Escalope de cerdo o pollo con Teckel's Fries y limón"},p:'15,90 €'},
-    {n:{en:'Linguini',de:'Linguini',es:'Linguini'},d:{en:'Pasta with tomato-ricotta sauce and Parmesan',de:'Pasta mit Tomaten-Ricotta-Sauce und Parmesan',es:'Pasta con salsa de tomate-ricotta y parmesano'},p:'10,90 €'},
-  ]},
-  {id:'sides',e:'🍟',name:{en:'Sides & Extras',de:'Beilagen & Extras',es:'Guarniciones & Extras'},sub:{en:'',de:'',es:''},items:[
-    {n:{en:"Teckel's Fries",de:"Teckel's Pommes",es:"Teckel's Fries"},d:{en:'',de:'',es:''},p:'4,90 €'},
-    {n:{en:'Side Salad',de:'Salat Beilage',es:'Ensalada pequeña'},d:{en:'',de:'',es:''},p:'3,90 €'},
-    {n:{en:'Olives',de:'Oliven',es:'Aceitunas'},d:{en:'',de:'',es:''},p:'2,90 €'},
-    {n:{en:'Extra Bacon',de:'Extra Bacon',es:'Bacon extra'},d:{en:'',de:'',es:''},p:'2,50 €'},
-    {n:{en:'Extra Prawns (5 pcs)',de:'Extra Garnelen (5 Stk.)',es:'Gambas extra (5 uds.)'},d:{en:'5 extra prawns',de:'5 extra Garnelen',es:'5 gambas extra'},p:'5,50 €'},
-    {n:{en:'Extra Chicken Strips',de:'Extra Hähnchenstreifen',es:'Tiras de pollo extra'},d:{en:'',de:'',es:''},p:'3,50 €'},
-    {n:{en:'Extra Bread',de:'Extra Brot',es:'Pan extra'},d:{en:'',de:'',es:''},p:'1,50 €'},
-  ]},
-  {id:'desserts',e:'🍫',name:{en:'Desserts',de:'Nachspeisen',es:'Postres'},sub:{en:'',de:'',es:''},items:[
-    {n:{en:'Lavakuchen',de:'Lavakuchen',es:'Coulant de Chocolate'},d:{en:'Chocolate lava cake with liquid center and vanilla ice cream',de:'Schokoladenkuchen mit flüssigem Kern und Vanilleeis',es:'Bizcocho de chocolate con centro líquido y helado de vainilla'},p:'6,90 €'},
-    {n:{en:'Vanilla Ice Cream Wild Berry',de:'Vanilleeis Wild Berry',es:'Helado de Vainilla Wild Berry'},d:{en:'Vanilla ice cream with wild berries and fresh mint',de:'Vanilleeis mit Wildbeeren und frischer Minze',es:'Helado de vainilla con frutos del bosque y menta fresca'},p:'4,90 €'},
-  ]},
-];
-
-let activeCat = 'starters';
-function buildMenu() {
-  const catsEl = document.getElementById('menuCats');
-  const contentEl = document.getElementById('menuContent');
-  if (!catsEl || !contentEl) return;
-  catsEl.innerHTML = '';
-  contentEl.innerHTML = '';
-  MENU.forEach(cat => {
-    const btn = document.createElement('button');
-    btn.className = 'mcat-btn' + (cat.id === activeCat ? ' active' : '');
-    btn.textContent = cat.e + ' ' + cat.name[lang];
-    btn.onclick = () => {
-      activeCat = cat.id;
-      document.querySelectorAll('.mcat-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('.mcat-content').forEach(c => c.classList.remove('show'));
-      document.getElementById('mc-' + cat.id).classList.add('show');
-    };
-    catsEl.appendChild(btn);
-    const sec = document.createElement('div');
-    sec.className = 'mcat-content' + (cat.id === activeCat ? ' show' : '');
-    sec.id = 'mc-' + cat.id;
-    const sub = cat.sub[lang] || '';
-    sec.innerHTML = '<div class="mcat-title">' + cat.e + ' ' + cat.name[lang] + '</div>' +
-      (sub ? '<div class="mcat-sub">' + sub + '</div>' : '') +
-      '<div class="mitems">' + cat.items.map(item => {
-        const nm = item.n[lang] || item.n.en;
-        const ds = item.d[lang] || item.d.en;
-        return '<div class="mitem"><div class="mitem-body"><div class="mitem-name">' + nm + '</div>' +
-          (ds ? '<div class="mitem-desc">' + ds + '</div>' : '') + '</div><div class="mitem-price">' + item.p + '</div></div>';
-      }).join('') + '</div>';
-    contentEl.appendChild(sec);
-  });
-}
-
-// ═══ REVEAL ═══
-const revObs = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('in'); });
-}, {threshold: 0.1});
-document.querySelectorAll('.reveal').forEach(function(el) { revObs.observe(el); });
-
-// ═══ SMOOTH SCROLL ═══
-document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-  anchor.addEventListener('click', function(e) {
-    const href = this.getAttribute('href');
-    if (href === '#') return;
-    e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      const top = target.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({top: top, behavior: 'smooth'});
-    }
-  });
-});
-
-// ═══ INIT ═══
-buildTrack();
-buildMenu();
-applyConfig();
-setLang(lang);
+const T={en:{nav_home:'Home',nav_menu:'Menu',nav_location:'Location',nav_reserve:'Reserve',book_btn:'Book a Table',our_menu:'Our Menu',get_there:'Get There',on_google:'on Google Maps',b_eco:'Eco Friendly',b_free:'Free Range',b_fresh:'100% Fresh',b_stars:'4.8 Stars',reviews_sub:'Verified Google Reviews · Rated 4.8 out of 5',avg_rating:'Avg Rating',reviews_label:'Reviews',top_rated:'Top Rated',menu_label:'Menu',menu_title:'Our Menu',follow_ig:'Follow on Instagram',loc_label:'Where to Find Us',loc_title:'Playa de Palma',loc_desc:'Right by the beach in Playa de Palma.<br>Calle de Llaut 8 — easy to find, hard to forget.',how_to_get:'How to Get There',res_label:'Reservations',res_title:'Book Your Table',res_desc:"Reach us on WhatsApp or Instagram and we'll confirm your table in minutes.",call_us:'Call Us',directions:'Directions'},de:{nav_home:'Start',nav_menu:'Speisekarte',nav_location:'Lage',nav_reserve:'Reservieren',book_btn:'Tisch reservieren',our_menu:'Unsere Karte',get_there:'Anfahrt',on_google:'auf Google Maps',b_eco:'Umweltfreundlich',b_free:'Freilandhaltung',b_fresh:'100% Frisch',b_stars:'4,8 Sterne',reviews_sub:'Verifizierte Google-Bewertungen · Durchschnitt 4,8 von 5',avg_rating:'Ø Bewertung',reviews_label:'Bewertungen',top_rated:'Top bewertet',menu_label:'Speisekarte',menu_title:'Unsere Karte',follow_ig:'Auf Instagram folgen',loc_label:'Wo wir sind',loc_title:'Playa de Palma',loc_desc:'Direkt am Strand in Playa de Palma.<br>Calle de Llaut 8 — leicht zu finden, unvergesslich.',how_to_get:'So kommen Sie zu uns',res_label:'Reservierungen',res_title:'Ihren Tisch reservieren',res_desc:'Schreiben Sie uns auf WhatsApp und wir bestätigen Ihren Tisch in Minuten.',call_us:'Anrufen',directions:'Wegbeschreibung'},es:{nav_home:'Inicio',nav_menu:'Menú',nav_location:'Ubicación',nav_reserve:'Reservar',book_btn:'Reservar Mesa',our_menu:'Nuestro Menú',get_there:'Cómo llegar',on_google:'en Google Maps',b_eco:'Eco Friendly',b_free:'Crianza Libre',b_fresh:'100% Fresco',b_stars:'4,8 Estrellas',reviews_sub:'Reseñas verificadas en Google · Valorado 4,8 sobre 5',avg_rating:'Valoración media',reviews_label:'Reseñas',top_rated:'Mejor valorado',menu_label:'Menú',menu_title:'Nuestro Menú',follow_ig:'Seguir en Instagram',loc_label:'Dónde Encontrarnos',loc_title:'Playa de Palma',loc_desc:'Justo junto a la playa en Playa de Palma.<br>Calle de Llaut 8 — fácil de encontrar, imposible de olvidar.',how_to_get:'Cómo llegar',res_label:'Reservas',res_title:'Reserva tu Mesa',res_desc:'Escríbenos por WhatsApp o Instagram y confirmamos tu mesa en minutos.',call_us:'Llamar',directions:'Cómo llegar'}};
+let lang=localStorage.getItem('tl')||'en';
+function setLang(l){lang=l;localStorage.setItem('tl',l);document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent===l.toUpperCase()));document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(T[lang][k]!==undefined)el.innerHTML=T[lang][k];});buildMenu();}
+const cfg={wa:'34613962833',mail:'info@teckels-mallorca.com',ig:'teckelsmallorca',maps:'https://maps.google.com/?q=Carrer+del+Llaut+8+Playa+de+Palma+Mallorca',reviewCount:598,reviewRating:'4.8'};
+function applyConfig(){const msg=encodeURIComponent("Hi! I would like to book a table at Teckel's.");const waUrl='https://wa.me/'+cfg.wa+'?text='+msg;const igUrl='https://instagram.com/'+cfg.ig;document.getElementById('navBook').href=waUrl;document.getElementById('heroWa').href=waUrl;document.getElementById('heroDir').href=cfg.maps;document.getElementById('chWa').href=waUrl;document.getElementById('chWaD').textContent='Said · +'+cfg.wa;document.getElementById('chIg').href=igUrl;document.getElementById('chIgD').textContent='@'+cfg.ig;document.getElementById('chMail').href='mailto:'+cfg.mail;document.getElementById('chMailD').textContent=cfg.mail;document.getElementById('chTel').href='tel:+'+cfg.wa;document.getElementById('chTelD').textContent='Said · +'+cfg.wa;document.getElementById('waFloat').href=waUrl;document.getElementById('igFollowBtn').href=igUrl;document.getElementById('fIg').href=igUrl;document.getElementById('fIg').textContent='@'+cfg.ig;document.getElementById('fWa').href=waUrl;document.getElementById('fMail').href='mailto:'+cfg.mail;document.getElementById('fDir').href=cfg.maps;document.getElementById('mapsBtn').href=cfg.maps;const rn=cfg.reviewCount+'+';document.getElementById('bigNum').textContent=rn;document.getElementById('statRating').textContent=cfg.reviewRating;document.getElementById('statCount').textContent=rn;document.getElementById('heroBadgeNum').textContent=cfg.reviewRating;document.getElementById('heroBadgeCount').textContent=rn+' Reviews';document.getElementById('locRating').textContent=cfg.reviewRating;document.getElementById('locLabel').textContent='Over '+rn+' Google Reviews';document.getElementById('igGrid').innerHTML=Array(6).fill(0).map(()=>'<div class="ig-empty">📸</div>').join('');setLang(lang);}
+const REVIEWS=[{t:"Absolutely the best burger in Mallorca! Fresh ingredients, amazing.",a:"Sarah M.",f:"🇬🇧"},{t:"Das beste Restaurant in Playa de Palma! Frische Zutaten und top Service.",a:"Klaus W.",f:"🇩🇪"},{t:"¡Espectacular! La carne es de primera calidad y todo muy fresco.",a:"María G.",f:"🇪🇸"},{t:"Hidden gem! Great food, super friendly staff. Will definitely be back.",a:"Tom B.",f:"🇬🇧"},{t:"Wir kommen jedes Jahr nach Mallorca und essen immer bei Teckels!",a:"Anna K.",f:"🇩🇪"},{t:"La mejor hamburguesa que he probado. 100% recomendado.",a:"Carlos R.",f:"🇪🇸"},{t:"Loved every bite! The organic ingredients really make a difference.",a:"James L.",f:"🇺🇸"},{t:"Sehr lecker und frisch. Der Burger war einfach perfekt!",a:"Petra S.",f:"🇩🇪"},{t:"Increíble. Ambiente genial y comida de calidad. Volvemos seguro.",a:"Lucía F.",f:"🇪🇸"},{t:"Best decision of our holiday! Teckel's is a must-visit.",a:"Emily R.",f:"🇦🇺"}];
+function buildTrack(){const tr=document.getElementById('track');if(!tr)return;const d=[...REVIEWS,...REVIEWS];tr.innerHTML=d.map(r=>'<div class="rcard"><div class="rcard-stars">⭐⭐⭐⭐⭐</div><div class="rcard-text">"'+r.t+'"</div><div class="rcard-author">'+r.f+' '+r.a+'</div></div>').join('');}
+const MENU=[{id:'starters',e:'🥗',name:{en:'Starters',de:'Vorspeisen',es:'Entrantes'},sub:{en:'',de:'',es:''},items:[{n:{en:'Pan y Alioli',de:'Pan y Alioli',es:'Pan y Alioli'},d:{en:'Bread with alioli',de:'Brot mit Alioli',es:'Pan con alioli'},p:'4,90 €'},{n:{en:'Pimientos de Padrón',de:'Pimientos de Padrón',es:'Pimientos de Padrón'},d:{en:'Spanish green peppers fried in olive oil with coarse sea salt',de:'Spanische grüne Paprika in Olivenöl mit grobem Meersalz',es:'Pimientos fritos en aceite de oliva con sal gruesa'},p:'7,90 €'},{n:{en:'Albóndigas',de:'Albóndigas',es:'Albóndigas'},d:{en:'Homemade Spanish meatballs in tomato sauce, served with bread',de:'Hausgemachte spanische Fleischbällchen in Tomatensauce mit Brot',es:'Albóndigas caseras en salsa de tomate, con pan'},p:'11,90 €'},{n:{en:'Gambas al Ajillo',de:'Gambas al Ajillo',es:'Gambas al Ajillo'},d:{en:'Black Tiger prawns in olive oil with garlic, paprika, tomatoes and bread',de:'Black-Tiger-Garnelen in Olivenöl mit Knoblauch, Paprika, Tomaten und Brot',es:'Gambas tigre en aceite de oliva con ajo, pimentón, tomates y pan'},p:'15,90 €'},{n:{en:'Tabla de Quesos',de:'Käseplatte',es:'Tabla de Quesos'},d:{en:'Spanish cheeses with fig jam and bread',de:'Spanische Käse mit Feigenmarmelade und Brot',es:'Quesos españoles con mermelada de higo y pan'},p:'11,90 €'},{n:{en:'Tabla de Jamón y Queso',de:'Serrano & Käse',es:'Tabla de Jamón y Queso'},d:{en:'Serrano ham and cheese with olives and bread',de:'Serranoschinken und Käse mit Oliven und Brot',es:'Jamón serrano y queso con aceitunas y pan'},p:'16,90 €'},{n:{en:'Burrata',de:'Burrata',es:'Burrata'},d:{en:'Burrata with tomato sauce, cherry tomatoes and bread',de:'Burrata mit Tomatensauce, Kirschtomaten und Brot',es:'Burrata con salsa de tomate, tomates cherry y pan'},p:'13,90 €'},{n:{en:'Smoked Wagyu Carpaccio',de:'Geräuchertes Wagyu Carpaccio',es:'Carpaccio de Wagyu Ahumado'},d:{en:'Wagyu with Parmesan, arugula, truffle mayo & black volcanic salt',de:'Wagyu mit Parmesan, Rucola, Trüffel-Mayo und schwarzem Vulkansalz',es:'Wagyu con parmesano, rúcula, mayonesa de trufa y sal volcánica negra'},p:'16,90 €'}]},{id:'salads',e:'🥬',name:{en:'Salads',de:'Salate',es:'Ensaladas'},sub:{en:'',de:'',es:''},items:[{n:{en:'Ensalada',de:'Ensalada',es:'Ensalada'},d:{en:'Mixed salad with cherry tomatoes, onions, cress and bread',de:'Gemischter Salat mit Kirschtomaten, Zwiebeln, Kresse und Brot',es:'Ensalada mixta con tomates cherry, cebolla, berros y pan'},p:'8,90 €'},{n:{en:'Ensalada de Gambas',de:'Garnelensalat',es:'Ensalada de Gambas'},d:{en:'Mixed salad with Black Tiger prawns, cherry tomatoes, onions and bread',de:'Gemischter Salat mit Black-Tiger-Garnelen, Kirschtomaten, Zwiebeln und Brot',es:'Ensalada mixta con gambas tigre, tomates cherry, cebolla y pan'},p:'14,90 €'}]},{id:'burgers',e:'🍔',name:{en:'Burgers',de:'Burger',es:'Burgers'},sub:{en:'All burgers served in a whole grain bun with roasted onions and salad.',de:'Alle Burger im Vollkornbrötchen mit gerösteten Zwiebeln und Salat.',es:'Todos los burgers en pan integral con cebolla asada y ensalada.'},items:[{n:{en:'Black Angus Burger',de:'Black Angus Burger',es:'Black Angus Burger'},d:{en:'200g Mallorcan Black Angus beef',de:'200g mallorquinisches Black-Angus-Rindfleisch',es:'200g de ternera Black Angus mallorquina'},p:'18,90 €'},{n:{en:'Chicken Fillet Burger',de:'Hähnchenbrust Burger',es:'Burger de Pollo'},d:{en:'Grilled chicken breast fillet',de:'Gegrilltes Hähnchenbrustfilet',es:'Filete de pechuga de pollo a la plancha'},p:'17,90 €'},{n:{en:'Vegan Meat Burger',de:'Veganer Burger',es:'Burger Vegano'},d:{en:'Vegan meat patty with cheddar cheese',de:'Veganes Patty mit Cheddar-Käse',es:'Hamburguesa vegana con queso cheddar'},p:'15,90 €'}]},{id:'mains',e:'🍖',name:{en:'Main Courses',de:'Hauptgerichte',es:'Platos Principales'},sub:{en:'',de:'',es:''},items:[{n:{en:'Chicken Wings',de:'Chicken Wings',es:'Alitas de Pollo'},d:{en:"Marinated farm chicken wings with dip and Teckel's Fries",de:"Marinierte Hähnchenflügel mit Dip und Teckel's Pommes",es:"Alitas de pollo marinadas con salsa y Teckel's Fries"},p:'12,90 €'},{n:{en:'Spare Ribs',de:'Spare Ribs',es:'Costillas'},d:{en:"Homemade spare ribs with BBQ sauce and Teckel's Fries",de:"Hausgemachte Spareribs mit BBQ-Sauce und Teckel's Pommes",es:"Costillas caseras con salsa BBQ y Teckel's Fries"},p:'18,90 €'},{n:{en:'Schnitzel with Fries',de:'Schnitzel mit Pommes',es:'Escalope con Patatas'},d:{en:"Pork or chicken schnitzel with Teckel's Fries and lemon",de:"Schweine- oder Hähnchenschnitzel mit Teckel's Pommes und Zitrone",es:"Escalope de cerdo o pollo con Teckel's Fries y limón"},p:'15,90 €'},{n:{en:'Linguini',de:'Linguini',es:'Linguini'},d:{en:'Pasta with tomato-ricotta sauce and Parmesan',de:'Pasta mit Tomaten-Ricotta-Sauce und Parmesan',es:'Pasta con salsa de tomate-ricotta y parmesano'},p:'10,90 €'}]},{id:'sides',e:'🍟',name:{en:'Sides & Extras',de:'Beilagen & Extras',es:'Guarniciones & Extras'},sub:{en:'',de:'',es:''},items:[{n:{en:"Teckel's Fries",de:"Teckel's Pommes",es:"Teckel's Fries"},d:{en:'',de:'',es:''},p:'4,90 €'},{n:{en:'Side Salad',de:'Salat Beilage',es:'Ensalada pequeña'},d:{en:'',de:'',es:''},p:'3,90 €'},{n:{en:'Olives',de:'Oliven',es:'Aceitunas'},d:{en:'',de:'',es:''},p:'2,90 €'},{n:{en:'Extra Bacon',de:'Extra Bacon',es:'Bacon extra'},d:{en:'',de:'',es:''},p:'2,50 €'},{n:{en:'Extra Prawns (5 pcs)',de:'Extra Garnelen (5 Stk.)',es:'Gambas extra (5 uds.)'},d:{en:'5 extra prawns',de:'5 extra Garnelen',es:'5 gambas extra'},p:'5,50 €'},{n:{en:'Extra Chicken Strips',de:'Extra Hähnchenstreifen',es:'Tiras de pollo extra'},d:{en:'',de:'',es:''},p:'3,50 €'},{n:{en:'Extra Bread',de:'Extra Brot',es:'Pan extra'},d:{en:'',de:'',es:''},p:'1,50 €'}]},{id:'desserts',e:'🍫',name:{en:'Desserts',de:'Nachspeisen',es:'Postres'},sub:{en:'',de:'',es:''},items:[{n:{en:'Lavakuchen',de:'Lavakuchen',es:'Coulant de Chocolate'},d:{en:'Chocolate lava cake with liquid center and vanilla ice cream',de:'Schokoladenkuchen mit flüssigem Kern und Vanilleeis',es:'Bizcocho de chocolate con centro líquido y helado de vainilla'},p:'6,90 €'},{n:{en:'Vanilla Ice Cream Wild Berry',de:'Vanilleeis Wild Berry',es:'Helado de Vainilla Wild Berry'},d:{en:'Vanilla ice cream with wild berries and fresh mint',de:'Vanilleeis mit Wildbeeren und frischer Minze',es:'Helado de vainilla con frutos del bosque y menta fresca'},p:'4,90 €'}]}];
+let activeCat='starters';
+function buildMenu(){const catsEl=document.getElementById('menuCats');const contentEl=document.getElementById('menuContent');if(!catsEl||!contentEl)return;catsEl.innerHTML='';contentEl.innerHTML='';MENU.forEach(cat=>{const btn=document.createElement('button');btn.className='mcat-btn'+(cat.id===activeCat?' active':'');btn.textContent=cat.e+' '+cat.name[lang];btn.onclick=()=>{activeCat=cat.id;document.querySelectorAll('.mcat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.mcat-content').forEach(c=>c.classList.remove('show'));document.getElementById('mc-'+cat.id).classList.add('show');};catsEl.appendChild(btn);const sec=document.createElement('div');sec.className='mcat-content'+(cat.id===activeCat?' show':'');sec.id='mc-'+cat.id;const sub=cat.sub[lang]||'';sec.innerHTML='<div class="mcat-title">'+cat.e+' '+cat.name[lang]+'</div>'+(sub?'<div class="mcat-sub">'+sub+'</div>':'')+'<div class="mitems">'+cat.items.map(item=>{const nm=item.n[lang]||item.n.en;const ds=item.d[lang]||item.d.en;return'<div class="mitem"><div class="mitem-body"><div class="mitem-name">'+nm+'</div>'+(ds?'<div class="mitem-desc">'+ds+'</div>':'')+'</div><div class="mitem-price">'+item.p+'</div></div>';}).join('')+'</div>';contentEl.appendChild(sec);});}
+const revObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(function(el){revObs.observe(el);});
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor){anchor.addEventListener('click',function(e){const href=this.getAttribute('href');if(href==='#')return;e.preventDefault();const target=document.querySelector(href);if(target){window.scrollTo({top:target.getBoundingClientRect().top+window.pageYOffset-80,behavior:'smooth'});}});});
+buildTrack();buildMenu();applyConfig();
 </script>
 </body>
 </html>
