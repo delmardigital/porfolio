@@ -3,298 +3,2013 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teckel's Multiverse Menu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;400;700&family=Orbitron:wght@700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <title>Teckel's - Food & Drinks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* =========================================
-           TEMAS (CSS VARIABLES)
-           ========================================= */
-        
         :root {
-            /* Tema 1: Classic Elegance (Default) */
-            --bg: #f9f7f2;
-            --header-bg: #ffffff;
-            --accent: #c5a059;
-            --secondary: #0a1d37;
-            --text-main: #333333;
-            --text-muted: #666666;
-            --card: transparent;
-            --border: 1px dashed rgba(197, 160, 89, 0.3);
-            --font-head: 'Playfair Display', serif;
-            --font-body: 'Source Sans Pro', sans-serif;
-            --radius: 0px;
+            --bg-primary: #FDFCF7;
+            --bg-secondary: #F5F1E8;
+            --text-primary: #1A1A1A;
+            --text-secondary: #4A4A4A;
+            --accent: #C8A882;
+            --accent-dark: #A68B6B;
+            --border: #E0D8C8;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --overlay: rgba(255, 255, 255, 0.95);
         }
 
-        [data-theme="sunset-beach"] {
-            --bg: radial-gradient(circle at top, #1a252f 0%, #0a0f14 100%);
-            --header-bg: transparent;
-            --accent: #d4b996;
-            --secondary: #ffc107;
-            --text-main: #e0e0e0;
-            --text-muted: #a0a0a0;
-            --card: rgba(255, 255, 255, 0.03);
-            --border: 1px solid rgba(212, 185, 150, 0.1);
-            --font-head: 'Playfair Display', serif;
-            --font-body: 'Montserrat', sans-serif;
-            --radius: 12px;
+        [data-theme="dark"] {
+            --bg-primary: #0F0F0F;
+            --bg-secondary: #1A1A1A;
+            --text-primary: #F5F1E8;
+            --text-secondary: #B8B8B8;
+            --accent: #D4B896;
+            --accent-dark: #C8A882;
+            --border: #2A2A2A;
+            --shadow: rgba(255, 255, 255, 0.05);
+            --overlay: rgba(15, 15, 15, 0.95);
         }
 
-        [data-theme="neon-urban"] {
-            --bg: #050505;
-            --header-bg: #000000;
-            --accent: #00f2ff;
-            --secondary: #ff0055;
-            --text-main: #ffffff;
-            --text-muted: #888888;
-            --card: rgba(20, 20, 20, 0.9);
-            --border: 2px solid var(--secondary);
-            --font-head: 'Syncopate', sans-serif;
-            --font-body: 'Orbitron', sans-serif;
-            --radius: 4px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-
-        /* =========================================
-           ESTILOS BASE (MOBILE FIRST)
-           ========================================= */
-        
-        * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.4s ease; }
 
         body {
-            background: var(--bg);
-            color: var(--text-main);
-            font-family: var(--font-body);
-            min-height: 100vh;
-            padding-bottom: 120px;
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
         }
 
-        /* Selectores Flotantes */
-        .ui-controls {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+        .header {
+            position: sticky;
+            top: 0;
+            background: var(--overlay);
+            backdrop-filter: blur(12px);
             z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            padding: 1rem;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 90%;
-            max-width: 400px;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .control-group {
-            display: flex;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-            padding: 5px;
-            border-radius: 50px;
-            border: 1px solid var(--accent);
-            justify-content: space-around;
-        }
-
-        .ui-btn {
-            background: none;
-            border: none;
-            color: #fff;
-            padding: 8px 12px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            border-radius: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .ui-btn.active { background: var(--accent); color: #000; }
-
-        /* Header */
-        header {
-            text-align: center;
-            padding: 60px 20px;
-            background: var(--header-bg);
-            border-bottom: 2px solid var(--accent);
-        }
-
-        h1 {
-            font-family: var(--font-head);
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--secondary);
-        }
-
-        [data-theme="neon-urban"] h1 {
-            text-shadow: 3px 3px 0px var(--secondary), -3px -3px 0px var(--accent);
-        }
-
-        .subtitle {
-            font-size: 0.7rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-top: 10px;
-        }
-
-        /* Menu Content */
-        .container { padding: 20px; max-width: 1000px; margin: 0 auto; }
-
-        .section-title {
-            font-family: var(--font-head);
-            text-align: center;
-            margin: 50px 0 30px;
-            color: var(--accent);
-            text-transform: uppercase;
+        .logo {
+            height: 50px;
+            width: auto;
             display: flex;
             align-items: center;
-            gap: 15px;
         }
 
-        .section-title::before, .section-title::after {
-            content: ""; flex: 1; height: 1px; background: var(--accent); opacity: 0.3;
+        .logo img {
+            height: 100%;
+            width: auto;
+            transition: opacity 0.3s ease;
         }
 
-        .menu-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .controls {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
 
-        @media (min-width: 768px) {
-            .menu-grid { grid-template-columns: 1fr 1fr; }
+        .lang-toggle, .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 0.5rem 0.75rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .lang-toggle:hover, .theme-toggle:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            font-size: 1.2rem;
+            padding: 0.5rem 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .theme-icon {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: var(--text-primary);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover .theme-icon {
+            stroke: white;
+        }
+
+        #moonIcon {
+            display: none;
+        }
+
+        [data-theme="dark"] #sunIcon {
+            display: none;
+        }
+
+        [data-theme="dark"] #moonIcon {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+        }
+
+        .season-badge {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .menu-section {
+            margin-bottom: 3rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .menu-item {
-            background: var(--card);
-            padding: 20px;
-            border-radius: var(--radius);
-            border-bottom: var(--border);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            transition: transform 0.3s ease;
         }
 
-        [data-theme="neon-urban"] .menu-item { border-left: 5px solid var(--accent); border-bottom: none; }
+        .menu-item:last-child {
+            border-bottom: none;
+        }
 
-        .item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+        .menu-item:hover {
+            transform: translateX(5px);
+        }
 
-        .item-name { font-weight: 700; text-transform: uppercase; font-size: 1rem; color: var(--text-main); }
-        
-        .item-price { font-weight: 700; color: var(--accent); font-family: var(--font-head); }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+            gap: 1rem;
+        }
 
-        .item-desc { font-size: 0.85rem; color: var(--text-muted); font-style: italic; line-height: 1.4; }
+        .item-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
 
-        footer { text-align: center; padding: 40px; font-size: 0.6rem; opacity: 0.5; letter-spacing: 2px; }
+        .item-price {
+            font-weight: 600;
+            color: var(--accent-dark);
+            white-space: nowrap;
+            font-size: 1.1rem;
+        }
+
+        .item-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            font-weight: 300;
+        }
+
+        .item-extra {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+
+        .note {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-left: 3px solid var(--accent);
+            margin-top: 2rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: var(--bg-secondary);
+            margin-top: 3rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 2rem auto;
+            border-radius: 2px;
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .container {
+                padding: 2rem;
+            }
+
+            .menu-section {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .item-name {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .header-content {
+                padding: 1.5rem 2rem;
+            }
+
+            .logo {
+                height: 60px;
+            }
+        }
+
+        /* Smooth transitions */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        button, .lang-toggle, .theme-toggle {
+            transition: all 0.3s ease;
+        }
     </style>
 </head>
-<body data-theme="default">
-
-    <div class="ui-controls">
-        <div class="control-group">
-            <button class="ui-btn active" onclick="setTheme('default', this)">Classic</button>
-            <button class="ui-btn" onclick="setTheme('sunset-beach', this)">Sunset</button>
-            <button class="ui-btn" onclick="setTheme('neon-urban', this)">Neon</button>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="teckels_logo.png" alt="Teckel's Food & Drinks">
+            </div>
+            <div class="controls">
+                <select class="lang-toggle" id="langSelect">
+                    <option value="en">EN</option>
+                    <option value="es" selected>ES</option>
+                    <option value="de">DE</option>
+                </select>
+                <button class="theme-toggle" id="themeToggle">
+                    <svg class="theme-icon" id="themeIcon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Sun icon (default) -->
+                        <g id="sunIcon">
+                            <circle cx="12" cy="12" r="5"/>
+                            <line x1="12" y1="1" x2="12" y2="3"/>
+                            <line x1="12" y1="21" x2="12" y2="23"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="1" y1="12" x2="3" y2="12"/>
+                            <line x1="21" y1="12" x2="23" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </g>
+                        <!-- Moon icon -->
+                        <g id="moonIcon">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </g>
+                    </svg>
+                </button>
+            </div>
         </div>
-        <div class="control-group">
-            <button class="ui-btn" onclick="setLang('de', this)">DE</button>
-            <button class="ui-btn" onclick="setLang('en', this)">EN</button>
-            <button class="ui-btn active" onclick="setLang('es', this)">ES</button>
+    </header>
+
+    <div class="container">
+        <!-- ENGLISH -->
+        <div class="lang-content" id="lang-en">
+            <div class="season-badge">Summer 2026</div>
+            
+            <section class="menu-section">
+                <h2 class="section-title">Tapas & Starters</h2>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Pan, Alioli y Aceitunas</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">Fresh bread served with aioli and olives</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Pimientos de Padrón</span>
+                        <span class="item-price">7.90€</span>
+                    </div>
+                    <p class="item-description">Spanish green peppers fried in olive oil with coarse sea salt</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Albóndigas</span>
+                        <span class="item-price">11.90€</span>
+                    </div>
+                    <p class="item-description">Homemade Spanish meatballs with tomato sauce & bread</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Tabla de Quesos</span>
+                        <span class="item-price">11.90€</span>
+                    </div>
+                    <p class="item-description">Selection of Spanish cheeses with fig jam & bread</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Feta al Horno Mediterráneo</span>
+                        <span class="item-price">12.90€</span>
+                    </div>
+                    <p class="item-description">Oven-baked feta cheese with olives, vegetables, mojo rojo y verde & bread</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Burrata</span>
+                        <span class="item-price">14.90€</span>
+                    </div>
+                    <p class="item-description">Tomato sauce with burrata, cherry tomatoes & bread</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Ensalada de Gambas</span>
+                        <span class="item-price">14.90€</span>
+                    </div>
+                    <p class="item-description">Mixed greens with black tiger prawns, cherry tomatoes, onions, cress & bread</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Gambas al Ajillo</span>
+                        <span class="item-price">15.90€</span>
+                    </div>
+                    <p class="item-description">Black tiger prawns in olive oil with garlic, paprika, tomatoes & bread</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Smoked Wagyu Carpaccio</span>
+                        <span class="item-price">15.90€</span>
+                    </div>
+                    <p class="item-description">Wagyu carpaccio with parmesan, arugula, truffle mayo & black salt</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Tabla de Jamón Serrano y Queso</span>
+                        <span class="item-price">16.90€</span>
+                    </div>
+                    <p class="item-description">Spanish Serrano ham & cheese selection with olives & bread</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Ensalada</span>
+                        <span class="item-price">8.90€</span>
+                    </div>
+                    <p class="item-description">Mixed greens with cherry tomatoes, onions, cress & bread</p>
+                    <p class="item-extra">+ Chicken breast strips €12.90</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Premium Burgers</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Vegan Meat Burger</span>
+                        <span class="item-price">15.90€</span>
+                    </div>
+                    <p class="item-description">Plant-based patty in a whole grain bun with roasted onions, lettuce, cheddar, pickles & Teckel's fries (vegetarian)</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Chicken Fillet Burger</span>
+                        <span class="item-price">17.90€</span>
+                    </div>
+                    <p class="item-description">Grilled chicken breast in a whole grain bun with roasted onions, lettuce, cheddar, pickles & Teckel's fries</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Black Angus Burger</span>
+                        <span class="item-price">18.90€</span>
+                    </div>
+                    <p class="item-description">200g Mallorcan Black Angus beef (Ramaders) served in a whole grain bun with roasted onions, lettuce, cheddar, pickles & Teckel's fries</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Main Courses</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Linguini</span>
+                        <span class="item-price">10.90€</span>
+                    </div>
+                    <p class="item-description">With tomato ricotta sauce & parmesan</p>
+                    <p class="item-extra">+ Black tiger prawns €14.90</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Chicken Wings</span>
+                        <span class="item-price">12.90€</span>
+                    </div>
+                    <p class="item-description">Marinated free-range chicken wings with dip & Teckel's fries</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Schnitzel with Fries</span>
+                        <span class="item-price">15.90€</span>
+                    </div>
+                    <p class="item-description">Pork or chicken Schnitzel with Teckel's fries & lemon</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Spare Ribs</span>
+                        <span class="item-price">18.90€</span>
+                    </div>
+                    <p class="item-description">Homemade spare ribs with BBQ sauce & Teckel's fries</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Sides & Extras</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Extra Aioli or Mojó rojo</span>
+                        <span class="item-price">2.00€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Extra Bacon</span>
+                        <span class="item-price">2.50€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Olives or Jalapeños</span>
+                        <span class="item-price">2.90€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Paprika or Pepper Sauce</span>
+                        <span class="item-price">2.90€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Extra Chicken Breast Strips</span>
+                        <span class="item-price">3.50€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Side Salad</span>
+                        <span class="item-price">3.90€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Teckel's Fries</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Desserts</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Chocolate Lava Cake</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">Warm chocolate cake with a molten center served with a scoop of vanilla ice cream</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Zero Alcohol</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Water</span>
+                        <span class="item-price">2.90€</span>
+                    </div>
+                    <p class="item-description">0.3 l still or sparkling</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Soft Drinks</span>
+                        <span class="item-price">3.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l Sodas, Aquarius, Iced tea</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Juices & Spritzers</span>
+                        <span class="item-price">3.90€</span>
+                    </div>
+                    <p class="item-description">0.3 l</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Soft Drinks</span>
+                        <span class="item-price">4.40€</span>
+                    </div>
+                    <p class="item-description">0.5 l Sodas, Aquarius, Iced tea</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Water</span>
+                        <span class="item-price">6.90€</span>
+                    </div>
+                    <p class="item-description">1.3 l still or sparkling</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Beer</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Estrella Galicia</span>
+                        <span class="item-price">3.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l Draft</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Estrella Galicia</span>
+                        <span class="item-price">3.90€</span>
+                    </div>
+                    <p class="item-description">0.33 l Bottle</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Estrella Alcohol-Free</span>
+                        <span class="item-price">3.90€</span>
+                    </div>
+                    <p class="item-description">0.33 l Bottle</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Estrella Galicia</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">0.5 l Draft</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Erdinger Wheat Beer</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">0.5 l Bottle</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Erdinger Alcohol-Free</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">0.5 l Bottle</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Sangria</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Sangria Red or White</span>
+                        <span class="item-price">7.90€</span>
+                    </div>
+                    <p class="item-description">0.5 l</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Sangria Red or White</span>
+                        <span class="item-price">18.90€</span>
+                    </div>
+                    <p class="item-description">1.3 l</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Bubbly & Spritzers</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Smirnoff Ice</span>
+                        <span class="item-price">3.90€</span>
+                    </div>
+                    <p class="item-description">0.275 l</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Glass of Sparkling Wine</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">0.2 l</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Spritz</span>
+                        <span class="item-price">8.50€</span>
+                    </div>
+                    <p class="item-description">0.4 l Aperol, Lillet, Limoncello</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Hugo</span>
+                        <span class="item-price">8.50€</span>
+                    </div>
+                    <p class="item-description">0.4 l</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Wine by the Glass</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">BATUTA Tempranillo</span>
+                        <span class="item-price">4.50€</span>
+                    </div>
+                    <p class="item-description">0.2 l Red or Rosé</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">copaboca RuedaVerdejo</span>
+                        <span class="item-price">4.50€</span>
+                    </div>
+                    <p class="item-description">0.2 l White</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Wine Spritzer</span>
+                        <span class="item-price">5.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l Red Rosé or White</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Bottled Wines</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">BATUTA Tempranillo</span>
+                        <span class="item-price">15.00€</span>
+                    </div>
+                    <p class="item-description">0.75 l Red or Rosé</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">copaboca RuedaVerdejo</span>
+                        <span class="item-price">25.00€</span>
+                    </div>
+                    <p class="item-description">0.75 l White</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">copaboca RiojaCrianza</span>
+                        <span class="item-price">25.00€</span>
+                    </div>
+                    <p class="item-description">0.75 l Red</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Shots</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Various Shots</span>
+                        <span class="item-price">2.90€</span>
+                    </div>
+                    <p class="item-description">2.0 cl</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Selected Shots</span>
+                        <span class="item-price">4.50€</span>
+                    </div>
+                    <p class="item-description">2.0 cl</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Cocktails & Copas</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Highballs</span>
+                        <span class="item-price">7.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l Selection of Long Drinks</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">JimBeam o. JackDaniel's</span>
+                        <span class="item-price">9.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l with mixer of choice</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Southern Comfort</span>
+                        <span class="item-price">9.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l with mixer of choice</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Smirnoff Vodka</span>
+                        <span class="item-price">9.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l with mixer or Red Bull</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Long Island Iced Tea</span>
+                        <span class="item-price">9.90€</span>
+                    </div>
+                    <p class="item-description">0.4 l</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Mojito</span>
+                        <span class="item-price">9.90€</span>
+                    </div>
+                    <p class="item-description">0.4 l Classic, Strawberry, Passion Fruit</p>
+                </div>
+            </section>
+
+            <div class="note">
+                We only use locally sourced meat from Ramaders Agrupats in Felanitx, Mallorca.
+            </div>
+        </div>
+
+        <!-- SPANISH -->
+        <div class="lang-content active" id="lang-es">
+            <div class="season-badge">Verano 2026</div>
+            
+            <section class="menu-section">
+                <h2 class="section-title">Tapas y Entrantes</h2>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Pan, Alioli y Aceitunas</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">Pan fresco servido con alioli y aceitunas</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Pimientos de Padrón</span>
+                        <span class="item-price">7.90€</span>
+                    </div>
+                    <p class="item-description">Pimientos verdes españoles fritos en aceite de oliva con sal marina gruesa</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Albóndigas</span>
+                        <span class="item-price">11.90€</span>
+                    </div>
+                    <p class="item-description">Albóndigas españolas caseras con salsa de tomate y pan</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Tabla de Quesos</span>
+                        <span class="item-price">11.90€</span>
+                    </div>
+                    <p class="item-description">Selección de quesos españoles con mermelada de higo y pan</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Feta al Horno Mediterráneo</span>
+                        <span class="item-price">12.90€</span>
+                    </div>
+                    <p class="item-description">Queso feta al horno con aceitunas, verduras, mojo rojo y verde y pan</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Burrata</span>
+                        <span class="item-price">14.90€</span>
+                    </div>
+                    <p class="item-description">Salsa de tomate con burrata, tomates cherry y pan</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Ensalada de Gambas</span>
+                        <span class="item-price">14.90€</span>
+                    </div>
+                    <p class="item-description">Mezcla de hojas verdes con langostinos tigre negros, tomates cherry, cebollas, berros y pan</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Gambas al Ajillo</span>
+                        <span class="item-price">15.90€</span>
+                    </div>
+                    <p class="item-description">Langostinos tigre negros en aceite de oliva con ajo, pimentón, tomates y pan</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Carpaccio de Wagyu Ahumado</span>
+                        <span class="item-price">15.90€</span>
+                    </div>
+                    <p class="item-description">Carpaccio de Wagyu con parmesano, rúcula, mayonesa de trufa y sal negra</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Tabla de Jamón Serrano y Queso</span>
+                        <span class="item-price">16.90€</span>
+                    </div>
+                    <p class="item-description">Jamón Serrano español y selección de quesos con aceitunas y pan</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Ensalada</span>
+                        <span class="item-price">8.90€</span>
+                    </div>
+                    <p class="item-description">Mezcla de hojas verdes con tomates cherry, cebollas, berros y pan</p>
+                    <p class="item-extra">+ Tiras de pechuga de pollo €12.90</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Hamburguesas Premium</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Hamburguesa de Carne Vegana</span>
+                        <span class="item-price">15.90€</span>
+                    </div>
+                    <p class="item-description">Hamburguesa vegetal en pan integral con cebollas asadas, lechuga, cheddar, pepinillos y patatas Teckel's (vegetariano)</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Hamburguesa de Pechuga de Pollo</span>
+                        <span class="item-price">17.90€</span>
+                    </div>
+                    <p class="item-description">Pechuga de pollo a la parrilla en pan integral con cebollas asadas, lechuga, cheddar, pepinillos y patatas Teckel's</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Hamburguesa Black Angus</span>
+                        <span class="item-price">18.90€</span>
+                    </div>
+                    <p class="item-description">200g de carne de Black Angus mallorquín (Ramaders) servida en pan integral con cebollas asadas, lechuga, cheddar, pepinillos y patatas Teckel's</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Platos Principales</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Linguini</span>
+                        <span class="item-price">10.90€</span>
+                    </div>
+                    <p class="item-description">Con salsa de tomate y ricotta y parmesano</p>
+                    <p class="item-extra">+ Langostinos tigre negros €14.90</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Alitas de Pollo</span>
+                        <span class="item-price">12.90€</span>
+                    </div>
+                    <p class="item-description">Alitas de pollo de corral marinadas con salsa y patatas Teckel's</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Schnitzel con Patatas</span>
+                        <span class="item-price">15.90€</span>
+                    </div>
+                    <p class="item-description">Schnitzel de cerdo o pollo con patatas Teckel's y limón</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Costillas</span>
+                        <span class="item-price">18.90€</span>
+                    </div>
+                    <p class="item-description">Costillas caseras con salsa BBQ y patatas Teckel's</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Acompañamientos y Extras</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Alioli o Mojó rojo Extra</span>
+                        <span class="item-price">2.00€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Bacon Extra</span>
+                        <span class="item-price">2.50€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Aceitunas o Jalapeños</span>
+                        <span class="item-price">2.90€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Salsa de Pimentón o Pimienta</span>
+                        <span class="item-price">2.90€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Tiras de Pechuga de Pollo Extra</span>
+                        <span class="item-price">3.50€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Ensalada de Acompañamiento</span>
+                        <span class="item-price">3.90€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Patatas Teckel's</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Postres</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Pastel de Chocolate Lava</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">Pastel de chocolate caliente con centro fundido servido con una bola de helado de vainilla</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Sin Alcohol</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Agua</span>
+                        <span class="item-price">2.90€</span>
+                    </div>
+                    <p class="item-description">0.3 l natural o con gas</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Refrescos</span>
+                        <span class="item-price">3.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l Sodas, Aquarius, Té helado</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Zumos y Spritzers</span>
+                        <span class="item-price">3.90€</span>
+                    </div>
+                    <p class="item-description">0.3 l</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Refrescos</span>
+                        <span class="item-price">4.40€</span>
+                    </div>
+                    <p class="item-description">0.5 l Sodas, Aquarius, Té helado</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Agua</span>
+                        <span class="item-price">6.90€</span>
+                    </div>
+                    <p class="item-description">1.3 l natural o con gas</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Cerveza</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Estrella Galicia</span>
+                        <span class="item-price">3.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l Barril</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Estrella Galicia</span>
+                        <span class="item-price">3.90€</span>
+                    </div>
+                    <p class="item-description">0.33 l Botella</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Estrella Sin Alcohol</span>
+                        <span class="item-price">3.90€</span>
+                    </div>
+                    <p class="item-description">0.33 l Botella</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Estrella Galicia</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">0.5 l Barril</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Erdinger Cerveza de Trigo</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">0.5 l Botella</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Erdinger Sin Alcohol</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">0.5 l Botella</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Sangría</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Sangría Tinta o Blanca</span>
+                        <span class="item-price">7.90€</span>
+                    </div>
+                    <p class="item-description">0.5 l</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Sangría Tinta o Blanca</span>
+                        <span class="item-price">18.90€</span>
+                    </div>
+                    <p class="item-description">1.3 l</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Espumosos y Spritzers</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Smirnoff Ice</span>
+                        <span class="item-price">3.90€</span>
+                    </div>
+                    <p class="item-description">0.275 l</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Copa de Vino Espumoso</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">0.2 l</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Spritz</span>
+                        <span class="item-price">8.50€</span>
+                    </div>
+                    <p class="item-description">0.4 l Aperol, Lillet, Limoncello</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Hugo</span>
+                        <span class="item-price">8.50€</span>
+                    </div>
+                    <p class="item-description">0.4 l</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Vino por Copa</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">BATUTA Tempranillo</span>
+                        <span class="item-price">4.50€</span>
+                    </div>
+                    <p class="item-description">0.2 l Tinto o Rosado</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">copaboca RuedaVerdejo</span>
+                        <span class="item-price">4.50€</span>
+                    </div>
+                    <p class="item-description">0.2 l Blanco</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Spritzer de Vino</span>
+                        <span class="item-price">5.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l Tinto Rosado o Blanco</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Vinos en Botella</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">BATUTA Tempranillo</span>
+                        <span class="item-price">15.00€</span>
+                    </div>
+                    <p class="item-description">0.75 l Tinto o Rosado</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">copaboca RuedaVerdejo</span>
+                        <span class="item-price">25.00€</span>
+                    </div>
+                    <p class="item-description">0.75 l Blanco</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">copaboca RiojaCrianza</span>
+                        <span class="item-price">25.00€</span>
+                    </div>
+                    <p class="item-description">0.75 l Tinto</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Chupitos</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Chupitos Variados</span>
+                        <span class="item-price">2.90€</span>
+                    </div>
+                    <p class="item-description">2.0 cl</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Chupitos Seleccionados</span>
+                        <span class="item-price">4.50€</span>
+                    </div>
+                    <p class="item-description">2.0 cl</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Cócteles y Copas</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Highballs</span>
+                        <span class="item-price">7.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l Selección de combinados largos</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">JimBeam o JackDaniel's</span>
+                        <span class="item-price">9.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l con mezclador a elegir</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Southern Comfort</span>
+                        <span class="item-price">9.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l con mezclador a elegir</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Smirnoff Vodka</span>
+                        <span class="item-price">9.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l con mezclador o Red Bull</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Long Island Iced Tea</span>
+                        <span class="item-price">9.90€</span>
+                    </div>
+                    <p class="item-description">0.4 l</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Mojito</span>
+                        <span class="item-price">9.90€</span>
+                    </div>
+                    <p class="item-description">0.4 l Clásico, Fresa, Fruta de la Pasión</p>
+                </div>
+            </section>
+
+            <div class="note">
+                Solo usamos carne de origen local de Ramaders Agrupats en Felanitx, Mallorca.
+            </div>
+        </div>
+
+        <!-- GERMAN -->
+        <div class="lang-content" id="lang-de">
+            <div class="season-badge">Sommer 2026</div>
+            
+            <section class="menu-section">
+                <h2 class="section-title">Tapas & Vorspeisen</h2>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Pan, Alioli y Aceitunas</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">Frisches Brot serviert mit Aioli und Oliven</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Pimientos de Padrón</span>
+                        <span class="item-price">7.90€</span>
+                    </div>
+                    <p class="item-description">Spanische grüne Paprika in Olivenöl gebraten mit grobem Meersalz</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Albóndigas</span>
+                        <span class="item-price">11.90€</span>
+                    </div>
+                    <p class="item-description">Hausgemachte spanische Fleischbällchen mit Tomatensauce und Brot</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Tabla de Quesos</span>
+                        <span class="item-price">11.90€</span>
+                    </div>
+                    <p class="item-description">Auswahl spanischer Käsesorten mit Feigenmarmelade und Brot</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Feta al Horno Mediterráneo</span>
+                        <span class="item-price">12.90€</span>
+                    </div>
+                    <p class="item-description">Ofengebackener Fetakäse mit Oliven, Gemüse, Mojo rojo y verde und Brot</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Burrata</span>
+                        <span class="item-price">14.90€</span>
+                    </div>
+                    <p class="item-description">Tomatensauce mit Burrata, Kirschtomaten und Brot</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Ensalada de Gambas</span>
+                        <span class="item-price">14.90€</span>
+                    </div>
+                    <p class="item-description">Gemischter Salat mit schwarzen Tigergarnelen, Kirschtomaten, Zwiebeln, Kresse und Brot</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Gambas al Ajillo</span>
+                        <span class="item-price">15.90€</span>
+                    </div>
+                    <p class="item-description">Schwarze Tigergarnelen in Olivenöl mit Knoblauch, Paprika, Tomaten und Brot</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Geräuchertes Wagyu Carpaccio</span>
+                        <span class="item-price">15.90€</span>
+                    </div>
+                    <p class="item-description">Wagyu Carpaccio mit Parmesan, Rucola, Trüffelmayo und schwarzem Salz</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Tabla de Jamón Serrano y Queso</span>
+                        <span class="item-price">16.90€</span>
+                    </div>
+                    <p class="item-description">Spanischer Serrano-Schinken und Käseauswahl mit Oliven und Brot</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Ensalada</span>
+                        <span class="item-price">8.90€</span>
+                    </div>
+                    <p class="item-description">Gemischter Salat mit Kirschtomaten, Zwiebeln, Kresse und Brot</p>
+                    <p class="item-extra">+ Hähnchenbruststreifen €12.90</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Premium Burger</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Veganer Burger</span>
+                        <span class="item-price">15.90€</span>
+                    </div>
+                    <p class="item-description">Pflanzliches Patty im Vollkornbrötchen mit gerösteten Zwiebeln, Salat, Cheddar, Gurken und Teckel's Pommes (vegetarisch)</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Hähnchenbrust Burger</span>
+                        <span class="item-price">17.90€</span>
+                    </div>
+                    <p class="item-description">Gegrillte Hähnchenbrust im Vollkornbrötchen mit gerösteten Zwiebeln, Salat, Cheddar, Gurken und Teckel's Pommes</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Black Angus Burger</span>
+                        <span class="item-price">18.90€</span>
+                    </div>
+                    <p class="item-description">200g mallorquinisches Black Angus Rind (Ramaders) serviert im Vollkornbrötchen mit gerösteten Zwiebeln, Salat, Cheddar, Gurken und Teckel's Pommes</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Hauptgerichte</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Linguini</span>
+                        <span class="item-price">10.90€</span>
+                    </div>
+                    <p class="item-description">Mit Tomaten-Ricotta-Sauce und Parmesan</p>
+                    <p class="item-extra">+ Schwarze Tigergarnelen €14.90</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Chicken Wings</span>
+                        <span class="item-price">12.90€</span>
+                    </div>
+                    <p class="item-description">Marinierte Freiland-Hähnchenflügel mit Dip und Teckel's Pommes</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Schnitzel mit Pommes</span>
+                        <span class="item-price">15.90€</span>
+                    </div>
+                    <p class="item-description">Schweine- oder Hähnchenschnitzel mit Teckel's Pommes und Zitrone</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Spare Ribs</span>
+                        <span class="item-price">18.90€</span>
+                    </div>
+                    <p class="item-description">Hausgemachte Spare Ribs mit BBQ-Sauce und Teckel's Pommes</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Beilagen & Extras</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Extra Aioli oder Mojó rojo</span>
+                        <span class="item-price">2.00€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Extra Bacon</span>
+                        <span class="item-price">2.50€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Oliven oder Jalapeños</span>
+                        <span class="item-price">2.90€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Paprika- oder Pfeffersauce</span>
+                        <span class="item-price">2.90€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Extra Hähnchenbruststreifen</span>
+                        <span class="item-price">3.50€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Beilagensalat</span>
+                        <span class="item-price">3.90€</span>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Teckel's Pommes</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Desserts</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Schoko-Lava-Kuchen</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">Warmer Schokoladenkuchen mit flüssigem Kern serviert mit einer Kugel Vanilleeis</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Alkoholfrei</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Wasser</span>
+                        <span class="item-price">2.90€</span>
+                    </div>
+                    <p class="item-description">0.3 l still oder sprudelnd</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Softdrinks</span>
+                        <span class="item-price">3.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l Limonaden, Aquarius, Eistee</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Säfte & Schorlen</span>
+                        <span class="item-price">3.90€</span>
+                    </div>
+                    <p class="item-description">0.3 l</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Softdrinks</span>
+                        <span class="item-price">4.40€</span>
+                    </div>
+                    <p class="item-description">0.5 l Limonaden, Aquarius, Eistee</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Wasser</span>
+                        <span class="item-price">6.90€</span>
+                    </div>
+                    <p class="item-description">1.3 l still oder sprudelnd</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Bier</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Estrella Galicia</span>
+                        <span class="item-price">3.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l vom Fass</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Estrella Galicia</span>
+                        <span class="item-price">3.90€</span>
+                    </div>
+                    <p class="item-description">0.33 l Flasche</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Estrella Alkoholfrei</span>
+                        <span class="item-price">3.90€</span>
+                    </div>
+                    <p class="item-description">0.33 l Flasche</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Estrella Galicia</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">0.5 l vom Fass</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Erdinger Weizenbier</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">0.5 l Flasche</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Erdinger Alkoholfrei</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">0.5 l Flasche</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Sangria</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Sangria Rot oder Weiß</span>
+                        <span class="item-price">7.90€</span>
+                    </div>
+                    <p class="item-description">0.5 l</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Sangria Rot oder Weiß</span>
+                        <span class="item-price">18.90€</span>
+                    </div>
+                    <p class="item-description">1.3 l</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Sekt & Spritzer</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Smirnoff Ice</span>
+                        <span class="item-price">3.90€</span>
+                    </div>
+                    <p class="item-description">0.275 l</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Glas Sekt</span>
+                        <span class="item-price">4.90€</span>
+                    </div>
+                    <p class="item-description">0.2 l</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Spritz</span>
+                        <span class="item-price">8.50€</span>
+                    </div>
+                    <p class="item-description">0.4 l Aperol, Lillet, Limoncello</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Hugo</span>
+                        <span class="item-price">8.50€</span>
+                    </div>
+                    <p class="item-description">0.4 l</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Wein im Glas</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">BATUTA Tempranillo</span>
+                        <span class="item-price">4.50€</span>
+                    </div>
+                    <p class="item-description">0.2 l Rot oder Rosé</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">copaboca RuedaVerdejo</span>
+                        <span class="item-price">4.50€</span>
+                    </div>
+                    <p class="item-description">0.2 l Weiß</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Weinschorle</span>
+                        <span class="item-price">5.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l Rot Rosé oder Weiß</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Flaschenweine</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">BATUTA Tempranillo</span>
+                        <span class="item-price">15.00€</span>
+                    </div>
+                    <p class="item-description">0.75 l Rot oder Rosé</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">copaboca RuedaVerdejo</span>
+                        <span class="item-price">25.00€</span>
+                    </div>
+                    <p class="item-description">0.75 l Weiß</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">copaboca RiojaCrianza</span>
+                        <span class="item-price">25.00€</span>
+                    </div>
+                    <p class="item-description">0.75 l Rot</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Shots</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Verschiedene Shots</span>
+                        <span class="item-price">2.90€</span>
+                    </div>
+                    <p class="item-description">2.0 cl</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Ausgewählte Shots</span>
+                        <span class="item-price">4.50€</span>
+                    </div>
+                    <p class="item-description">2.0 cl</p>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="menu-section">
+                <h2 class="section-title">Cocktails & Copas</h2>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Highballs</span>
+                        <span class="item-price">7.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l Auswahl an Longdrinks</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">JimBeam o. JackDaniel's</span>
+                        <span class="item-price">9.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l mit Mixer nach Wahl</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Southern Comfort</span>
+                        <span class="item-price">9.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l mit Mixer nach Wahl</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Smirnoff Wodka</span>
+                        <span class="item-price">9.50€</span>
+                    </div>
+                    <p class="item-description">0.3 l mit Mixer oder Red Bull</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Long Island Iced Tea</span>
+                        <span class="item-price">9.90€</span>
+                    </div>
+                    <p class="item-description">0.4 l</p>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-name">Mojito</span>
+                        <span class="item-price">9.90€</span>
+                    </div>
+                    <p class="item-description">0.4 l Klassisch, Erdbeere, Passionsfrucht</p>
+                </div>
+            </section>
+
+            <div class="note">
+                Wir verwenden ausschließlich lokal bezogenes Fleisch von Ramaders Agrupats in Felanitx, Mallorca.
+            </div>
         </div>
     </div>
 
-    <header>
-        <div class="subtitle">Balearic Flavors</div>
-        <h1 id="main-title">Teckel's</h1>
-        <div class="subtitle">Dine • Unwind • Ride</div>
-    </header>
-
-    <main class="container" id="menu-container"></main>
-
-    <footer>&copy; 2026 TECKEL'S RESTAURANT • PALMA DE MALLORCA</footer>
+    <footer>
+        <p>Teckel's Food & Drinks · Palma de Mallorca</p>
+    </footer>
 
     <script>
-        const menuData = {
-            es: {
-                starters: "Entrantes", main: "Platos Principales", burgers: "Hamburguesas", sides: "Extras", dessert: "Postres",
-                items: [
-                    { cat: "starters", name: "Carpaccio Wagyu", desc: "Wagyu ahumado, parmesano, trufa, sal volcánica", price: "16,90 €" },
-                    { cat: "starters", name: "Gambas al Ajillo", desc: "Black Tiger, aceite, ajo, pimentón y pan", price: "15,90 €" },
-                    { cat: "main", name: "Costillar BBQ", desc: "8 horas de cocción lenta, patatas fritas", price: "18,90 €" },
-                    { cat: "main", name: "Schnitzel", desc: "Cerdo o pollo crujiente con limón y patatas", price: "15,90 €" },
-                    { cat: "burgers", name: "Black Angus", desc: "200g ternera, cebolla frita, pan integral", price: "18,90 €" },
-                    { cat: "burgers", name: "Vegan Burger", desc: "Patty vegano, cheddar, lechuga fresca", price: "15,90 €" },
-                    { cat: "sides", name: "Patatas Teckel's", desc: "Corte grueso y extra crujientes", price: "4,90 €" },
-                    { cat: "dessert", name: "Coulant Chocolate", desc: "Corazón fundido con helado de vainilla", price: "6,90 €" }
-                ]
-            },
-            en: {
-                starters: "Starters", main: "Main Courses", burgers: "Burgers", sides: "Sides", dessert: "Desserts",
-                items: [
-                    { cat: "starters", name: "Wagyu Carpaccio", desc: "Smoked wagyu, parmesan, truffle, volcanic salt", price: "16,90 €" },
-                    { cat: "starters", name: "Garlic Prawns", desc: "Black Tiger prawns, garlic oil, bread", price: "15,90 €" },
-                    { cat: "main", name: "BBQ Ribs", desc: "8h slow cooked, served with fries", price: "18,90 €" },
-                    { cat: "main", name: "Schnitzel", desc: "Pork or chicken with lemon and fries", price: "15,90 €" },
-                    { cat: "burgers", name: "Black Angus", desc: "200g beef, roasted onions, wholemeal bun", price: "18,90 €" },
-                    { cat: "burgers", name: "Vegan Burger", desc: "Vegan patty, cheddar, fresh lettuce", price: "15,90 €" },
-                    { cat: "sides", name: "Teckel's Fries", desc: "Hand-cut crispy potatoes", price: "4,90 €" },
-                    { cat: "dessert", name: "Lava Cake", desc: "Molten heart with vanilla ice cream", price: "6,90 €" }
-                ]
-            },
-            de: {
-                starters: "Vorspeisen", main: "Hauptgerichte", burgers: "Burgers", sides: "Beilagen", dessert: "Nachspeisen",
-                items: [
-                    { cat: "starters", name: "Wagyu Carpaccio", desc: "Geräuchertes Wagyu, Trüffel, Vulkansalz", price: "16,90 €" },
-                    { cat: "starters", name: "Gambas al Ajillo", desc: "Black Tiger Garnelen in Knoblauchöl", price: "15,90 €" },
-                    { cat: "main", name: "Spare Ribs", desc: "8 Std. gegart, mit BBQ-Sauce und Fries", price: "18,90 €" },
-                    { cat: "main", name: "Schnitzel", desc: "Schwein oder Hähnchen mit Pommes", price: "15,90 €" },
-                    { cat: "burgers", name: "Black Angus", desc: "200g Beef, Röstzwiebeln, Vollkornbrötchen", price: "18,90 €" },
-                    { cat: "burgers", name: "Vegan Burger", desc: "Vegan Patty, Cheddar, frischer Salat", price: "15,90 €" },
-                    { cat: "sides", name: "Teckel's Fries", desc: "Hausgemachte knusprige Pommes", price: "4,90 €" },
-                    { cat: "dessert", name: "Lavakuchen", desc: "Flüssiger Kern mit Vanilleeis", price: "6,90 €" }
-                ]
-            }
-        };
+        // Language toggle
+        const langSelect = document.getElementById('langSelect');
+        const langContents = document.querySelectorAll('.lang-content');
 
-        let currentLang = 'es';
+        langSelect.addEventListener('change', (e) => {
+            const selectedLang = e.target.value;
+            langContents.forEach(content => {
+                content.classList.remove('active');
+                if (content.id === `lang-${selectedLang}`) {
+                    content.classList.add('active');
+                }
+            });
+            
+            // Save language preference
+            localStorage.setItem('teckelLang', selectedLang);
+        });
 
-        function setTheme(theme, btn) {
-            document.body.setAttribute('data-theme', theme);
-            updateBtnActive(btn);
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('teckelTheme');
+
+        // Set initial theme
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
         }
 
-        function setLang(lang, btn) {
-            currentLang = lang;
-            renderMenu();
-            updateBtnActive(btn);
-        }
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('teckelTheme', newTheme);
+        });
 
-        function updateBtnActive(btn) {
-            const siblings = btn.parentElement.querySelectorAll('.ui-btn');
-            siblings.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        }
-
-        function renderMenu() {
-            const container = document.getElementById('menu-container');
-            const data = menuData[currentLang];
-            container.innerHTML = '';
-
-            const categories = ['starters', 'main', 'burgers', 'sides', 'dessert'];
-
-            categories.forEach(catKey => {
-                const section = document.createElement('section');
-                section.innerHTML = `<h2 class="section-title">${data[catKey]}</h2>`;
-                
-                const grid = document.createElement('div');
-                grid.className = 'menu-grid';
-
-                data.items.filter(i => i.cat === catKey).forEach(item => {
-                    grid.innerHTML += `
-                        <div class="menu-item">
-                            <div class="item-header">
-                                <span class="item-name">${item.name}</span>
-                                <span class="item-price">${item.price}</span>
-                            </div>
-                            <p class="item-desc">${item.desc}</p>
-                        </div>
-                    `;
-                });
-                section.appendChild(grid);
-                container.appendChild(section);
+        // Restore saved language
+        const savedLang = localStorage.getItem('teckelLang');
+        if (savedLang) {
+            langSelect.value = savedLang;
+            langContents.forEach(content => {
+                content.classList.remove('active');
+                if (content.id === `lang-${savedLang}`) {
+                    content.classList.add('active');
+                }
             });
         }
-
-        window.onload = renderMenu;
     </script>
 </body>
 </html>
