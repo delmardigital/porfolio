@@ -378,6 +378,7 @@
 
 </div>
 
+<script src="menu-data.js"></script>
 <script>
 /* =========================================================
    I18N — UI labels
@@ -410,9 +411,14 @@ const ui = {
 };
 
 /* =========================================================
-   MENU DATA — each item has description in 3 languages
+   MENU DATA — Convert from window.TECKELS_MENU or use fallback
    ========================================================= */
-const food = [
+// Process menu data from external file or fallback
+const FOOD_CATS  = ['starters','burgers','mains','sides','desserts'];
+const DRINK_CATS = ['soft','beer','wine','sangria','sekt','cocktails','shots'];
+const food = (typeof window.TECKELS_MENU !== 'undefined' && Array.isArray(window.TECKELS_MENU)) 
+  ? window.TECKELS_MENU.filter(cat => FOOD_CATS.includes(cat.id))
+  : [
   {
     id:"tapas",
     title:{ de:"Tapas & Vorspeisen", es:"Tapas & Entrantes", en:"Tapas & Starters" },
@@ -528,7 +534,9 @@ const food = [
   }
 ];
 
-const drinks = [
+const drinks = (typeof window.TECKELS_MENU !== 'undefined' && Array.isArray(window.TECKELS_MENU))
+  ? window.TECKELS_MENU.filter(cat => DRINK_CATS.includes(cat.id))
+  : [
   {
     id:"soft",
     title:{ de:"Alkoholfreies", es:"Agua y Refrescos", en:"Zero Alcohol" },

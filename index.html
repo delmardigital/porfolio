@@ -410,6 +410,7 @@ footer{background:var(--black);color:var(--white);border-top:1px solid rgba(255,
   </div>
   <p class="f-copy">© 2026 Teckel&#39;s Food &amp; Drinks · Calle de Llaut 8, Playa de Palma</p>
 </footer>
+<script src="menu-data.js"></script>
 <script>
 const T={en:{nav_home:'Home',nav_menu:'Menu',nav_location:'Location',nav_reserve:'Reserve',book_btn:'Book a Table',our_menu:'Our Menu',get_there:'Get There',on_google:'on Google Maps',b_eco:'Eco Friendly',b_free:'Free Range',b_fresh:'100% Fresh',b_stars:'4.8 Stars',reviews_sub:'Verified Google Reviews · Rated 4.8 out of 5',avg_rating:'Avg Rating',reviews_label:'Reviews',top_rated:'Top Rated',menu_label:'Menu',menu_title:'Our Menu',follow_ig:'Follow on Instagram',loc_label:'Where to Find Us',loc_title:'Playa de Palma',loc_desc:'Right by the beach in Playa de Palma.<br>Calle de Llaut 8 — easy to find, hard to forget.',how_to_get:'How to Get There',res_label:'Reservations',res_title:'Book Your Table',res_desc:'Fill in the form and we will confirm your table in minutes.',call_us:'Call Us',directions:'Directions'},de:{nav_home:'Start',nav_menu:'Speisekarte',nav_location:'Lage',nav_reserve:'Reservieren',book_btn:'Tisch reservieren',our_menu:'Unsere Karte',get_there:'Anfahrt',on_google:'auf Google Maps',b_eco:'Umweltfreundlich',b_free:'Freilandhaltung',b_fresh:'100% Frisch',b_stars:'4,8 Sterne',reviews_sub:'Verifizierte Google-Bewertungen · Durchschnitt 4,8 von 5',avg_rating:'Ø Bewertung',reviews_label:'Bewertungen',top_rated:'Top bewertet',menu_label:'Speisekarte',menu_title:'Unsere Karte',follow_ig:'Auf Instagram folgen',loc_label:'Wo wir sind',loc_title:'Playa de Palma',loc_desc:'Direkt am Strand in Playa de Palma.<br>Calle de Llaut 8 — leicht zu finden, unvergesslich.',how_to_get:'So kommen Sie zu uns',res_label:'Reservierungen',res_title:'Ihren Tisch reservieren',res_desc:'Füllen Sie das Formular aus und wir bestätigen Ihren Tisch in Minuten.',call_us:'Anrufen',directions:'Wegbeschreibung'},es:{nav_home:'Inicio',nav_menu:'Menú',nav_location:'Ubicación',nav_reserve:'Reservar',book_btn:'Reservar Mesa',our_menu:'Nuestro Menú',get_there:'Cómo llegar',on_google:'en Google Maps',b_eco:'Eco Friendly',b_free:'Crianza Libre',b_fresh:'100% Fresco',b_stars:'4,8 Estrellas',reviews_sub:'Reseñas verificadas en Google · Valorado 4,8 sobre 5',avg_rating:'Valoración media',reviews_label:'Reseñas',top_rated:'Mejor valorado',menu_label:'Menú',menu_title:'Nuestro Menú',follow_ig:'Seguir en Instagram',loc_label:'Dónde Encontrarnos',loc_title:'Playa de Palma',loc_desc:'Justo junto a la playa en Playa de Palma.<br>Calle de Llaut 8 — fácil de encontrar, imposible de olvidar.',how_to_get:'Cómo llegar',res_label:'Reservas',res_title:'Reserva tu Mesa',res_desc:'Rellena el formulario y confirmamos tu mesa en minutos.',call_us:'Llamar',directions:'Cómo llegar'}};
 let lang=localStorage.getItem('tl')||'en';
@@ -485,8 +486,10 @@ function initHours(){
   }).join('');
 }
 function buildTrack(){const tr=document.getElementById('track');if(!tr)return;const d=[...REVIEWS,...REVIEWS];tr.innerHTML=d.map(r=>'<div class="rcard"><div class="rcard-stars">⭐⭐⭐⭐⭐</div><div class="rcard-text">"'+r.t+'"</div><div class="rcard-author">'+r.f+' '+r.a+'</div></div>').join('');}
-const MENU=[
-// ── FOOD ──
+// Load menu from external file (menu-data.js) or use fallback
+const MENU = (typeof window.TECKELS_MENU !== 'undefined' && Array.isArray(window.TECKELS_MENU)) ? window.TECKELS_MENU : [
+// ── FALLBACK MENU ──
+// If menu-data.js fails to load, use this minimal fallback
 {id:'starters',e:'🥗',name:{en:'Starters',de:'Vorspeisen',es:'Entrantes'},sub:{en:'',de:'',es:''},items:[
   {n:{en:'Pan y Alioli',de:'Pan y Alioli',es:'Pan y Alioli'},d:{en:'Bread with alioli',de:'Brot mit Alioli',es:'Pan con alioli'},p:'4,90 €'},
   {n:{en:'Pimientos de Padrón',de:'Pimientos de Padrón',es:'Pimientos de Padrón'},d:{en:'Spanish peppers fried in olive oil with coarse sea salt',de:'Spanische Paprikaschoten in Olivenöl gebraten mit grobem Meersalz',es:'Pimientos fritos en aceite de oliva con sal gruesa'},p:'7,90 €'},
