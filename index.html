@@ -247,10 +247,10 @@ footer{background:var(--black);color:var(--white);border-top:1px solid rgba(255,
 <br><br><br>
     <div class="hero-open-status" id="heroOpenStatus"></div>
     <a href="#reviews" class="hero-badge">
-      <div class="hb-num" id="heroBadgeNum">4.9</div>
+      <div class="hb-num countup" id="heroBadgeNum" data-target="4.9" data-decimals="1">0.0</div>
       <span style="font-size:1rem;letter-spacing:2px">Reviews⭐⭐⭐⭐⭐</span>
       <div class="hb-sep"></div>
-      <div class="hb-info"><strong id="heroBadgeCount">760+ Reviews</strong><span data-i18n="on_google">on Google Maps</span></div>
+      <div class="hb-info"><strong id="heroBadgeCount"><span class="countup" data-target="760" data-suffix="+">0+</span> Reviews</strong><span data-i18n="on_google">on Google Maps</span></div>
     </a>
     <div class="hero-ctas">
       <a id="heroWa" href="#" class="btn btn-wa btn-full" target="_blank">
@@ -281,13 +281,13 @@ footer{background:var(--black);color:var(--white);border-top:1px solid rgba(255,
 <section class="reviews-section" id="reviews">
   <div class="reviews-inner">
     <div class="reviews-headline reveal">
-      <div class="reviews-big" id="bigNum">760+</div>
+      <div class="reviews-big countup" id="bigNum" data-target="760" data-suffix="+">0+</div>
       <div class="stars-big">⭐⭐⭐⭐⭐</div>
       <div class="reviews-sub" data-i18n="reviews_sub">Verified Google Reviews · Rated 4.9 out of 5</div>
     </div>
     <div class="reviews-stats reveal">
-      <div class="rstat"><div class="rstat-num" id="statRating">4.9</div><div class="rstat-label" data-i18n="avg_rating">Avg Rating</div></div>
-      <div class="rstat"><div class="rstat-num" id="statCount">Over 760</div><div class="rstat-label" data-i18n="reviews_label">Reviews</div></div>
+      <div class="rstat"><div class="rstat-num countup" id="statRating" data-target="4.9" data-decimals="1">0.0</div><div class="rstat-label" data-i18n="avg_rating">Avg Rating</div></div>
+      <div class="rstat"><div class="rstat-num">Over <span class="countup" id="statCount" data-target="760">0</span></div><div class="rstat-label" data-i18n="reviews_label">Reviews</div></div>
       <div class="rstat"><div class="rstat-num">🏆</div><div class="rstat-label" data-i18n="top_rated">Top Rated</div></div>
     </div>
   </div>
@@ -336,7 +336,7 @@ footer{background:var(--black);color:var(--white);border-top:1px solid rgba(255,
         <h2 class="s-title" data-i18n="loc_title">Playa de Palma</h2>
         <div class="review-pill">
           <div class="rp-stars">⭐⭐⭐⭐⭐</div>
-          <div><div class="rp-num" id="locRating">4.9</div><div class="rp-label" id="locLabel">Over 760+ Google Reviews</div></div>
+          <div><div class="rp-num countup" id="locRating" data-target="4.9" data-decimals="1">0.0</div><div class="rp-label">Over <span class="countup" id="locLabel" data-target="760" data-suffix="+">0+</span> Google Reviews</div></div>
         </div>
         <p style="color:var(--gray);line-height:1.7;font-size:.86rem;margin-bottom:1.2rem;" data-i18n="loc_desc">Right by the beach in Playa de Palma.<br>Calle de Llaut 8 — easy to find, hard to forget.</p>
         <div class="hours-card">
@@ -683,8 +683,28 @@ document.addEventListener('click',function(e){
 });
 
 document.getElementById('igGrid').querySelectorAll('.ig-cell').forEach(el=>el.addEventListener('click',()=>window.open('https://instagram.com/teckelsmallorca','_blank')));
-const revObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:0.1});
+const revObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('.countup').forEach(animateCount);}});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(function(el){revObs.observe(el);});
+function animateCount(el){
+  if(el.dataset.done)return;
+  el.dataset.done='1';
+  const target=parseFloat(el.dataset.target);
+  const decimals=parseInt(el.dataset.decimals||'0',10);
+  const prefix=el.dataset.prefix||'';
+  const suffix=el.dataset.suffix||'';
+  const duration=1400;
+  const start=performance.now();
+  function step(now){
+    const p=Math.min((now-start)/duration,1);
+    const eased=1-Math.pow(1-p,3);
+    const val=target*eased;
+    el.textContent=prefix+val.toFixed(decimals)+suffix;
+    if(p<1)requestAnimationFrame(step);
+    else el.textContent=prefix+target.toFixed(decimals)+suffix;
+  }
+  requestAnimationFrame(step);
+}
+window.addEventListener('load',function(){document.querySelectorAll('.hero .countup').forEach(animateCount);});
 document.querySelectorAll('a[href^="#"]').forEach(function(anchor){anchor.addEventListener('click',function(e){const href=this.getAttribute('href');if(href==='#')return;e.preventDefault();const target=document.querySelector(href);if(target){window.scrollTo({top:target.getBoundingClientRect().top+window.pageYOffset-80,behavior:'smooth'});}});});
 buildTrack();buildMenu();setLang(lang);initHours();
 window.addEventListener('scroll',function(){
