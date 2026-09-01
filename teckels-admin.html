@@ -194,11 +194,11 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Segoe 
       <div class="panel active" id="panel-dashboard">
         <div class="stats-row">
           <div class="stat-card">
-            <div class="stat-card-num" style="color:var(--gold)" id="dash-reviews">598+</div>
+            <div class="stat-card-num" style="color:var(--gold)" id="dash-reviews">760+</div>
             <div class="stat-card-label">Google Reviews</div>
           </div>
           <div class="stat-card">
-            <div class="stat-card-num" style="color:var(--cyan)" id="dash-rating">4.8</div>
+            <div class="stat-card-num" style="color:var(--cyan)" id="dash-rating">4.9</div>
             <div class="stat-card-label">Average Rating</div>
           </div>
           <div class="stat-card">
@@ -251,8 +251,8 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Segoe 
         <div class="card">
           <div class="card-title">⭐ Google Reviews Display</div>
           <div class="card-grid">
-            <div class="field"><label>Total Review Count</label><input type="number" id="aRevCount" placeholder="598"/><div class="field-hint">Shown as "598+" across the site</div></div>
-            <div class="field"><label>Average Rating</label><input type="text" id="aRevRating" placeholder="4.8"/><div class="field-hint">e.g. 4.8</div></div>
+            <div class="field"><label>Total Review Count</label><input type="number" id="aRevCount" placeholder="760"/><div class="field-hint">Shown as "760+" across the site</div></div>
+            <div class="field"><label>Average Rating</label><input type="text" id="aRevRating" placeholder="4.9"/><div class="field-hint">e.g. 4.9</div></div>
           </div>
           <div class="field"><label>Google Reviews URL</label><input type="text" id="aGoogleReviews" placeholder="https://g.page/r/..."/><div class="field-hint">Link to your Google Business reviews page</div></div>
         </div>
@@ -376,7 +376,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Segoe 
 </div><!-- /app -->
 
 <script>
-const DEFAULTS={wa:'34613962833',mail:'info@teckels-mallorca.com',ig:'teckelsmallorca',phone:'+34 613 962 833',maps:'https://maps.google.com/?q=Carrer+del+Llaut+8+Playa+de+Palma+Mallorca',address:'Calle de Llaut 8, Playa de Palma',menuLink:'',reviewCount:598,reviewRating:'4.8',googleReviews:'',igUrl:'https://instagram.com/teckelsmallorca',tripAdvisor:'',heroBg:'',carousel:[],feed:[],colorPink:'#ff2d78',colorGold:'#f5c842',smokeEffect:true,reviewTicker:true,waFloat:true,showFeed:true,hours:[
+const DEFAULTS={wa:'34613962833',mail:'info@teckels-mallorca.com',ig:'teckelsmallorca',phone:'+34 613 962 833',maps:'https://maps.google.com/?q=Carrer+del+Llaut+8+Playa+de+Palma+Mallorca',address:'Calle de Llaut 8, Playa de Palma',menuLink:'',reviewCount:760,reviewRating:'4.9',googleReviews:'',igUrl:'https://instagram.com/teckelsmallorca',tripAdvisor:'',heroBg:'',carousel:[],feed:[],colorPink:'#ff2d78',colorGold:'#f5c842',smokeEffect:true,reviewTicker:true,waFloat:true,showFeed:true,hours:[
   {open:false,from:'13:00',to:'22:00'},
   {open:true,from:'13:00',to:'22:00'},
   {open:true,from:'13:00',to:'22:00'},
@@ -426,8 +426,8 @@ function loadAll(){
   document.getElementById('aMaps').value=cfg.maps||'';
   document.getElementById('aAddress').value=cfg.address||'';
   document.getElementById('aMenuLink').value=cfg.menuLink||'';
-  document.getElementById('aRevCount').value=cfg.reviewCount||598;
-  document.getElementById('aRevRating').value=cfg.reviewRating||'4.8';
+  document.getElementById('aRevCount').value=cfg.reviewCount||760;
+  document.getElementById('aRevRating').value=cfg.reviewRating||'4.9';
   document.getElementById('aGoogleReviews').value=cfg.googleReviews||'';
   document.getElementById('aIgUrl').value=cfg.igUrl||'';
   document.getElementById('aTripAdvisor').value=cfg.tripAdvisor||'';
@@ -442,8 +442,8 @@ function loadAll(){
 }
 
 function updateDash(){
-  document.getElementById('dash-reviews').textContent=(cfg.reviewCount||598)+'+';
-  document.getElementById('dash-rating').textContent=cfg.reviewRating||'4.8';
+  document.getElementById('dash-reviews').textContent=(cfg.reviewCount||760)+'+';
+  document.getElementById('dash-rating').textContent=cfg.reviewRating||'4.9';
   const photos=(cfg.carousel||[]).filter(Boolean).length+(cfg.feed||[]).filter(Boolean).length;
   document.getElementById('dash-photos').textContent=photos;
 }
@@ -585,8 +585,8 @@ function saveAll(){
   cfg.maps=document.getElementById('aMaps').value.trim()||DEFAULTS.maps;
   cfg.address=document.getElementById('aAddress').value.trim()||DEFAULTS.address;
   cfg.menuLink=document.getElementById('aMenuLink').value.trim();
-  cfg.reviewCount=parseInt(document.getElementById('aRevCount').value)||598;
-  cfg.reviewRating=document.getElementById('aRevRating').value.trim()||'4.8';
+  cfg.reviewCount=parseInt(document.getElementById('aRevCount').value)||760;
+  cfg.reviewRating=document.getElementById('aRevRating').value.trim()||'4.9';
   cfg.googleReviews=document.getElementById('aGoogleReviews').value.trim();
   cfg.igUrl=document.getElementById('aIgUrl').value.trim();
   cfg.tripAdvisor=document.getElementById('aTripAdvisor').value.trim();
