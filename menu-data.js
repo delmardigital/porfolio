@@ -28,6 +28,32 @@ window.TECKELS_MENU = [
       },
       {
         "n": {
+          "en": "Dátiles con Bacon",
+          "de": "Datteln mit Speck",
+          "es": "Dátiles con Bacon"
+        },
+        "d": {
+          "en": "Dates with crispy bacon",
+          "de": "Datteln mit knusprigem Speck",
+          "es": "Dátiles con bacon crujiente"
+        },
+        "p": "5,90 €"
+      },
+      {
+        "n": {
+          "en": "Croquetas de Jamón y Queso",
+          "de": "Kroketten mit Schinken und Käse",
+          "es": "Croquetas de Jamón y Queso"
+        },
+        "d": {
+          "en": "Ham and cheese croquettes",
+          "de": "Kroketten aus Schinken und Käse",
+          "es": "Croquetas de jamón y queso"
+        },
+        "p": "5,90 €"
+      },
+      {
+        "n": {
           "en": "Pimientos de Padrón",
           "de": "Pimientos de Padrón",
           "es": "Pimientos de Padrón"
@@ -37,7 +63,7 @@ window.TECKELS_MENU = [
           "de": "Spanische Paprikaschoten in Olivenöl gebraten mit grobem Meersalz",
           "es": "Pimientos fritos en aceite de oliva con sal gruesa"
         },
-        "p": "7,90 €"
+        "p": "8,90 €"
       },
       {
         "n": {
@@ -102,7 +128,7 @@ window.TECKELS_MENU = [
           "de": "Tomatensauce mit Burrata, Cherry-Tomaten & Brot",
           "es": "Salsa de tomate con burrata, tomates cherry y pan"
         },
-        "p": "13,90 €"
+        "p": "14,90 €"
       },
       {
         "n": {
@@ -115,7 +141,7 @@ window.TECKELS_MENU = [
           "de": "Salatvariationen mit Cherry-Tomaten, Zwiebeln, Kresse & Brot · + Hähnchenbruststreifen 12,90€",
           "es": "Ensalada mixta con tomates cherry, cebolla, berros y pan · + tiras de pollo 12,90€"
         },
-        "p": "8,90 €"
+        "p": "9,90 €"
       },
       {
         "n": {
@@ -128,7 +154,7 @@ window.TECKELS_MENU = [
           "de": "Salatvariationen mit Black Tiger Garnelen, Cherry-Tomaten, Zwiebeln, Kresse & Brot",
           "es": "Ensalada con gambas tigre, tomates cherry, cebolla, berros y pan"
         },
-        "p": "14,90 €"
+        "p": "9,90 €"
       },
       {
         "n": {
@@ -225,7 +251,7 @@ window.TECKELS_MENU = [
           "de": "Marinierte Flügel vom Landhuhn mit Dip & Teckel's Fries",
           "es": "Alitas de pollo de corral marinadas con salsa y Teckel's Fries"
         },
-        "p": "12,90 €"
+        "p": "13,90 €"
       },
       {
         "n": {
@@ -238,7 +264,7 @@ window.TECKELS_MENU = [
           "de": "Hausgemachte Spare Ribs mit BBQ-Sauce & Teckel's Fries",
           "es": "Costillas caseras con salsa BBQ y Teckel's Fries"
         },
-        "p": "18,90 €"
+        "p": "19,90 €"
       },
       {
         "n": {
@@ -264,7 +290,7 @@ window.TECKELS_MENU = [
           "de": "Tomaten-Ricotta-Sauce mit Parmesan · + Black Tiger Garnelen 14,90€",
           "es": "Salsa de tomate-ricotta con parmesano · + gambas tigre 14,90€"
         },
-        "p": "10,90 €"
+        "p": "11,90 €"
       }
     ]
   },
@@ -332,7 +358,7 @@ window.TECKELS_MENU = [
           "de": "",
           "es": ""
         },
-        "p": "2,50 €"
+        "p": "5,90 €"
       },
       {
         "n": {
@@ -345,7 +371,7 @@ window.TECKELS_MENU = [
           "de": "",
           "es": ""
         },
-        "p": "5,50 €"
+        "p": "5,90 €"
       },
       {
         "n": {
@@ -358,7 +384,7 @@ window.TECKELS_MENU = [
           "de": "",
           "es": ""
         },
-        "p": "3,50 €"
+        "p": "4,50 €"
       },
       {
         "n": {
