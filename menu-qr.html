@@ -413,6 +413,21 @@ const ui = {
 /* =========================================================
    MENU DATA — Convert from window.TECKELS_MENU or use fallback
    ========================================================= */
+const getText = (value, lang) => {
+  if (typeof value === 'string') return value;
+  if (value && typeof value === 'object') {
+    return value[lang] || value.en || value.de || value.es || '';
+  }
+  return '';
+};
+
+const normalizeItem = (item, lang) => ({
+  name: getText(item?.name ?? item?.n, lang),
+  desc: getText(item?.desc ?? item?.d, lang),
+  price: item?.price ?? item?.p ?? '',
+  add: getText(item?.add, lang)
+});
+
 // Process menu data from external file or fallback
 const FOOD_CATS  = ['starters','burgers','mains','sides','desserts'];
 const DRINK_CATS = ['soft','beer','wine','sangria','sekt','cocktails','shots'];
@@ -653,27 +668,26 @@ const drinks = (typeof window.TECKELS_MENU !== 'undefined' && Array.isArray(wind
    ========================================================= */
 let currentLang = 'de';
 
-const get = (val, lang) => typeof val === 'string' ? val : (val ? val[lang] : '');
+const get = (val, lang) => typeof val === 'string' ? val : (val ? val[lang] || val.en || val.de || val.es || '' : '');
 
 function renderSection(s, lang){
-  const items = s.items.map(it=>{
-    const name = get(it.name, lang);
-    const desc = it.desc ? get(it.desc, lang) : '';
-    const add  = it.add  ? get(it.add , lang) : '';
+  const items = (s.items || []).map(it => {
+    const item = normalizeItem(it, lang);
     return `
       <div class="item">
         <div class="item-row">
-          <div class="item-name">${name}</div>
-          <div class="item-price">${it.price}</div>
+          <div class="item-name">${item.name}</div>
+          <div class="item-price">${item.price}</div>
         </div>
-        ${desc ? `<div class="item-desc">${desc}</div>` : ''}
-        ${add  ? `<div class="item-add">${add}</div>`   : ''}
+        ${item.desc ? `<div class="item-desc">${item.desc}</div>` : ''}
+        ${item.add ? `<div class="item-add">${item.add}</div>` : ''}
       </div>`;
   }).join('');
+
   return `
     <section class="section ${s.compact ? 'compact' : ''}" id="sec-${s.id}">
       <div class="section-head">
-        <h2>${get(s.title, lang)}</h2>
+        <h2>${get(s.title || s.name, lang)}</h2>
         <div class="head-line"></div>
       </div>
       ${items}
