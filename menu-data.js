@@ -1,5 +1,164 @@
 window.TECKELS_MENU = [
   {
+    "id": "breakfast",
+    "e": "🍳",
+    "name": {
+      "en": "Breakfast",
+      "de": "Frühstück",
+      "es": "Desayunos"
+    },
+    "sub": {
+      "en": "",
+      "de": "",
+      "es": ""
+    },
+    "items": [
+      {
+        "n": {
+          "en": "Avocado Toast",
+          "de": "Avocado Toast",
+          "es": "Tostada de Aguacate"
+        },
+        "d": {
+          "en": "Toasted Mallorcan country bread; olive oil; avocado; cherry tomatoes; spices · + egg 1,50 €",
+          "de": "Geröstetes mallorquinisches Landbrot; Olivenöl; Avocado; Cherry-Tomaten; Gewürze · + Ei 1,50 €",
+          "es": "Pan payés mallorquín tostado; aceite de oliva; aguacate; tomates cherry; especias · + huevo 1,50 €"
+        },
+        "p": "7,90 €"
+      },
+      {
+        "n": {
+          "en": "Extra Boiled Egg",
+          "de": "Extra gekochtes Ei",
+          "es": "Huevo cocido extra"
+        },
+        "d": {
+          "en": "",
+          "de": "",
+          "es": ""
+        },
+        "p": "1,50 €"
+      },
+      {
+        "n": {
+          "en": "Extra Bread Roll",
+          "de": "Extra Brötchen",
+          "es": "Panecillo extra"
+        },
+        "d": {
+          "en": "",
+          "de": "",
+          "es": ""
+        },
+        "p": "1,00 €"
+      },
+      {
+        "n": {
+          "en": "Extra Butter / Jam",
+          "de": "Extra Butter / Marmelade",
+          "es": "Mantequilla / mermelada extra"
+        },
+        "d": {
+          "en": "",
+          "de": "",
+          "es": ""
+        },
+        "p": "1,00 €"
+      },
+      {
+        "n": {
+          "en": "Extra Ham / Cheese / Salami",
+          "de": "Extra Schinken / Käse / Salami",
+          "es": "Jamón / queso / salami extra"
+        },
+        "d": {
+          "en": "",
+          "de": "",
+          "es": ""
+        },
+        "p": "2,50 €"
+      },
+      {
+        "n": {
+          "en": "Extra Serrano Ham",
+          "de": "Extra Serrano Ham",
+          "es": "Jamón serrano extra"
+        },
+        "d": {
+          "en": "",
+          "de": "",
+          "es": ""
+        },
+        "p": "3,50 €"
+      },
+      {
+        "n": {
+          "en": "Fresh Breakfast Bowl",
+          "de": "Fresh Breakfast Bowl",
+          "es": "Bowl de Desayuno Fresco"
+        },
+        "d": {
+          "en": "Greek yogurt; fresh seasonal fruit; granola / muesli; honey",
+          "de": "Griechischer Joghurt; frische Früchte der Saison; Granola / Müsli; Honig",
+          "es": "Yogur griego; fruta fresca de temporada; granola / muesli; miel"
+        },
+        "p": "6,90 €"
+      },
+      {
+        "n": {
+          "en": "German Breakfast",
+          "de": "Deutsches Frühstück",
+          "es": "Desayuno Alemán"
+        },
+        "d": {
+          "en": "Filter coffee or tea; 3 bread rolls; butter; jam; cheese; ham, salami; 1 boiled egg",
+          "de": "Filterkaffee oder Tee; 3 Brötchen; Butter; Marmelade; Käse; Schinken, Salami; 1 gekochtes Ei",
+          "es": "Café filtrado o té; 3 panecillos; mantequilla; mermelada; queso; jamón, salami; 1 huevo cocido"
+        },
+        "p": "9,50 €"
+      },
+      {
+        "n": {
+          "en": "Glass of Sparkling Wine 0,15l",
+          "de": "Glas Sekt 0,15l",
+          "es": "Copa de Cava 0,15l"
+        },
+        "d": {
+          "en": "",
+          "de": "",
+          "es": ""
+        },
+        "p": "2,90 €"
+      },
+      {
+        "n": {
+          "en": "Mallorcan Breakfast",
+          "de": "Mallorquinisches Frühstück",
+          "es": "Desayuno Mallorquín"
+        },
+        "d": {
+          "en": "Filter coffee or tea; 2 slices of toasted country bread; tomato; olive oil; Serrano ham; cheese",
+          "de": "Filterkaffee oder Tee; 2 Scheiben geröstetes Landbrot; Tomate; Olivenöl; Serrano-Schinken; Käse",
+          "es": "Café filtrado o té; 2 rebanadas de pan payés tostado; tomate; aceite de oliva; jamón serrano; queso"
+        },
+        "p": "9,50 €"
+      },
+      {
+        "n": {
+          "en": "Small Breakfast",
+          "de": "Kleines Frühstück",
+          "es": "Desayuno pequeño"
+        },
+        "d": {
+          "en": "Filter coffee or tea; 1 bread roll; butter; jam; cheese; salami; 1 boiled egg",
+          "de": "Filterkaffee oder Tee; 1 Brötchen; Butter; Marmelade; Käse; Salami; 1 gekochtes Ei",
+          "es": "Café filtrado o té; 1 panecillo; mantequilla; mermelada; queso; salami; 1 huevo cocido"
+        },
+        "p": "3,90 €"
+      }
+    ]
+  },
+  {
     "id": "starters",
     "e": "🥗",
     "name": {
