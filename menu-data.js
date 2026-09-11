@@ -15,16 +15,16 @@ window.TECKELS_MENU = [
     "items": [
       {
         "n": {
-          "en": "Albóndigas",
-          "de": "Albóndigas",
-          "es": "Albóndigas"
+          "en": "Bread, Alioli & Olives",
+          "de": "Brot, Alioli & Oliven",
+          "es": "Pan, Alioli y Aceitunas"
         },
         "d": {
-          "en": "Homemade Spanish meatballs in tomato sauce & bread",
-          "de": "Spanische hausgemachte Hackbällchen mit Tomatensauce & Brot",
-          "es": "Albóndigas caseras en salsa de tomate y pan"
+          "en": "Bread with alioli and olives",
+          "de": "Brot mit Alioli und Oliven",
+          "es": "Pan con alioli y aceitunas"
         },
-        "p": "11,90 €"
+        "p": "4,90 €"
       },
       {
         "n": {
@@ -33,63 +33,37 @@ window.TECKELS_MENU = [
           "es": "Burrata"
         },
         "d": {
-          "en": "Tomato sauce with burrata, cherry tomatoes & bread",
-          "de": "Tomatensauce mit Burrata, Cherry-Tomaten & Brot",
+          "en": "Tomato sauce with burrata, cherry tomatoes and bread",
+          "de": "Tomatensauce mit Burrata, Cherrytomaten und Brot",
           "es": "Salsa de tomate con burrata, tomates cherry y pan"
         },
         "p": "14,90 €"
       },
       {
         "n": {
-          "en": "Croquetas de Jamón y Queso",
-          "de": "Kroketten mit Schinken und Käse",
-          "es": "Croquetas de Jamón y Queso"
+          "en": "Cheese Board",
+          "de": "Käseplatte",
+          "es": "Tabla de Quesos"
         },
         "d": {
-          "en": "Ham and cheese croquettes",
-          "de": "Kroketten aus Schinken und Käse",
-          "es": "Croquetas de jamón y queso"
+          "en": "Cheese selection",
+          "de": "Käseauswahl",
+          "es": "Tabla de quesos (solo quesos)"
         },
-        "p": "5,90 €"
+        "p": "11,90 €"
       },
       {
         "n": {
-          "en": "Dátiles con Bacon",
+          "en": "Dates with Bacon",
           "de": "Datteln mit Speck",
-          "es": "Dátiles con Bacon"
+          "es": "Dátiles con Bacón"
         },
         "d": {
-          "en": "Dates with crispy bacon",
-          "de": "Datteln mit knusprigem Speck",
-          "es": "Dátiles con bacon crujiente"
+          "en": "Sweet dates wrapped in crispy bacon, served hot",
+          "de": "Süße Datteln mit knusprigem Speck, heiß serviert",
+          "es": "Dátiles dulces envueltos en bacón crujiente, servidos calientes"
         },
         "p": "5,90 €"
-      },
-      {
-        "n": {
-          "en": "Ensalada",
-          "de": "Ensalada",
-          "es": "Ensalada"
-        },
-        "d": {
-          "en": "Mixed salad with cherry tomatoes, onions, cress & bread · + chicken strips 12,90€",
-          "de": "Salatvariationen mit Cherry-Tomaten, Zwiebeln, Kresse & Brot · + Hähnchenbruststreifen 12,90€",
-          "es": "Ensalada mixta con tomates cherry, cebolla, berros y pan · + tiras de pollo 12,90€"
-        },
-        "p": "9,90 €"
-      },
-      {
-        "n": {
-          "en": "Ensalada de Gambas",
-          "de": "Ensalada de Gambas",
-          "es": "Ensalada de Gambas"
-        },
-        "d": {
-          "en": "Mixed salad with Black Tiger prawns, cherry tomatoes, onions, cress & bread",
-          "de": "Salatvariationen mit Black Tiger Garnelen, Cherry-Tomaten, Zwiebeln, Kresse & Brot",
-          "es": "Ensalada con gambas tigre, tomates cherry, cebolla, berros y pan"
-        },
-        "p": "9,90 €"
       },
       {
         "n": {
@@ -98,24 +72,63 @@ window.TECKELS_MENU = [
           "es": "Gambas al Ajillo"
         },
         "d": {
-          "en": "Black Tiger prawns in olive oil with garlic, paprika, tomatoes & bread",
-          "de": "Black Tiger Garnelen in Olivenöl mit Knoblauch, Paprika, Tomaten & Brot",
-          "es": "Gambas tigre en aceite de oliva con ajo, pimentón, tomates y pan"
+          "en": "Black Tiger prawns in olive oil with garlic, paprika, tomatoes and bread",
+          "de": "Black Tiger Garnelen in Olivenöl mit Knoblauch, Paprika, Tomaten und Brot",
+          "es": "Gambas Black Tiger en aceite de oliva con ajo, pimentón, tomate y pan"
         },
         "p": "15,90 €"
       },
       {
         "n": {
-          "en": "Pan y Alioli",
-          "de": "Pan y Alioli",
-          "es": "Pan y Alioli"
+          "en": "Ham & Cheese Croquettes",
+          "de": "Kroketten mit Schinken und Käse",
+          "es": "Croquetas de jamón y queso"
         },
         "d": {
-          "en": "Bread with alioli",
-          "de": "Brot mit Alioli",
-          "es": "Pan con alioli"
+          "en": "Crispy fried croquettes filled with creamy béchamel, fine ham and melted cheese",
+          "de": "Knusprig frittierte Kroketten mit cremiger Béchamel, feinem Schinken und geschmolzenem Käse",
+          "es": "Crujientes croquetas fritas rellenas de una cremosa bechamel, jamón fino y queso fundido"
         },
-        "p": "4,90 €"
+        "p": "5,90 €"
+      },
+      {
+        "n": {
+          "en": "Meatballs",
+          "de": "Hackbällchen",
+          "es": "Albóndigas"
+        },
+        "d": {
+          "en": "Homemade Spanish meatballs with tomato sauce and bread",
+          "de": "Spanische hausgemachte Hackbällchen mit Tomatensauce und Brot",
+          "es": "Albóndigas caseras españolas con salsa de tomate y pan"
+        },
+        "p": "11,90 €"
+      },
+      {
+        "n": {
+          "en": "Mediterranean Baked Feta",
+          "de": "Mediterrikanischer gebackener Feta",
+          "es": "Feta al Horno Mediterráneo"
+        },
+        "d": {
+          "en": "Baked feta with vegetables and olives, red and green mojo with bread",
+          "de": "Gebackener Feta mit Gemüse und Oliven, rotem und grünem Mojo mit Brot",
+          "es": "Queso feta al horno con verduras y aceitunas, mojo rojo y verde con pan"
+        },
+        "p": "12,90 €"
+      },
+      {
+        "n": {
+          "en": "Patatas Bravas",
+          "de": "Patatas Bravas",
+          "es": "Patatas Bravas"
+        },
+        "d": {
+          "en": "Crispy potato cubes with homemade spicy brava sauce and alioli",
+          "de": "Knusprige Kartoffelwürfel mit hausgemachter scharfer Bravas-Sauce und Alioli",
+          "es": "Dados de patata crujientes con salsa brava picante casera y alioli"
+        },
+        "p": "6,90 €"
       },
       {
         "n": {
@@ -126,48 +139,48 @@ window.TECKELS_MENU = [
         "d": {
           "en": "Spanish peppers fried in olive oil with coarse sea salt",
           "de": "Spanische Paprikaschoten in Olivenöl gebraten mit grobem Meersalz",
-          "es": "Pimientos fritos en aceite de oliva con sal gruesa"
+          "es": "Pimientos españoles fritos en aceite de oliva con sal marina gruesa"
         },
         "p": "8,90 €"
       },
       {
         "n": {
+          "en": "Salad",
+          "de": "Salat",
+          "es": "Ensalada"
+        },
+        "d": {
+          "en": "Mixed salad with cherry tomatoes, onion, cress and bread · + chicken breast strips 13,90€ · + Black Tiger prawns 15,90€ · + burrata 14,90€",
+          "de": "Salatvariation mit Cherrytomaten, Zwiebeln, Kresse und Brot · + Hähnchenbruststreifen 13,90€ · + Black Tiger Garnelen 15,90€ · + Burrata 14,90€",
+          "es": "Variación de ensalada con tomates cherry, cebolla, berros y pan · + Tiras de Pechuga de Pollo 13,90€ · + Gambas Black Tiger 15,90€ · + Burrata 14,90€"
+        },
+        "p": "9,90 €"
+      },
+      {
+        "n": {
+          "en": "Serrano Ham & Cheese Board",
+          "de": "Serrano-Schinken- & Käseplatte",
+          "es": "Tabla de Jamón Serrano y Quesos"
+        },
+        "d": {
+          "en": "Serrano ham and a selection of cheeses with olives and bread",
+          "de": "Serrano-Schinken und Käseauswahl mit Oliven und Brot",
+          "es": "Jamón serrano y selección de quesos con aceitunas y pan"
+        },
+        "p": "16,90 €"
+      },
+      {
+        "n": {
           "en": "Smoked Wagyu Carpaccio",
-          "de": "Smoked Wagyu Carpaccio",
-          "es": "Smoked Wagyu Carpaccio"
+          "de": "Geräuchertes Wagyu-Carpaccio",
+          "es": "Carpaccio de Wagyu"
         },
         "d": {
-          "en": "Wagyu carpaccio with parmesan, arugula, truffle mayo & black volcanic salt",
-          "de": "Wagyu-Carpaccio mit Parmesan, Rucola, Trüffelmayo & schwarzem Vulkansalz",
-          "es": "Carpaccio de Wagyu con parmesano, rúcula, mayonesa de trufa y sal volcánica negra"
+          "en": "Smoked Wagyu carpaccio with parmesan, arugula, truffle mayo and volcanic salt",
+          "de": "Geräuchertes Wagyu-Carpaccio mit Parmesan, Rucola, Trüffelmayonnaise und Vulkansalz",
+          "es": "Carpaccio de Wagyu ahumado con parmesano, rúcula, mayonesa de trufa y sal volcánica"
         },
         "p": "16,90 €"
-      },
-      {
-        "n": {
-          "en": "Tabla de Jamón Serrano y Queso",
-          "de": "Tabla de Jamón Serrano y Queso",
-          "es": "Tabla de Jamón Serrano y Queso"
-        },
-        "d": {
-          "en": "Spanish Serrano ham & cheese selection with olives & bread",
-          "de": "Spanischer Serrano-Schinken & Käseauswahl mit Oliven & Brot",
-          "es": "Jamón serrano y quesos con aceitunas y pan"
-        },
-        "p": "16,90 €"
-      },
-      {
-        "n": {
-          "en": "Tabla de Quesos",
-          "de": "Tabla de Quesos",
-          "es": "Tabla de Quesos"
-        },
-        "d": {
-          "en": "Spanish cheese selection with fig jam & bread",
-          "de": "Spanische Käseauswahl mit Feigenmarmelade & Brot",
-          "es": "Selección de quesos españoles con mermelada de higo y pan"
-        },
-        "p": "11,90 €"
       }
     ]
   },
@@ -180,9 +193,9 @@ window.TECKELS_MENU = [
       "es": "Burgers"
     },
     "sub": {
-      "en": "All burgers in wholegrain bun with roasted onions, salad, cheddar, gherkin & Teckel's Fries.",
-      "de": "Alle Burger im Integral-Bun mit gerösteten Zwiebeln, Salat, Cheddar-Käse, Gewürzgurke & Teckel's Fries.",
-      "es": "Todos los burgers en pan integral con cebolla asada, ensalada, cheddar, pepinillo y Teckel's Fries."
+      "en": "",
+      "de": "",
+      "es": ""
     },
     "items": [
       {
@@ -192,9 +205,9 @@ window.TECKELS_MENU = [
           "es": "Black Angus Burger"
         },
         "d": {
-          "en": "200g Mallorcan Black Angus beef",
-          "de": "200g Mallorquinisches Black Angus Beef",
-          "es": "200g de ternera Black Angus mallorquina"
+          "en": "200 g Mallorcan Black Angus beef from Ramaders, wholegrain bun with roasted onion, lettuce, cheddar, gherkin & Teckel's Fries",
+          "de": "200 g mallorquinisches Black Angus Rind von Ramaders, Vollkorn-Bun mit gerösteter Zwiebel, Salat, Cheddar, Gewürzgurke & Teckel's Fries",
+          "es": "200 g de carne Black Angus mallorquina de Ramaders, pan integral con cebolla tostada, lechuga, queso cheddar, pepinillo & patatas Teckel's"
         },
         "p": "18,90 €"
       },
@@ -202,27 +215,27 @@ window.TECKELS_MENU = [
         "n": {
           "en": "Chicken Fillet Burger",
           "de": "Chicken Fillet Burger",
-          "es": "Burger de Pollo"
+          "es": "Chicken Fillet Burger"
         },
         "d": {
-          "en": "Grilled chicken breast fillet",
-          "de": "Gegrilltes Hähnchenbrustfilet",
-          "es": "Filete de pechuga de pollo a la plancha"
+          "en": "Grilled chicken breast fillet in a wholegrain bun with roasted onion, lettuce, cheddar, gherkin and Teckel's Fries",
+          "de": "Gegrilltes Hähnchenbrustfilet im Vollkorn-Bun mit gerösteter Zwiebel, Salat, Cheddar, Gewürzgurke und Teckel's Fries",
+          "es": "Filete de pechuga de pollo a la parrilla en pan integral con cebolla tostada, lechuga, queso cheddar, pepinillo y patatas Teckel's"
         },
         "p": "17,90 €"
       },
       {
         "n": {
-          "en": "Vegan Meat Burger",
-          "de": "Vegan Meat Burger",
-          "es": "Burger Vegano"
+          "en": "Zero Meat Burger",
+          "de": "Zero Meat Burger",
+          "es": "Zero Meat Burger"
         },
         "d": {
-          "en": "Vegan meat patty (vegetarian)",
-          "de": "Vegan Meat Patty (vegetarisch)",
-          "es": "Hamburguesa vegana (vegetariano)"
+          "en": "Vegan patty in a wholegrain bun with roasted onion, lettuce, cheddar, gherkin and Teckel's Fries (vegetarian)",
+          "de": "Veganes Patty im Vollkorn-Bun mit gerösteter Zwiebel, Salat, Cheddar, Gewürzgurke und Teckel's Fries (vegetarisch)",
+          "es": "Patty vegano en pan integral con cebolla tostada, lechuga, queso cheddar, pepinillo y patatas Teckel's (vegetariana)"
         },
-        "p": "15,90 €"
+        "p": "16,90 €"
       }
     ]
   },
@@ -244,12 +257,12 @@ window.TECKELS_MENU = [
         "n": {
           "en": "Chicken Wings",
           "de": "Chicken Wings",
-          "es": "Alitas de Pollo"
+          "es": "Chicken Wings"
         },
         "d": {
-          "en": "Marinated free-range chicken wings with dip & Teckel's Fries",
-          "de": "Marinierte Flügel vom Landhuhn mit Dip & Teckel's Fries",
-          "es": "Alitas de pollo de corral marinadas con salsa y Teckel's Fries"
+          "en": "Marinated free-range chicken wings with sauce and Teckel's Fries",
+          "de": "Marinierte Flügel vom Landhuhn mit Sauce und Teckel's Fries",
+          "es": "Alitas de pollo de corral marinadas con salsa y patatas Teckel's"
         },
         "p": "13,90 €"
       },
@@ -260,9 +273,9 @@ window.TECKELS_MENU = [
           "es": "Linguini"
         },
         "d": {
-          "en": "Tomato-ricotta sauce with parmesan · + Black Tiger prawns 14,90€",
-          "de": "Tomaten-Ricotta-Sauce mit Parmesan · + Black Tiger Garnelen 14,90€",
-          "es": "Salsa de tomate-ricotta con parmesano · + gambas tigre 14,90€"
+          "en": "Tomato and ricotta sauce with parmesan · + Black Tiger prawns 15,90€",
+          "de": "Tomaten-Ricotta-Sauce mit Parmesan · + Black Tiger Garnelen 15,90€",
+          "es": "Salsa de tomate y ricotta con parmesano · + Gambas Black Tiger 15,90€"
         },
         "p": "11,90 €"
       },
@@ -270,12 +283,12 @@ window.TECKELS_MENU = [
         "n": {
           "en": "Schnitzel with Fries",
           "de": "Schnitzel mit Pommes",
-          "es": "Escalope con Patatas"
+          "es": "Schnitzel con patatas"
         },
         "d": {
-          "en": "Pork or chicken schnitzel with Teckel's Fries & lemon",
-          "de": "Schweine- oder Hähnchenschnitzel mit Teckel's Fries & Zitrone",
-          "es": "Escalope de cerdo o pollo con Teckel's Fries y limón"
+          "en": "Pork or chicken schnitzel with Teckel's Fries and lemon",
+          "de": "Schweine- oder Hähnchenschnitzel mit Teckel's Fries und Zitrone",
+          "es": "Escalope de cerdo o pollo con patatas Teckel's y limón"
         },
         "p": "15,90 €"
       },
@@ -283,14 +296,14 @@ window.TECKELS_MENU = [
         "n": {
           "en": "Spare Ribs",
           "de": "Spare Ribs",
-          "es": "Costillas"
+          "es": "Spare Ribs"
         },
         "d": {
-          "en": "Homemade spare ribs with BBQ sauce & Teckel's Fries",
-          "de": "Hausgemachte Spare Ribs mit BBQ-Sauce & Teckel's Fries",
-          "es": "Costillas caseras con salsa BBQ y Teckel's Fries"
+          "en": "Homemade spare ribs with BBQ sauce and Teckel's Fries",
+          "de": "Hausgemachte Spare Ribs mit BBQ-Sauce und Teckel's Fries",
+          "es": "Costillas caseras con salsa BBQ y patatas Teckel's"
         },
-        "p": "19,90 €"
+        "p": "18,90 €"
       }
     ]
   },
@@ -310,35 +323,35 @@ window.TECKELS_MENU = [
     "items": [
       {
         "n": {
+          "en": "Extra Alioli or Red Mojo",
+          "de": "Extra Alioli oder roter Mojo",
+          "es": "Extra Alioli o Mojó rojo"
+        },
+        "d": {
+          "en": "",
+          "de": "",
+          "es": ""
+        },
+        "p": "2,00 €"
+      },
+      {
+        "n": {
           "en": "Extra Bacon",
           "de": "Extra Bacon",
-          "es": "Bacon extra"
+          "es": "Extra Bacon"
         },
         "d": {
           "en": "",
           "de": "",
           "es": ""
         },
-        "p": "5,90 €"
+        "p": "2,50 €"
       },
       {
         "n": {
-          "en": "Extra Bread",
-          "de": "Extra Brot",
-          "es": "Pan extra"
-        },
-        "d": {
-          "en": "",
-          "de": "",
-          "es": ""
-        },
-        "p": "1,50 €"
-      },
-      {
-        "n": {
-          "en": "Extra Chicken Strips",
+          "en": "Extra Chicken Breast Strips",
           "de": "Extra Hähnchenbruststreifen",
-          "es": "Tiras de pollo extra"
+          "es": "Tiras de Pechuga de Pollo"
         },
         "d": {
           "en": "",
@@ -349,9 +362,9 @@ window.TECKELS_MENU = [
       },
       {
         "n": {
-          "en": "Extra Prawns (5 pcs)",
-          "de": "Extra Garnelen (5 Stk.)",
-          "es": "Gambas extra (5 uds.)"
+          "en": "Extra Prawns (4 pcs.)",
+          "de": "Extra Garnelen (4 Stk.)",
+          "es": "Extra Gambas (4 uds.)"
         },
         "d": {
           "en": "",
@@ -362,9 +375,22 @@ window.TECKELS_MENU = [
       },
       {
         "n": {
-          "en": "Olives",
-          "de": "Oliven",
-          "es": "Aceitunas"
+          "en": "Mayonnaise or Ketchup",
+          "de": "Mayonnaise oder Ketchup",
+          "es": "Mayonesa o Ketchup"
+        },
+        "d": {
+          "en": "",
+          "de": "",
+          "es": ""
+        },
+        "p": "0,60 €"
+      },
+      {
+        "n": {
+          "en": "Olives or Jalapeños",
+          "de": "Oliven oder Jalapeños",
+          "es": "Aceitunas o Jalapeños"
         },
         "d": {
           "en": "",
@@ -376,8 +402,8 @@ window.TECKELS_MENU = [
       {
         "n": {
           "en": "Side Salad",
-          "de": "Salat Beilage",
-          "es": "Ensalada pequeña"
+          "de": "Beilagensalat",
+          "es": "Guarnición de ensalada"
         },
         "d": {
           "en": "",
@@ -390,7 +416,7 @@ window.TECKELS_MENU = [
         "n": {
           "en": "Teckel's Fries",
           "de": "Teckel's Fries",
-          "es": "Teckel's Fries"
+          "es": "Patatas fritas Teckel's"
         },
         "d": {
           "en": "",
@@ -417,29 +443,16 @@ window.TECKELS_MENU = [
     "items": [
       {
         "n": {
-          "en": "Lavakuchen",
-          "de": "Lavakuchen",
-          "es": "Coulant de Chocolate"
+          "en": "Chocolate Coulant",
+          "de": "Schokoladen-Coulant",
+          "es": "Coulant de chocolate"
         },
         "d": {
-          "en": "Lava cake with liquid chocolate center & vanilla ice cream",
-          "de": "Lavakuchen mit flüssigem Schokokern & einer Kugel Vanilleeis",
-          "es": "Bizcocho con centro de chocolate líquido y helado de vainilla"
+          "en": "Chocolate cake with liquid center and a scoop of vanilla ice cream",
+          "de": "Schokoladenkuchen mit flüssigem Kern und einer Kugel Vanilleeis",
+          "es": "Pastel de chocolate con interior fundido y una bola de helado de vainilla"
         },
         "p": "6,90 €"
-      },
-      {
-        "n": {
-          "en": "Vanilla Ice Cream Wild Berry",
-          "de": "Vanilleeis Wild Berry",
-          "es": "Helado de Vainilla Wild Berry"
-        },
-        "d": {
-          "en": "Vanilla ice cream with wild berries & fresh mint",
-          "de": "Vanilleeis mit Waldbeeren & frischer Minze",
-          "es": "Helado de vainilla con frutos del bosque y menta fresca"
-        },
-        "p": "4,90 €"
       }
     ]
   },
@@ -459,9 +472,9 @@ window.TECKELS_MENU = [
     "items": [
       {
         "n": {
-          "en": "Juices & Spritzers 0,3l",
-          "de": "Säfte & Saftschorlen 0,3l",
-          "es": "Zumos y refrescos 0,3l"
+          "en": "Juice & Juice with Water 0,3l",
+          "de": "Saft & Saft mit Wasser 0,3l",
+          "es": "Zumo y zumo con agua 0,3l"
         },
         "d": {
           "en": "",
@@ -477,22 +490,22 @@ window.TECKELS_MENU = [
           "es": "Refrescos 0,3l"
         },
         "d": {
-          "en": "",
-          "de": "",
-          "es": ""
+          "en": "Soft drinks, Aquarius, Nestea",
+          "de": "Softdrinks, Aquarius, Nestea",
+          "es": "Refrescos, Aquarius, Nestea"
         },
         "p": "3,50 €"
       },
       {
         "n": {
-          "en": "Soft Drinks 0,5l",
-          "de": "Softdrinks 0,5l",
-          "es": "Refrescos 0,5l"
+          "en": "Soft Drinks 0,4l",
+          "de": "Softdrinks 0,4l",
+          "es": "Refrescos 0,4l"
         },
         "d": {
-          "en": "",
-          "de": "",
-          "es": ""
+          "en": "Soft drinks, Aquarius, Nestea",
+          "de": "Softdrinks, Aquarius, Nestea",
+          "es": "Refrescos, Aquarius, Nestea"
         },
         "p": "4,40 €"
       },
@@ -503,9 +516,9 @@ window.TECKELS_MENU = [
           "es": "Agua 0,3l"
         },
         "d": {
-          "en": "",
-          "de": "",
-          "es": ""
+          "en": "Still or sparkling",
+          "de": "Still oder mit Kohlensäure",
+          "es": "Con o sin gas"
         },
         "p": "2,90 €"
       },
@@ -516,9 +529,9 @@ window.TECKELS_MENU = [
           "es": "Agua 1,3l"
         },
         "d": {
-          "en": "",
-          "de": "",
-          "es": ""
+          "en": "Still or sparkling",
+          "de": "Still oder mit Kohlensäure",
+          "es": "Con o sin gas"
         },
         "p": "6,90 €"
       }
@@ -553,9 +566,9 @@ window.TECKELS_MENU = [
       },
       {
         "n": {
-          "en": "Erdinger alkoholfrei 0,5l",
-          "de": "Erdinger alkoholfrei 0,5l",
-          "es": "Erdinger sin alcohol 0,5l"
+          "en": "Erdinger alkoholfrei 0,5l bottle",
+          "de": "Erdinger alkoholfrei 0,5l Flasche",
+          "es": "Erdinger sin alcohol 0,5l botella"
         },
         "d": {
           "en": "",
@@ -580,7 +593,7 @@ window.TECKELS_MENU = [
       {
         "n": {
           "en": "Estrella Galicia 0,3l draft",
-          "de": "Estrella Galicia 0,3l Faß",
+          "de": "Estrella Galicia 0,3l vom Fass",
           "es": "Estrella Galicia 0,3l barril"
         },
         "d": {
@@ -593,7 +606,7 @@ window.TECKELS_MENU = [
       {
         "n": {
           "en": "Estrella Galicia 0,5l draft",
-          "de": "Estrella Galicia 0,5l Faß",
+          "de": "Estrella Galicia 0,5l vom Fass",
           "es": "Estrella Galicia 0,5l barril"
         },
         "d": {
@@ -605,9 +618,9 @@ window.TECKELS_MENU = [
       },
       {
         "n": {
-          "en": "Estrella alkoholfrei 0,33l",
-          "de": "Estrella alkoholfrei 0,33l",
-          "es": "Estrella sin alcohol 0,33l"
+          "en": "Estrella alkoholfrei 0,33l bottle",
+          "de": "Estrella alkoholfrei 0,33l Flasche",
+          "es": "Estrella sin alcohol 0,33l botella"
         },
         "d": {
           "en": "",
@@ -622,9 +635,9 @@ window.TECKELS_MENU = [
     "id": "wine",
     "e": "🍷",
     "name": {
-      "en": "Wine",
-      "de": "Weine",
-      "es": "Vinos"
+      "en": "Wine by the Glass",
+      "de": "Weine im Glas",
+      "es": "Copas Vino"
     },
     "sub": {
       "en": "",
@@ -634,94 +647,42 @@ window.TECKELS_MENU = [
     "items": [
       {
         "n": {
-          "en": "BATUTA Tempranillo 0,2l",
-          "de": "BATUTA Tempranillo 0,2l",
-          "es": "BATUTA Tempranillo 0,2l"
+          "en": "BATUTA 0,2l",
+          "de": "BATUTA 0,2l",
+          "es": "BATUTA 0,2l"
         },
         "d": {
-          "en": "Red or rosé wine",
-          "de": "Rot- o. Rosewein",
-          "es": "Vino tinto o rosado"
+          "en": "Red, white or rosé wine",
+          "de": "Rot-, Weiß- oder Roséwein",
+          "es": "Vino tinto, blanco o rosado"
         },
         "p": "4,50 €"
       },
       {
         "n": {
-          "en": "BATUTA Tempranillo 0,75l",
-          "de": "BATUTA Tempranillo 0,75l",
-          "es": "BATUTA Tempranillo 0,75l"
+          "en": "BATUTA Bottle 0,75l",
+          "de": "BATUTA Flasche 0,75l",
+          "es": "BATUTA Botella 0,75l"
         },
         "d": {
-          "en": "Bottle — red or rosé",
-          "de": "Flasche — Rotwein o. Rosewein",
-          "es": "Botella — tinto o rosado"
+          "en": "Red, white or rosé wine",
+          "de": "Rot-, Weiß- oder Roséwein",
+          "es": "Vino tinto, blanco o rosado"
         },
         "p": "15,00 €"
       },
       {
         "n": {
-          "en": "Red / Rosé / White wine 0,3l",
-          "de": "Rot- / Rosé- / Weisswein 0,3l",
-          "es": "Vino tinto / rosado / blanco 0,3l"
-        },
-        "d": {
-          "en": "",
-          "de": "",
-          "es": ""
-        },
-        "p": "5,50 €"
-      },
-      {
-        "n": {
           "en": "Weinschorle 0,3l",
           "de": "Weinschorle 0,3l",
-          "es": "Vino con gaseosa 0,3l"
+          "es": "Weinschorle 0,3l"
         },
         "d": {
-          "en": "Red, rosé or white wine spritzer",
-          "de": "Rot-, Rose- oder Weisswein",
-          "es": "Tinto, rosado o blanco con soda"
+          "en": "Wine with sparkling water or Sprite",
+          "de": "Wein mit Mineralwasser oder Sprite",
+          "es": "Vino con agua con gas o Sprite"
         },
         "p": "5,50 €"
-      },
-      {
-        "n": {
-          "en": "copaboca Rioja Crianza 0,75l",
-          "de": "copaboca Rioja Crianza 0,75l",
-          "es": "copaboca Rioja Crianza 0,75l"
-        },
-        "d": {
-          "en": "Bottle — red wine",
-          "de": "Flasche — Rotwein",
-          "es": "Botella — vino tinto"
-        },
-        "p": "25,00 €"
-      },
-      {
-        "n": {
-          "en": "copaboca Rueda Verdejo 0,2l",
-          "de": "copaboca Rueda Verdejo 0,2l",
-          "es": "copaboca Rueda Verdejo 0,2l"
-        },
-        "d": {
-          "en": "White wine",
-          "de": "Weisswein",
-          "es": "Vino blanco"
-        },
-        "p": "4,50 €"
-      },
-      {
-        "n": {
-          "en": "copaboca Rueda Verdejo 0,75l",
-          "de": "copaboca Rueda Verdejo 0,75l",
-          "es": "copaboca Rueda Verdejo 0,75l"
-        },
-        "d": {
-          "en": "Bottle — white wine",
-          "de": "Flasche — Weisswein",
-          "es": "Botella — vino blanco"
-        },
-        "p": "25,00 €"
       }
     ]
   },
@@ -742,7 +703,7 @@ window.TECKELS_MENU = [
       {
         "n": {
           "en": "Sangria Red or White 0,5l",
-          "de": "Sangria Rot o. Weiss 0,5l",
+          "de": "Sangria Rot oder Weiß 0,5l",
           "es": "Sangría roja o blanca 0,5l"
         },
         "d": {
@@ -750,12 +711,12 @@ window.TECKELS_MENU = [
           "de": "",
           "es": ""
         },
-        "p": "7,90 €"
+        "p": "8,90 €"
       },
       {
         "n": {
           "en": "Sangria Red or White 1,3l",
-          "de": "Sangria Rot o. Weiss 1,3l",
+          "de": "Sangria Rot oder Weiß 1,3l",
           "es": "Sangría roja o blanca 1,3l"
         },
         "d": {
@@ -773,7 +734,7 @@ window.TECKELS_MENU = [
     "name": {
       "en": "Sparkling & Mix",
       "de": "Sekt & Mixdrinks",
-      "es": "Cava & Combinados"
+      "es": "Cava & Mixdrinks"
     },
     "sub": {
       "en": "",
@@ -784,7 +745,7 @@ window.TECKELS_MENU = [
       {
         "n": {
           "en": "Glass of Cava",
-          "de": "Glas Sekt",
+          "de": "Glas Cava",
           "es": "Copa de Cava"
         },
         "d": {
@@ -801,24 +762,11 @@ window.TECKELS_MENU = [
           "es": "Hugo"
         },
         "d": {
-          "en": "0,3l",
-          "de": "0,3l",
-          "es": "0,3l"
+          "en": "0,4l",
+          "de": "0,4l",
+          "es": "0,4l"
         },
         "p": "8,50 €"
-      },
-      {
-        "n": {
-          "en": "Smirnoff Ice",
-          "de": "Smirnoff Ice",
-          "es": "Smirnoff Ice"
-        },
-        "d": {
-          "en": "0,275l",
-          "de": "0,275l",
-          "es": "0,275l"
-        },
-        "p": "3,90 €"
       },
       {
         "n": {
@@ -851,26 +799,52 @@ window.TECKELS_MENU = [
     "items": [
       {
         "n": {
-          "en": "Diverse Longdrinks",
-          "de": "Diverse Longdrinks",
-          "es": "Combinados variados"
+          "en": "Copas",
+          "de": "Copas",
+          "es": "Copas"
         },
         "d": {
-          "en": "0,3l",
-          "de": "0,3l",
-          "es": "0,3l"
+          "en": "0,3l incl. soft drink",
+          "de": "0,3l inkl. Softdrink",
+          "es": "0,3l incl. refresco"
         },
         "p": "7,50 €"
       },
       {
         "n": {
-          "en": "JimBeam or JackDaniel's",
-          "de": "JimBeam o. JackDaniel's",
-          "es": "JimBeam o JackDaniel's"
+          "en": "Copas Signature",
+          "de": "Copas Signature",
+          "es": "Copas Signature"
         },
         "d": {
           "en": "0,3l incl. soft drink",
-          "de": "0,3l inkl. Softdrink nach Wahl",
+          "de": "0,3l inkl. Softdrink",
+          "es": "0,3l incl. refresco"
+        },
+        "p": "9,50 €"
+      },
+      {
+        "n": {
+          "en": "Gin Tonic 0,0 %",
+          "de": "Gin Tonic 0,0 %",
+          "es": "Gin Tonic 0,0 %"
+        },
+        "d": {
+          "en": "0,3l gin without alcohol and tonic",
+          "de": "0,3l alkoholfreier Gin und Tonic",
+          "es": "0,3l gin sin alcohol y tónica"
+        },
+        "p": "8,50 €"
+      },
+      {
+        "n": {
+          "en": "JimBeam or JackDaniel's",
+          "de": "JimBeam o. JackDaniel's",
+          "es": "JimBeam o. JackDaniel's"
+        },
+        "d": {
+          "en": "0,3l incl. soft drink",
+          "de": "0,3l inkl. Softdrink",
           "es": "0,3l incl. refresco"
         },
         "p": "9,50 €"
@@ -895,37 +869,24 @@ window.TECKELS_MENU = [
           "es": "Mojito"
         },
         "d": {
-          "en": "0,4l — Classic, Strawberry, Passionfruit",
-          "de": "0,4l — Classic, Erdbeere, Passionfruit",
-          "es": "0,4l — Clásico, Fresa, Maracuyá"
+          "en": "0,4l — Classic, Strawberry, Wild Berry",
+          "de": "0,4l — Klassisch, Erdbeere, Wild Berry",
+          "es": "0,4l — Clásico, Fresa, Wild Berry"
         },
         "p": "9,90 €"
       },
       {
         "n": {
-          "en": "Smirnoff Vodka",
-          "de": "Smirnoff Vodka",
-          "es": "Smirnoff Vodka"
+          "en": "Virgin Mojito",
+          "de": "Virgin Mojito",
+          "es": "Virgen Mojito"
         },
         "d": {
-          "en": "0,3l incl. soft drink or Red Bull",
-          "de": "0,3l inkl. Softdrink o. Red Bull",
-          "es": "0,3l incl. refresco o Red Bull"
+          "en": "0,4l — Classic, Strawberry, Wild Berry",
+          "de": "0,4l — Klassisch, Erdbeere, Wild Berry",
+          "es": "0,4l — Clásico, Fresa, Wild Berry"
         },
-        "p": "9,50 €"
-      },
-      {
-        "n": {
-          "en": "Southern Comfort",
-          "de": "Southern Comfort",
-          "es": "Southern Comfort"
-        },
-        "d": {
-          "en": "0,3l incl. soft drink",
-          "de": "0,3l inkl. Softdrink nach Wahl",
-          "es": "0,3l incl. refresco"
-        },
-        "p": "9,50 €"
+        "p": "7,50 €"
       }
     ]
   },
@@ -945,9 +906,9 @@ window.TECKELS_MENU = [
     "items": [
       {
         "n": {
-          "en": "Diverse Shots",
-          "de": "Diverse Shots",
-          "es": "Chupitos variados"
+          "en": "Shots",
+          "de": "Shots",
+          "es": "Chupitos"
         },
         "d": {
           "en": "2,0 cl",
@@ -958,9 +919,9 @@ window.TECKELS_MENU = [
       },
       {
         "n": {
-          "en": "Selected Shots",
-          "de": "Ausgewählte Shots",
-          "es": "Chupitos seleccionados"
+          "en": "Shots with Ice",
+          "de": "Shots mit Eis",
+          "es": "Chupitos con hielo"
         },
         "d": {
           "en": "2,0 cl",
@@ -968,6 +929,61 @@ window.TECKELS_MENU = [
           "es": "2,0 cl"
         },
         "p": "4,50 €"
+      }
+    ]
+  },
+  {
+    "id": "wine_bottles",
+    "e": "🍷",
+    "name": {
+      "en": "Wine Bottles",
+      "de": "Weinflaschen",
+      "es": "Botellas Vino"
+    },
+    "sub": {
+      "en": "",
+      "de": "",
+      "es": ""
+    },
+    "items": [
+      {
+        "n": {
+          "en": "Bottle of Cava",
+          "de": "Flasche Cava",
+          "es": "Botella de Cava"
+        },
+        "d": {
+          "en": "0,75l dry",
+          "de": "0,75l trocken",
+          "es": "0,75l seco"
+        },
+        "p": "25,00 €"
+      },
+      {
+        "n": {
+          "en": "HALLAZGO Crinaza",
+          "de": "HALLAZGO Crinaza",
+          "es": "HALLAZGO Crinaza"
+        },
+        "d": {
+          "en": "0,75l Rioja (red wine)",
+          "de": "0,75l Rioja (Rotwein)",
+          "es": "0,75l Rioja (vino tinto)"
+        },
+        "p": "25,00 €"
+      },
+      {
+        "n": {
+          "en": "Señorío de lizia",
+          "de": "Señorío de lizia",
+          "es": "Señorío de lizia"
+        },
+        "d": {
+          "en": "0,75l Verdejo (white wine)",
+          "de": "0,75l Verdejo (Weißwein)",
+          "es": "0,75l Verdejo (vino blanco)"
+        },
+        "p": "25,00 €"
       }
     ]
   }
