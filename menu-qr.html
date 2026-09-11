@@ -354,12 +354,18 @@
 
   <!-- ========== TABS ========== -->
   <div class="tabs" role="tablist">
-    <button data-tab="food" class="on" data-i18n="tab_food">Speisen</button>
+    <button data-tab="breakfast" class="on" data-i18n="tab_breakfast">Frühstück</button>
+    <button data-tab="food" data-i18n="tab_food">Speisen</button>
     <button data-tab="drinks" data-i18n="tab_drinks">Getränke</button>
   </div>
 
+  <!-- ========== BREAKFAST PAGE ========== -->
+  <div class="page on" id="page-breakfast">
+    <div class="menu-grid" id="grid-breakfast"></div>
+  </div>
+
   <!-- ========== FOOD PAGE ========== -->
-  <div class="page on" id="page-food">
+  <div class="page" id="page-food">
     <div class="menu-grid" id="grid-food"></div>
     <footer>
       <span data-i18n="foot_food">Wir verwenden ausschließlich lokales Qualitätsfleisch von Ramaders Agrupats, Felanitx.</span>
@@ -387,6 +393,7 @@ const ui = {
   de:{
     title:"TECKEL'S",
     season:"Sommer 2026",
+    tab_breakfast:"Frühstück",
     tab_food:"Speisen",
     tab_drinks:"Getränke",
     foot_food:"Wir verwenden ausschließlich lokales Qualitätsfleisch von Ramaders Agrupats, Felanitx.",
@@ -395,6 +402,7 @@ const ui = {
   es:{
     title:"TECKEL'S",
     season:"Verano 2026",
+    tab_breakfast:"Desayunos",
     tab_food:"Comida",
     tab_drinks:"Bebidas",
     foot_food:"Utilizamos únicamente carne de origen local de Ramaders Agrupats en Felanitx.",
@@ -403,6 +411,7 @@ const ui = {
   en:{
     title:"TECKEL'S",
     season:"Summer 2026",
+    tab_breakfast:"Breakfast",
     tab_food:"Food",
     tab_drinks:"Drinks",
     foot_food:"We only use locally sourced meat from Ramaders Agrupats in Felanitx, Mallorca.",
@@ -695,6 +704,8 @@ function renderSection(s, lang){
 }
 
 function render(){
+  const breakfast = (typeof window.TECKELS_MENU !== 'undefined' && Array.isArray(window.TECKELS_MENU)) ? window.TECKELS_MENU.filter(s => s.id === 'breakfast') : [];
+  document.getElementById('grid-breakfast').innerHTML = breakfast.map(s=>renderSection(s, currentLang)).join('');
   document.getElementById('grid-food').innerHTML   = food.map(s=>renderSection(s, currentLang)).join('');
   document.getElementById('grid-drinks').innerHTML = drinks.map(s=>renderSection(s, currentLang)).join('');
 
