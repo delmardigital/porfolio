@@ -121,6 +121,7 @@ def build_menu(xlsx_path: str):
             menu.append(categories[cat_id])
 
         item = {
+            "_order": float(row["item_order"] or 999999),
             "n": {"en": row["item_en"], "de": row["item_de"], "es": row["item_es"]},
             "d": {"en": row["description_en"], "de": row["description_de"], "es": row["description_es"]},
             "p": normalise_price(row["price"]),
@@ -128,7 +129,9 @@ def build_menu(xlsx_path: str):
         categories[cat_id]["items"].append(item)
 
     for category in menu:
-        category["items"].sort(key=lambda x: x["n"]["en"])
+        category["items"].sort(key=lambda x: x["_order"])
+        for item in category["items"]:
+            item.pop("_order", None)
 
     return menu
 
